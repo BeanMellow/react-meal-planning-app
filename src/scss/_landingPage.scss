@@ -1,0 +1,78 @@
+.main {
+  font-family: 'Open Sans', sans-serif;
+  font-size: $fontSizeMain;
+  background-color: $colorBg;
+  h2 {
+    font-size: $fontSizeMedium;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  width: 1024px;
+}
+
+.header {
+  height: 70px;
+  line-height: 70px;
+  background-color: $colorHead;
+  > .container {
+    display: flex;
+  }
+  nav > ul {
+    display: flex;
+    color: #fff;
+    li {
+      padding: 0 30px;
+      &:first-of-type {
+        color: $colorBtn;
+      }
+    }
+  }
+}
+
+.logo {
+  font-family: 'Charmonman', cursive;
+  font-size: $fontSizeLarge;
+  color: #fff;
+  flex-grow: 1;
+  span {
+    color: $colorLogo;
+    font-weight: 700;
+  }
+}
+
+.slider {
+  > .container {
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    i {
+      padding: $fontSizeMain;
+    }
+    > div {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+}
+
+.callToAction {
+  background-color: $colorHead;
+  color: #fff;
+  > .container {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > div {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

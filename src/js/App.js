@@ -1,13 +1,14 @@
-import React from 'react'
+import React from 'react';
+import LandingPage from './LandingPage';
 
 class App extends React.Component {
     render() {
         return (
-            <div>
-                 <h1>Testowy nagłówek</h1>
-            </div>
+            <React.Fragment>
+                <LandingPage />
+            </React.Fragment>
         );
     }
 }
 
-export default App
+export default App;
