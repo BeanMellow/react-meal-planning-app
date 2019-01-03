@@ -108,33 +108,20 @@ class RegistrationPage extends React.Component{
 class App extends React.Component {
     render() {
 
+        // return (
+        //     <HashRouter>
+        //         <div className="mainAppView">
+        //             <UserHeader/>
+        //             <div style={{display: 'flex'}}>
+        //                 <AppNavigation/>
+        //                 <AppSwitch/>
+        //             </div>
+        //         </div>
+        //     </HashRouter>
+        // )
 
-        if(localStorage.getItem("givenName") === null){
-            return (
-                <HashRouter>
-                    <div className="mainAppView">
-                        <InitialHeader/>
-                        <div style={{display: 'flex'}}>
-                            <AppNavigation/>
-                            <RegistrationPage nameIsChanged={this.changeView}/>
-                        </div>
+        return <LandingPage/>
 
-                    </div>
-                </HashRouter>
-            )
-        }else{
-            return (
-                <HashRouter>
-                    <div className="mainAppView">
-                        <UserHeader/>
-                        <div style={{display: 'flex'}}>
-                            <AppNavigation/>
-                            <AppSwitch/>
-                        </div>
-                    </div>
-                </HashRouter>
-            )
-        }
     }
 
 
