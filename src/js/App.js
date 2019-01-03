@@ -21,7 +21,11 @@ class MainApp extends React.Component{
     render(){
         return (
             <div className="mainAppView">
-                <h1>Główny widok aplikacji</h1>
+                <UserHeader/>
+                <div style={{display: 'flex'}}>
+                    <AppNavigation/>
+                    <h1>główny widok aplikacji z widżetami i planem tygodnia</h1>
+                </div>
             </div>
         )
     }
@@ -30,8 +34,12 @@ class MainApp extends React.Component{
 class Recipes extends React.Component{
     render(){
         return (
-            <div>
-                <h1>Przepisy</h1>
+            <div className="mainAppView">
+                <UserHeader/>
+                <div style={{display: 'flex'}}>
+                    <AppNavigation/>
+                    <h1>Przepisy</h1>
+                </div>
             </div>
         )
     }
@@ -40,8 +48,12 @@ class Recipes extends React.Component{
 class Planes extends React.Component{
     render(){
         return (
-            <div>
-                <h1>Plany</h1>
+            <div className="mainAppView">
+                <UserHeader/>
+                <div style={{display: 'flex'}}>
+                    <AppNavigation/>
+                    <h1>Plany</h1>
+                </div>
             </div>
         )
     }
@@ -51,7 +63,7 @@ class UserHeader extends React.Component {
     render(){
         return (
             <div className="appHeader">
-                <Link to="/About" style={linkStyle}><h1>Zaplanuj jedzonko</h1></Link>
+                <Link to="/" style={linkStyle}><h1>Zaplanuj jedzonko</h1></Link>
             </div>
         )
     }
@@ -72,9 +84,8 @@ class AppSwitch extends React.Component {
         return (
             <div>
                 <Switch>
-
-                    <Route exact path="/" component={MainApp}/>
-                    <Route path="/About" component={About}/>
+                    <Route exact path="/" component={LandingPage}/>
+                    <Route path="/Main" component={MainApp}/>
                     <Route path="/Recipes" component={Recipes}/>
                     <Route path="/Planes" component={Planes}/>
                 </Switch>
@@ -87,7 +98,7 @@ class AppNavigation extends React.Component {
         return (
             <div className="navigationContainer">
                 <ul>
-                    <Link to="/" style={linkStyle}><li>Pulpit</li></Link>
+                    <Link to="/Main" style={linkStyle}><li>Pulpit</li></Link>
                     <Link to="/Recipes" style={linkStyle}><li>Przepisy</li></Link>
                     <Link to="/Planes" style={linkStyle}><li>Plany</li></Link>
                 </ul>
@@ -108,19 +119,11 @@ class RegistrationPage extends React.Component{
 class App extends React.Component {
     render() {
 
-        // return (
-        //     <HashRouter>
-        //         <div className="mainAppView">
-        //             <UserHeader/>
-        //             <div style={{display: 'flex'}}>
-        //                 <AppNavigation/>
-        //                 <AppSwitch/>
-        //             </div>
-        //         </div>
-        //     </HashRouter>
-        // )
-
-        return <LandingPage/>
+        return (
+            <HashRouter>
+                    <AppSwitch/>
+            </HashRouter>
+        )
 
     }
 

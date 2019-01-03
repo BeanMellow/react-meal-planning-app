@@ -1,4 +1,10 @@
 import React from 'react';
+import {Link} from "react-router-dom";
+
+const linkStyle = {
+    textDecoration: 'none',
+    color: '#0A1F1C'
+};
 
 const Header = () => (
     <div className={'header'}>
@@ -86,7 +92,7 @@ const CallToAction = () => (
                 <h2>Zaplanuj każdy posiłek</h2>
                 <p>Planowanie posiłków nigdy nie było takie proste, kliknij przycisk i przekonaj się!</p>
             </div>
-            <span className={'btn'}>ZACZYNAM!</span>
+            <Link to="/Main" style={linkStyle}><span className={'btn'}>ZACZYNAM</span></Link>
         </div>
     </div>
 );
