@@ -70,9 +70,9 @@ class Slider extends React.Component {
         return (
             <div className={'slider'}>
                 <div className={'container'}>
-                    <i className="fas fa-chevron-left" onClick={this.handleClick('left')}></i>
+                    <i className="fas fa-chevron-left" onClick={this.handleClick('left')}> </i>
                     {result}
-                    <i className="fas fa-chevron-right" onClick={this.handleClick('right')}></i>
+                    <i className="fas fa-chevron-right" onClick={this.handleClick('right')}> </i>
                 </div>
             </div>
         );
@@ -83,10 +83,10 @@ const CallToAction = () => (
     <div className={'callToAction'}>
         <div className={'container'}>
             <div>
-                <h2>Lorem ipsum dolor sit amet</h2>
-                <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h2>Zaplanuj każdy posiłek</h2>
+                <p>Planowanie posiłków nigdy nie było takie proste, kliknij przycisk i przekonaj się!</p>
             </div>
-            <span className={'btn'}>Lorem ipsum</span>
+            <span className={'btn'}>ZACZYNAM!</span>
         </div>
     </div>
 );
@@ -98,7 +98,7 @@ const AboutApp = () => {
         <div className={'container aboutApp'}>
             {icons.map(icon => (
                 <div key={icon}>
-                    <i className={icon}></i>
+                    <i className={icon}> </i>
                     <h2>Lorem ipsum dolor sit amet</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat
                         volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.</p>
@@ -134,7 +134,7 @@ class NewsletterForm extends React.Component {
 
 const AboutAuthor = () => (
     <div className={'aboutAuthor container'}>
-        <div className={'pic'}></div>
+        <div className={'pic'}> </div>
         <div>
             <h2>Lorem ipsum dolor sit amet</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.
@@ -183,7 +183,7 @@ class Footer extends React.Component {
                             </form>
                             <div className={'socialMedia'}>
                                 {icons.map(icon => (
-                                    <i key={icon} className={icon}></i>
+                                    <i key={icon} className={icon}> </i>
                                 ))}
                             </div>
                         </div>
