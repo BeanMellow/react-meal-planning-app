@@ -89,17 +89,19 @@ class AppNavigation extends React.Component {
 class App extends React.Component {
     render() {
 
-        return (
-            <HashRouter>
-                <div className="mainAppView">
-                    <UserHeader/>
-                    <div style={{display: 'flex'}}>
-                        <AppNavigation/>
-                        <AppSwitch/>
-                    </div>
-                </div>
-            </HashRouter>
-        )
+        // return (
+        //     <HashRouter>
+        //         <div className="mainAppView">
+        //             <UserHeader/>
+        //             <div style={{display: 'flex'}}>
+        //                 <AppNavigation/>
+        //                 <AppSwitch/>
+        //             </div>
+        //         </div>
+        //     </HashRouter>
+        // )
+
+        return <LandingPage/>
     }
 }
 

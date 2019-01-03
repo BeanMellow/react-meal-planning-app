@@ -83,10 +83,10 @@ const CallToAction = () => (
     <div className={'callToAction'}>
         <div className={'container'}>
             <div>
-                <h3>Lorem ipsum dolor sit amet</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At magni provident quae saepe similique velit! Obcaecati possimus quo rerum soluta.</p>
+                <h2>Lorem ipsum dolor sit amet</h2>
+                <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
-            <button>Lorem ipsum</button>
+            <span className={'btn'}>Lorem ipsum</span>
         </div>
     </div>
 );
