@@ -57,6 +57,16 @@ class UserHeader extends React.Component {
     }
 }
 
+class InitialHeader extends React.Component {
+    render(){
+        return (
+            <div className="appHeader">
+                <Link to="/About" style={linkStyle}><h1>Zaplanuj jedzonko - to jest initial header</h1></Link>
+            </div>
+        )
+    }
+}
+
 class AppSwitch extends React.Component {
     render() {
         return (
@@ -86,21 +96,48 @@ class AppNavigation extends React.Component {
     }
 }
 
+class RegistrationPage extends React.Component{
+    render(){
+
+        return (
+            <h1>regisration page</h1>
+        )
+    }
+}
+
 class App extends React.Component {
     render() {
 
-        return (
-            <HashRouter>
-                <div className="mainAppView">
-                    <UserHeader/>
-                    <div style={{display: 'flex'}}>
-                        <AppNavigation/>
-                        <AppSwitch/>
+
+        if(localStorage.getItem("givenName") === null){
+            return (
+                <HashRouter>
+                    <div className="mainAppView">
+                        <InitialHeader/>
+                        <div style={{display: 'flex'}}>
+                            <AppNavigation/>
+                            <RegistrationPage nameIsChanged={this.changeView}/>
+                        </div>
+
                     </div>
-                </div>
-            </HashRouter>
-        )
+                </HashRouter>
+            )
+        }else{
+            return (
+                <HashRouter>
+                    <div className="mainAppView">
+                        <UserHeader/>
+                        <div style={{display: 'flex'}}>
+                            <AppNavigation/>
+                            <AppSwitch/>
+                        </div>
+                    </div>
+                </HashRouter>
+            )
+        }
     }
+
+
 }
 
 export default App;
