@@ -30,18 +30,17 @@ class Slider extends React.Component {
     };
 
     handleClick = leftOrRight => () => {
-        let nextSlide = this.state.activeSlide;
+        // let nextSlide = this.state.activeSlide;
+        let nextSlide = JSON.parse(JSON.stringify(this.state.activeSlide));
         if (leftOrRight === 'left') {
             nextSlide > 0 ? nextSlide-- : nextSlide = 2;
-            this.setState({
-                activeSlide: nextSlide
-            });
         } else if (leftOrRight === 'right') {
             nextSlide < 2 ? nextSlide++ : nextSlide = 0;
-            this.setState({
-                activeSlide: nextSlide
-            });
         }
+
+        this.setState({
+            activeSlide: nextSlide
+        });
     };
 
     render() {
@@ -140,7 +139,7 @@ class NewsletterForm extends React.Component {
 
 const AboutAuthor = () => (
     <div className={'aboutAuthor container'}>
-        <div className={'pic'}> </div>
+        <div className={'pic'}></div>
         <div>
             <h2>Lorem ipsum dolor sit amet</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat volutpat.
@@ -169,7 +168,8 @@ class Footer extends React.Component {
                     <div>
                         <div>
                             <h2>Lorem ipsum dolor</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem. Aliquam erat
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.
+                                Aliquam erat
                                 volutpat. Donec placerat nisl magna.</p>
                         </div>
                         <div>
