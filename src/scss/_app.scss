@@ -25,12 +25,48 @@
   align-items: center;
   color: #fff;
   padding-right: 20px;
+  h2{
+    font-weight: bold;
+  }
 }
 
 .fa-user-circle{
   color: $colorBtn;
   padding: 10px;
 }
+
+.firstVisitContainer{
+  width: 85%;
+  height: 90vh;
+  background-color: #fff;
+  margin: 30px;
+  border: 1px dashed $colorNav;
+  text-align: center;
+  color: $colorNav;
+  padding: 30px 200px;
+  h2{
+    font-size: $fontSizeLarge;
+    padding: 10px;
+  }
+  h3{
+    font-size: $fontSizeMedium;
+    padding: 10px;
+  }
+  input{
+    width: 250px;
+    border: 1px solid #CFCFCE;
+  }
+  button{
+    width: 100px;
+    border: 1px solid $colorBtn;
+    background-color: $colorBtn;
+    color: #fff;
+    font-weight: bold;
+    padding: 7px;
+    margin: 10px;
+  }
+}
+
 
 .navigationContainer{
   width: 15%;

@@ -1,10 +1,6 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
 
-const linkStyle = {
-    textDecoration: 'none',
-    color: '#0A1F1C'
-};
 
 class RegistrationPage extends React.Component{
 
@@ -20,13 +16,15 @@ class RegistrationPage extends React.Component{
     render(){
 
         return (
-            <div>
+            <div className="firstVisitContainer">
                 <h2>Witaj,</h2>
                 <h3>Wygląda na to, że jesteś tutaj pierwszy raz!</h3>
-                <input type={"text"} ref={(input) => {
-                    this.input = input
-                }}/>
-                <button type={"submit"} onClick={this.handleClick}> Gotowe!</button>
+
+                    <input type={"text"} placeholder={"tutaj wpisz jak masz na imię"} ref={(input) => {
+                        this.input = input
+                    }}/> <br/>
+                    <button type={"submit"} onClick={this.handleClick}> Gotowe!</button>
+
                 <h3>Podaj nam swoje imię, a my zorganizujemy dla Ciebie naszą aplikację :)</h3>
             </div>
         )
@@ -36,24 +34,28 @@ class RegistrationPage extends React.Component{
 class InitialHeader extends React.Component {
     render(){
         return (
-            <div className={'header'}>
+            <div className={'header appHeader'}>
                 <div className={'container'}>
-                    <Link to="/" style={linkStyle}><h1 className={'logo'}>
+                    <Link to="/" style={{textDecoration: 'none'}}><h1 className={'logo'}>
                         Zaplanuj <span>Jedzonko</span>
                     </h1></Link>
                 </div>
+                <div className={'user'}>
+                    <h2>Imię</h2>
+                    <i className="fas fa-user-circle fa-2x"> </i>
+                </div>
             </div>
+
         )
     }
 }
+
 
 class InitialAppNavigation extends React.Component {
     render() {
         return (
             <div className="navigationContainer">
-                <ul>
-                    <Link to="/Main" style={linkStyle}><li>Pulpit</li></Link>
-                </ul>
+                    <NavLink to="/Main" className={"navStyle"} activeClassName={"activeLink"}>Pulpit</NavLink>
             </div>
         );
     }
