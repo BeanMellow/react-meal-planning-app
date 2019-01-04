@@ -2,32 +2,24 @@ import React from "react";
 import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import firebase, {db} from "./firebase";
+// import {NavLink} from "react-router-dom";
 
-// handleSubmit = () => {
-//     // (event)
-//     // event.preventDefault();
-//     db.collection(this.state.category).doc(this.state.SKU).set({
-//         name: this.state.name,
-//         category: this.state.category,
-//         price: this.state.price,
-//         currency: this.state.currency,
-//         SKU: this.state.SKU,
-//         imageUrl: this.state.imageUrl,
-//         description: this.state.description
-//     }).then(() => {
-//         console.log('Product successfully added to database');
-//         this.setState({
-//             name: '',
-//             category: 'hoodie',
-//             price: '',
-//             currency: 'EUR',
-//             SKU: '',
-//             imageUrl: '',
-//             description: ''
-//         });
-//     })
-//         .catch(error => console.log('Error writing document: ', error));
-// };
+const List = props => {
+    let list;
+    const listItems = props.items.map((item, i) => (
+        <li key={i}>{item}</li>
+    ));
+    if (props.type === 'ol') {
+        list = (
+            <ol>{listItems}</ol>
+        );
+    } else if (props.type === 'ul') {
+        list = (
+            <ul>{listItems}</ul>
+        );
+    }
+    return list;
+};
 
 class AddRecipe extends React.Component {
     state = {
@@ -41,6 +33,22 @@ class AddRecipe extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault();
+        db.collection('Recipes').doc(this.state.recipeName).set({
+            recipeName: this.state.recipeName,
+            recipeDesc: this.state.recipeDesc,
+            instructions: this.state.instructions,
+            ingredients: this.state.ingredients
+        }).then(() => {
+            console.log('Recipe successfully added to database');
+            this.setState({
+                recipeName: '',
+                recipeDesc: '',
+                recipeInst: '',
+                recipeIngr: '',
+                instructions: [],
+                ingredients: []
+            });
+        }).catch(error => console.log('Error writing document: ', error));
     };
 
     handleChange = name => event => {
@@ -103,6 +111,7 @@ class AddRecipe extends React.Component {
                                            onClick={this.handleClick('instruction')}
                                         ></i>
                                     </div>
+                                    <List items={this.state.instructions} type={'ol'}/>
                                 </div>
                                 <div>
                                     <h2>SKŁADNIKI</h2>
@@ -114,6 +123,7 @@ class AddRecipe extends React.Component {
                                            onClick={this.handleClick('ingredient')}
                                         ></i>
                                     </div>
+                                    <List items={this.state.ingredients} type={'ul'}/>
                                 </div>
                             </div>
                         </form>
