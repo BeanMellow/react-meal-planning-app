@@ -66,14 +66,15 @@
         color: $colorBin;
       }
     }
-    ol, ul {
-      margin-left: 20px;
-    }
-    ul {
-      list-style-type: disc;
-      &.errorList {
-        color: $colorBin;
-      }
-    }
+  }
+}
+
+ol, ul {
+  margin-left: 20px;
+}
+ul {
+  list-style-type: disc;
+  &.errorList {
+    color: $colorBin;
   }
 }
