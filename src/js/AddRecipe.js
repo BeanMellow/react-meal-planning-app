@@ -22,13 +22,9 @@ const List = props => {
         </li>
     ));
     if (props.type === 'instructions') {
-        list = (
-            <ol>{listItems}</ol>
-        );
+        list = <ol>{listItems}</ol>;
     } else if (props.type === 'ingredients') {
-        list = (
-            <ul>{listItems}</ul>
-        );
+        list = <ul>{listItems}</ul>;
     }
     return list;
 };
@@ -42,7 +38,11 @@ class AddRecipe extends React.Component {
         instructions: [],
         ingredients: [],
         instructionValid: [],
-        ingredientValid: []
+        ingredientValid: [],
+        // editInst: false,
+        editInstIndex: -1,
+        // editIngr: false,
+        editIngrIndex: -1
     };
 
     handleSubmit = event => {
@@ -92,11 +92,13 @@ class AddRecipe extends React.Component {
                 });
             } else {
                 newState = [...instructions];
-                newState.push(recipeInst);
+                // newState.push(recipeInst);
+                this.state.editInstIndex >= 0 ? newState.splice(this.state.editInstIndex, 1, recipeInst) : newState.push(recipeInst);
                 this.setState({
                     recipeInst: '',
                     instructions: newState,
-                    instructionValid: []
+                    instructionValid: [],
+                    editInstIndex: -1
                 });
             }
         } else if (name === 'ingredient') {
@@ -104,11 +106,11 @@ class AddRecipe extends React.Component {
             const ingredients = this.state.ingredients;
 
             if (recipeIngr.length < 3 || recipeIngr.length > 50) {
-                errors.push('Każdy podpunkt instrukcji musi mieć od 3 do 50 znaków.')
+                errors.push('Każdy podpunkt składników musi mieć od 3 do 50 znaków.')
             }
             // check if input is unique
             if (ingredients.indexOf(recipeIngr) > -1) {
-                errors.push('Każdy podpunkt instrukcji musi być unikalny.');
+                errors.push('Każdy podpunkt składników musi być unikalny.');
             }
 
             if (errors.length) {
@@ -117,11 +119,13 @@ class AddRecipe extends React.Component {
                 });
             } else {
                 newState = [...ingredients];
-                newState.push(recipeIngr);
+                // newState.push(recipeIngr);
+                this.state.editIngrIndex >= 0 ? newState.splice(this.state.editIngrIndex, 1, recipeIngr) : newState.push(recipeIngr);
                 this.setState({
                     recipeIngr: '',
                     ingredients: newState,
-                    ingredientValid: []
+                    ingredientValid: [],
+                    editIngrIndex: -1
                 });
             }
         }
@@ -129,6 +133,21 @@ class AddRecipe extends React.Component {
 
     handleEdit = (i, type) => event => {
         console.log(i, type, event.target);
+        if (type === 'instructions') {
+            const editInst = this.state.instructions[i];
+            this.setState({
+                recipeInst: editInst,
+                // editInst: true,
+                editInstIndex: i
+            });
+        } else if (type === 'ingredients') {
+            const editIngr = this.state.instructions[i];
+            this.setState({
+                recipeIngr: editIngr,
+                // editIngr: true,
+                editIngrIndex: i
+            });
+        }
     };
 
     handleDelete = (i, type) => event => {
