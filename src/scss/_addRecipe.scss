@@ -42,6 +42,9 @@
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
+  i {
+    cursor: pointer;
+  }
   > div {
     width: 48%;
     h2 {
@@ -50,10 +53,27 @@
     input {
       width: 85%;
     }
-    i {
+    .add {
       margin: 10px;
       color: $colorSuccess;
-      cursor: pointer;
+    }
+    .action {
+      margin-left: 5px;
+      &:first-of-type {
+        color: $colorWarning;
+      }
+      &:last-of-type {
+        color: $colorBin;
+      }
+    }
+    ol, ul {
+      margin-left: 20px;
+    }
+    ul {
+      list-style-type: disc;
+      &.errorList {
+        color: $colorBin;
+      }
     }
   }
 }

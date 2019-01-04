@@ -4,16 +4,28 @@ import AppNavigation from "./Navigation";
 import firebase, {db} from "./firebase";
 // import {NavLink} from "react-router-dom";
 
+const ErrorList = props => (
+    <ul className={'errorList'}>
+        {props.items.map(item => (
+            <li key={item}>{item}</li>
+        ))}
+    </ul>
+);
+
 const List = props => {
     let list;
     const listItems = props.items.map((item, i) => (
-        <li key={i}>{item}</li>
+        <li key={item}>
+            {item}
+            <i onClick={props.handleEdit(i, props.type)} className="fas fa-edit action"></i>
+            <i onClick={props.handleDelete(i, props.type)} className="fas fa-trash-alt action"></i>
+        </li>
     ));
-    if (props.type === 'ol') {
+    if (props.type === 'instructions') {
         list = (
             <ol>{listItems}</ol>
         );
-    } else if (props.type === 'ul') {
+    } else if (props.type === 'ingredients') {
         list = (
             <ul>{listItems}</ul>
         );
@@ -28,7 +40,9 @@ class AddRecipe extends React.Component {
         recipeInst: '',
         recipeIngr: '',
         instructions: [],
-        ingredients: []
+        ingredients: [],
+        instructionValid: [],
+        ingredientValid: []
     };
 
     handleSubmit = event => {
@@ -46,7 +60,7 @@ class AddRecipe extends React.Component {
                 recipeInst: '',
                 recipeIngr: '',
                 instructions: [],
-                ingredients: []
+                ingredients: [],
             });
         }).catch(error => console.log('Error writing document: ', error));
     };
@@ -57,21 +71,80 @@ class AddRecipe extends React.Component {
         });
     };
 
-    handleClick = name => event => {
+    handleClick = name => () => {
         let newState;
+        const errors = [];
         if (name === 'instruction') {
-            newState = [...this.state.instructions];
-            newState.push(this.state.recipeInst);
-            this.setState({
-                instructions: newState,
-                recipeInst: ''
-            });
+            const recipeInst = this.state.recipeInst;
+            const instructions = this.state.instructions;
+
+            if (recipeInst.length < 10 || recipeInst.length > 150) {
+                errors.push('Każdy podpunkt instrukcji musi mieć od 10 do 150 znaków.')
+            }
+            // check if input is unique
+            if (instructions.indexOf(recipeInst) > -1) {
+                errors.push('Każdy podpunkt instrukcji musi być unikalny.');
+            }
+
+            if (errors.length) {
+                this.setState({
+                    instructionValid: errors
+                });
+            } else {
+                newState = [...instructions];
+                newState.push(recipeInst);
+                this.setState({
+                    recipeInst: '',
+                    instructions: newState,
+                    instructionValid: []
+                });
+            }
         } else if (name === 'ingredient') {
-            newState = [...this.state.ingredients];
-            newState.push(this.state.recipeIngr);
+            const recipeIngr = this.state.recipeIngr;
+            const ingredients = this.state.ingredients;
+
+            if (recipeIngr.length < 3 || recipeIngr.length > 50) {
+                errors.push('Każdy podpunkt instrukcji musi mieć od 3 do 50 znaków.')
+            }
+            // check if input is unique
+            if (ingredients.indexOf(recipeIngr) > -1) {
+                errors.push('Każdy podpunkt instrukcji musi być unikalny.');
+            }
+
+            if (errors.length) {
+                this.setState({
+                    ingredientValid: errors
+                });
+            } else {
+                newState = [...ingredients];
+                newState.push(recipeIngr);
+                this.setState({
+                    recipeIngr: '',
+                    ingredients: newState,
+                    ingredientValid: []
+                });
+            }
+        }
+    };
+
+    handleEdit = (i, type) => event => {
+        console.log(i, type, event.target);
+    };
+
+    handleDelete = (i, type) => event => {
+        console.log(i, type, event.target);
+        let newState;
+        if (type === 'instructions') {
+            newState = [...this.state.instructions];
+            newState.splice(i, 1);
             this.setState({
-                ingredients: newState,
-                recipeIngr: ''
+                instructions: newState
+            });
+        } else if (type === 'ingredients') {
+            newState = [...this.state.ingredients];
+            newState.splice(i, 1);
+            this.setState({
+                ingredients: newState
             });
         }
     };
@@ -107,11 +180,16 @@ class AddRecipe extends React.Component {
                                         <input value={this.state.recipeInst}
                                                onChange={this.handleChange('recipeInst')}
                                                type="text"/>
-                                        <i className="fas fa-plus-square fa-2x"
+                                        <i className="fas fa-plus-square fa-2x add"
                                            onClick={this.handleClick('instruction')}
                                         ></i>
                                     </div>
-                                    <List items={this.state.instructions} type={'ol'}/>
+                                    <ErrorList items={this.state.instructionValid}/>
+                                    <List items={this.state.instructions}
+                                          handleDelete={this.handleDelete}
+                                          handleEdit={this.handleEdit}
+                                          type={'instructions'}
+                                    />
                                 </div>
                                 <div>
                                     <h2>SKŁADNIKI</h2>
@@ -119,11 +197,16 @@ class AddRecipe extends React.Component {
                                         <input value={this.state.recipeIngr}
                                                onChange={this.handleChange('recipeIngr')}
                                                type="text"/>
-                                        <i className="fas fa-plus-square fa-2x"
+                                        <i className="fas fa-plus-square fa-2x add"
                                            onClick={this.handleClick('ingredient')}
                                         ></i>
                                     </div>
-                                    <List items={this.state.ingredients} type={'ul'}/>
+                                    <ErrorList items={this.state.ingredientValid}/>
+                                    <List items={this.state.ingredients}
+                                          handleDelete={this.handleDelete}
+                                          handleEdit={this.handleEdit}
+                                          type={'ingredients'}
+                                    />
                                 </div>
                             </div>
                         </form>
