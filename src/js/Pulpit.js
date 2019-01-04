@@ -51,8 +51,15 @@ class Widgets extends React.Component{
 class ScheduleWeek extends React.Component{
     render(){
         return(
-            <div>
-                <h1>tutaj plan tygodniowy</h1>
+            <div className={"scheduleContainer"}>
+                <div>
+                    <h2>Twój plan na <span> XX </span> tydzień:</h2>
+                    <div>plan</div>
+                </div>
+                <div>
+                    <h3>  poprzedni </h3>
+                    <h3>następny</h3>
+                </div>
             </div>
         )
     }

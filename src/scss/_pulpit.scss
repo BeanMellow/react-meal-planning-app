@@ -67,3 +67,25 @@
     color: $colorSuccess;
   }
 }
+
+.scheduleContainer{
+  width: 94%;
+  height: 60vh;
+  border: 1px dashed #CFCFCA;
+  background-color: #fff;
+  margin: 0 auto;
+  text-align: center;
+  h2{
+    font-size: $fontSizeMedium;
+    color: $colorBtn;
+    padding: 10px;
+  }
+  div:nth-of-type(2){
+    display: flex;
+    justify-content: space-between;
+    h3{
+      color: $colorBtn;
+      cursor: pointer;
+    }
+  }
+}
