@@ -1,12 +1,7 @@
 import React from 'react'
-import { HashRouter, Switch, Route, Link } from 'react-router-dom';
+import { HashRouter, Switch, Route, Link, NavLink} from 'react-router-dom';
 import LandingPage from './LandingPage';
 import FirstVisit from './FirstVisit';
-
-const linkStyle = {
-    textDecoration: 'none',
-    color: '#0A1F1C'
-};
 
 class Recipes extends React.Component{
     render(){
@@ -36,21 +31,16 @@ class Schedules extends React.Component{
     }
 }
 
-const display = {
-    display: "flex",
-    justifyContent: "space between"
-}
-
 class UserHeader extends React.Component {
     render(){
         return (
-            <div className={'header'} style={display}>
+            <div className={'header appHeader'}>
                 <div className={'container'}>
-                    <Link to="/" style={linkStyle}><h1 className={'logo'}>
+                    <Link to="/" style={{textDecoration: 'none'}}><h1 className={'logo'}>
                         Zaplanuj <span>Jedzonko</span>
                     </h1></Link>
                 </div>
-                <div style={display}>
+                <div className={'user'}>
                     <h2>{localStorage.getItem("givenName")}</h2>
                     <i className="fas fa-user-circle fa-2x"> </i>
                 </div>
@@ -64,11 +54,9 @@ class AppNavigation extends React.Component {
     render() {
         return (
             <div className="navigationContainer">
-                <ul>
-                    <Link to="/Main" style={linkStyle}><li>Pulpit</li></Link>
-                    <Link to="/Recipes" style={linkStyle}><li>Przepisy</li></Link>
-                    <Link to="/Schedules" style={linkStyle}><li>Plany</li></Link>
-                </ul>
+                    <NavLink to="/Main" className={"navStyle"} activeClassName={"activeLink"}>Pulpit</NavLink>
+                    <NavLink to="/Recipes" className={"navStyle"} activeClassName={"activeLink"}>Przepisy</NavLink>
+                    <NavLink to="/Schedules" className={"navStyle"} activeClassName={"activeLink"}>Plany</NavLink>
             </div>
         );
     }

@@ -1,0 +1,50 @@
+.mainAppView{
+  background-image: url("../images/background.png");
+  width: 100%;
+  height: 100%;
+  font-family: "Open Sans", sans-serif;
+}
+
+.appHeader{
+  width: 100%;
+  background-color: $colorHead;
+  display: flex;
+  justify-content: space-around;
+  h1{
+    font-size: $fontSizeMedium;
+    padding-left: 10px;
+  }
+  span{
+    color: $colorBtn
+  }
+}
+
+.user{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  padding-right: 20px;
+}
+
+.fa-user-circle{
+  color: $colorBtn;
+  padding: 10px;
+}
+
+.navigationContainer{
+  width: 15%;
+  height: 100vh;
+  background-color: #5B605F;
+  display: flex;
+  flex-direction: column;
+}
+.navStyle{
+    color: #fff;
+    font-size: $fontSizeMedium;
+    padding: 20px;
+    text-decoration: none;
+}
+.activeLink{
+    font-weight: bold;
+}
