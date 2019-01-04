@@ -1,0 +1,59 @@
+.addRecipeContainer {
+  background-color: $colorBg;
+  width: 80%;
+  margin: 30px auto;
+  border: 1px dashed $colorTabData;
+}
+
+.addRecipeForm {
+  width: 95%;
+  margin: 30px auto;
+}
+
+.addRecipeHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid $colorTabData;
+  color: $colorBtn;
+  h2 {
+    font-weight: 700;
+  }
+  button {
+    color: #fff;
+    background-color: $colorBtn;
+    padding: 10px 40px;
+    cursor: pointer;
+    border-width: 0;
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+}
+
+.addRecipeInput-horiz {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  input {
+    width: 90%;
+  }
+}
+
+.addRecipeInput-vert {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  > div {
+    width: 48%;
+    h2 {
+      border-bottom: 2px solid $colorTabData;
+    }
+    input {
+      width: 90%;
+    }
+    i {
+      margin: 10px;
+      color: $colorSuccess;
+      cursor: pointer;
+    }
+  }
+}
