@@ -2,20 +2,26 @@ import React from "react";
 import FirstVisit from "./FirstVisit";
 import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
+import {NavLink} from "react-router-dom";
 
 class Widgets extends React.Component{
     render(){
         return(
             <div className={"widgetsContainer"}>
                 <div>
-                    <div className={"widgetAdd"}>
-                        <i className="far fa-plus-square fa-4x"> </i>
-                        <h3>dodaj przepis</h3>
-                    </div>
-                    <div className={"widgetAdd"}>
-                        <i className="far fa-plus-square fa-4x"> </i>
-                        <h3>dodaj plan</h3>
-                    </div>
+                    <NavLink to="/AddRecipe" style={{textDecoration: 'none'}}>
+                        <div className={"widgetAdd"}>
+                            <i className="far fa-plus-square fa-4x"> </i>
+                            <h3>dodaj przepis</h3>
+                        </div>
+                    </NavLink>
+
+                    <NavLink to="/AddSchedule" style={{textDecoration: 'none'}}>
+                        <div className={"widgetAdd"}>
+                            <i className="far fa-plus-square fa-4x"> </i>
+                            <h3>dodaj plan</h3>
+                        </div>
+                    </NavLink>
                 </div>
                 <div className={"widgetsInfo"}>
                     <div>
