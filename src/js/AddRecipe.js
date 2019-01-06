@@ -4,38 +4,34 @@ import AppNavigation from "./Navigation";
 import firebase, {db} from "./firebase";
 // import {NavLink} from "react-router-dom";
 
-// const ErrorList = props => (
-//     <ul className={'errorList'}>
-//         {props.items.map(item => (
-//             <li key={item}>{item}</li>
-//         ))}
-//     </ul>
-// );
-const ErrorList = props => {
-    let result = null;
-    if (props.items) {
+// each error in different place -> map useless for now
+// const ErrorList = props => {
+//     let result = null;
+//     if (props.items) {
+//         result = (
+//             <ul className={'errorList'}>
+//                 {props.items.map(item => (
+//                     <li key={item}>{item}</li>
+//                 ))}
+//             </ul>
+//         );
+//     }
+//     return result;
+// };
+
+const ErrorMessage = props => {
+    let result;
+    if (props.error.length) {
         result = (
             <ul className={'errorList'}>
-                {props.items.map(item => (
-                    <li key={item}>{item}</li>
-                ))}
+                <li>{props.error}</li>
             </ul>
         );
+    } else {
+        result = null;
     }
     return result;
 };
-
-// const SingleError = props => {
-//   let result;
-//   if (props.error) {
-//       result = (
-//           <ul className={'errorList'}>
-//               <li>{props.error}</li>
-//           </ul>
-//       );
-//   } else result = null;
-//   return result;
-// };
 
 const List = props => {
     let list;
@@ -84,10 +80,10 @@ class AddRecipe extends React.Component {
         recipeIngr: '',
         instructions: [],
         ingredients: [],
-        nameValid: [],
-        descValid: [],
-        instructionValid: [],
-        ingredientValid: [],
+        nameValid: '',
+        descValid: '',
+        instructionValid: '',
+        ingredientValid: '',
         editInstIndex: -1,
         editIngrIndex: -1
     };
@@ -98,25 +94,27 @@ class AddRecipe extends React.Component {
         const recipeDesc = this.state.recipeDesc;
         let nameError = '';
         let descError = '';
+        let instError = '';
+        let ingrError = '';
         if (recipeName.length < 3 || recipeName.length > 50) {
-            // errors.push('Nazwa przepisu musi mieć od 3 do 50 znaków.');
-            nameError = ['Nazwa przepisu musi mieć od 3 do 50 znaków.'];
+            nameError = 'Nazwa przepisu musi mieć od 3 do 50 znaków.';
         }
         if (recipeDesc.length < 10 || recipeDesc.length > 150) {
-            // errors.push('Opis przepisu musi mieć od 10 do 150 znaków.');
             descError = ['Opis przepisu musi mieć od 10 do 150 znaków.'];
         }
-        // TODO: decide how to finish validation - SingleError or ErrorsList?
-        // let noIngredients = '';
-        // if (this.state.ingredients.length < 1) {
-        //     noIngredients = 'Przepis musi zawierać przynajmniej 1 instrukcję.'
-        // }
+        if (this.state.instructions.length < 1) {
+            instError = 'Nie można zapisać przepisu bez instrukcji.'
+        }
+        if (this.state.ingredients.length < 1) {
+            ingrError = 'Nie można zapisać przepisu bez składników.'
+        }
 
-        if (nameError || descError) {
+        if (nameError || descError || instError || ingrError) {
             this.setState({
                 nameValid: nameError,
                 descValid: descError,
-                // noIngredients: noIngredients
+                instructionValid: instError,
+                ingredientValid: ingrError
             });
         } else {
             db.collection('Recipes').doc(this.state.recipeName).set({
@@ -152,28 +150,27 @@ class AddRecipe extends React.Component {
 
     handleClick = name => () => {
         let newState;
-        const errors = [];
+        let error = '';
         if (name === 'instruction') {
             const recipeInst = this.state.recipeInst;
             const instructions = this.state.instructions;
             const index = this.state.editInstIndex;
 
             if (recipeInst.length < 10 || recipeInst.length > 150) {
-                errors.push('Każdy podpunkt instrukcji musi mieć od 10 do 150 znaków.');
-            }
-            // check if input is unique
-            if (instructions.indexOf(recipeInst) > -1) {
+                error = 'Każdy podpunkt instrukcji musi mieć od 10 do 150 znaków.';
+                // check if input is unique
+            } else if (instructions.indexOf(recipeInst) > -1) {
                 // different message during edit
                 if (this.state.editInstIndex >= 0) {
-                    errors.push('Dokończ edycję wybranego punktu. Pamiętaj, że każdy podpunkt musi być unikalny.');
+                    error = 'Dokończ edycję wybranego punktu. Pamiętaj, że każdy podpunkt musi być unikalny.';
                 } else {
-                    errors.push('Każdy podpunkt instrukcji musi być unikalny.');
+                    error = 'Każdy podpunkt instrukcji musi być unikalny.';
                 }
             }
 
-            if (errors.length) {
+            if (error.length) {
                 this.setState({
-                    instructionValid: errors
+                    instructionValid: error
                 });
             } else {
                 newState = [...instructions];
@@ -192,21 +189,21 @@ class AddRecipe extends React.Component {
             const index = this.state.editIngrIndex;
 
             if (recipeIngr.length < 3 || recipeIngr.length > 50) {
-                errors.push('Każdy podpunkt składników musi mieć od 3 do 50 znaków.')
+                error = 'Każdy podpunkt składników musi mieć od 3 do 50 znaków.';
             }
             // check if input is unique (except during edit)
             if (ingredients.indexOf(recipeIngr) > -1) {
                 // different message during edit
                 if (this.state.editIngrIndex >= 0) {
-                    errors.push('Dokończ edycję wybranego punktu. Pamiętaj, że każdy podpunkt musi być unikalny.');
+                    error = 'Dokończ edycję wybranego punktu. Pamiętaj, że każdy podpunkt musi być unikalny.';
                 } else {
-                    errors.push('Każdy podpunkt składników musi być unikalny.');
+                    error = 'Każdy podpunkt składników musi być unikalny.';
                 }
             }
 
-            if (errors.length) {
+            if (error.length) {
                 this.setState({
-                    ingredientValid: errors
+                    ingredientValid: error
                 });
             } else {
                 newState = [...ingredients];
@@ -222,9 +219,8 @@ class AddRecipe extends React.Component {
         }
     };
 
-    // TODO: BLOCK OTHER EDIT/DELETE DURING EDITING - CAUSING ERRORS
     handleEdit = (i, type) => event => {
-        console.log(i, type, event.target);
+        // console.log(i, type, event.target);
         // block btn when editing list item
         if (type === 'instructions' && this.state.editInstIndex < 0) {
             const editInst = this.state.instructions[i];
@@ -243,7 +239,7 @@ class AddRecipe extends React.Component {
     };
 
     handleDelete = (i, type) => event => {
-        console.log(i, type, event.target);
+        // console.log(i, type, event.target);
         let newState;
         // block btn when editing list item
         if (type === 'instructions' && this.state.editInstIndex < 0) {
@@ -280,14 +276,14 @@ class AddRecipe extends React.Component {
                                        onChange={this.handleChange('recipeName')}
                                        type="text"/>
                             </div>
-                            <ErrorList items={this.state.nameValid}/>
+                            <ErrorMessage error={this.state.nameValid}/>
                             <div className={'addRecipeInput-horiz'}>
                                 <h2>Opis przepisu</h2>
                                 <input value={this.state.recipeDesc}
                                        onChange={this.handleChange('recipeDesc')}
                                        type="text"/>
                             </div>
-                            <ErrorList items={this.state.descValid}/>
+                            <ErrorMessage error={this.state.descValid}/>
                             <div className={'addRecipeInput-vert'}>
                                 <div>
                                     <h2>INSTRUKCJE</h2>
@@ -299,7 +295,7 @@ class AddRecipe extends React.Component {
                                            onClick={this.handleClick('instruction')}
                                         ></i>
                                     </div>
-                                    <ErrorList items={this.state.instructionValid}/>
+                                    <ErrorMessage error={this.state.instructionValid}/>
                                     <List items={this.state.instructions}
                                           handleDelete={this.handleDelete}
                                           handleEdit={this.handleEdit}
@@ -317,8 +313,7 @@ class AddRecipe extends React.Component {
                                            onClick={this.handleClick('ingredient')}
                                         ></i>
                                     </div>
-                                    <ErrorList items={this.state.ingredientValid}/>
-                                    {/*<SingleError error={this.state.noIngredients}/>*/}
+                                    <ErrorMessage error={this.state.ingredientValid}/>
                                     <List items={this.state.ingredients}
                                           handleDelete={this.handleDelete}
                                           handleEdit={this.handleEdit}
