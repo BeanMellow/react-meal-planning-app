@@ -2,14 +2,26 @@
   background-color: $colorBg;
   width: 80%;
   margin: 30px auto;
-  border: 1px dashed $colorTabData;
+  border: 1px dashed $colorNav;
 }
 
 .addRecipeForm {
   width: 95%;
   margin: 30px auto;
+  label {
+    color: $colorHead;
+    font-size: $fontSizeMedium;
+  }
+  textarea {
+    height: 70px;
+    resize: none;
+  }
   ol, ul {
-    margin-left: 20px;
+    margin-left: 25px;
+    li {
+      // without this long list items go out of container
+      width: 100%;
+    }
   }
   ul {
     list-style-type: disc;
@@ -35,6 +47,7 @@
     border-width: 0;
     margin-bottom: 5px;
     font-weight: 700;
+    font-size: $fontSizeMain;
   }
 }
 
@@ -42,8 +55,8 @@
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  input {
-    width: 90%;
+  input, textarea {
+    width: 88%;
   }
 }
 
@@ -56,14 +69,27 @@
   }
   > div {
     width: 48%;
-    h2 {
+    label {
+      display: block;
+      width: 95%;
       border-bottom: 2px solid $colorTabData;
     }
-    input {
+    div {
+      display: flex;
+      height: 100px;
+      i {
+        margin-top: 10px;
+      }
+    }
+    input, textarea {
       width: 85%;
+      margin: 10px;
+    }
+    // TODO: leave like this or change to textarea?
+    input {
+      height: 35px;
     }
     .add {
-      margin: 10px;
       color: $colorSuccess;
     }
     .action {
@@ -74,6 +100,10 @@
       &:last-of-type {
         color: $colorBin;
       }
+    }
+    .recipeList {
+      height: 350px;
+      overflow-y: auto;
     }
   }
 }

@@ -5,8 +5,13 @@
 @import '_pulpit.scss';
 @import '_addRecipe.scss';
 
-//*{
-//  margin: 0;
-//  padding: 0;
-//}
-
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: $fontSizeMain;
+  h1 {
+    font-size: $fontSizeLarge;
+  }
+  h2 {
+    font-size: $fontSizeMedium;
+  }
+}

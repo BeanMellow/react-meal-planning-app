@@ -1,10 +1,11 @@
 .main {
-  font-family: 'Open Sans', sans-serif;
-  font-size: $fontSizeMain;
+  // commented -> moved to main to affect whole project
+  //font-family: 'Open Sans', sans-serif;
+  //font-size: $fontSizeMain;
   background-color: $colorBg;
-  h2 {
-    font-size: $fontSizeMedium;
-  }
+  //h2 {
+  //  font-size: $fontSizeMedium;
+  //}
 }
 
 .container {
@@ -33,7 +34,8 @@
 
 .logo {
   font-family: 'Charmonman', cursive;
-  font-size: $fontSizeLarge;
+  // moved to h1 in MAIN
+  //font-size: $fontSizeLarge;
   color: #fff;
   flex-grow: 1;
   span {

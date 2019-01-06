@@ -36,7 +36,7 @@ const ErrorMessage = props => {
 const List = props => {
     let list;
     const listItems = props.items.map((item, i) => {
-        const styleText = {color: '#000'};
+        const styleText = {color: '#4a4a49'};
         const styleIcon = {
             edit: {color: '#FFB03B'},
             delete: {color: '#BD4932'}
@@ -64,9 +64,9 @@ const List = props => {
     });
 
     if (props.type === 'instructions') {
-        list = <ol>{listItems}</ol>;
+        list = <ol className={'recipeList'}>{listItems}</ol>;
     } else if (props.type === 'ingredients') {
-        list = <ul>{listItems}</ul>;
+        list = <ul className={'recipeList'}>{listItems}</ul>;
     }
 
     return list;
@@ -271,26 +271,30 @@ class AddRecipe extends React.Component {
                                 <button type={'submit'}>Zapisz i zamknij</button>
                             </div>
                             <div className={'addRecipeInput-horiz'}>
-                                <h2>Nazwa przepisu</h2>
+                                <label htmlFor={'recipeName'}>Nazwa przepisu</label>
                                 <input value={this.state.recipeName}
                                        onChange={this.handleChange('recipeName')}
-                                       type="text"/>
+                                       type='text'
+                                       id='recipeName'
+                                />
                             </div>
                             <ErrorMessage error={this.state.nameValid}/>
                             <div className={'addRecipeInput-horiz'}>
-                                <h2>Opis przepisu</h2>
-                                <input value={this.state.recipeDesc}
+                                <label htmlFor={'recipeDescription'}>Opis przepisu</label>
+                                <textarea value={this.state.recipeDesc}
                                        onChange={this.handleChange('recipeDesc')}
-                                       type="text"/>
+                                       id={'recipeDescription'}
+                                />
                             </div>
                             <ErrorMessage error={this.state.descValid}/>
                             <div className={'addRecipeInput-vert'}>
                                 <div>
-                                    <h2>INSTRUKCJE</h2>
+                                    <label htmlFor={'recipeInstruction'}>INSTRUKCJE</label>
                                     <div>
-                                        <input value={this.state.recipeInst}
+                                        <textarea value={this.state.recipeInst}
                                                onChange={this.handleChange('recipeInst')}
-                                               type="text"/>
+                                               id={'recipeInstruction'}
+                                        />
                                         <i className="fas fa-plus-square fa-2x add"
                                            onClick={this.handleClick('instruction')}
                                         ></i>
@@ -304,11 +308,13 @@ class AddRecipe extends React.Component {
                                     />
                                 </div>
                                 <div>
-                                    <h2>SKŁADNIKI</h2>
+                                    <label htmlFor={'recipeIngredient'}>SKŁADNIKI</label>
                                     <div>
                                         <input value={this.state.recipeIngr}
                                                onChange={this.handleChange('recipeIngr')}
-                                               type="text"/>
+                                               type="text"
+                                               id={'recipeIngredient'}
+                                        />
                                         <i className="fas fa-plus-square fa-2x add"
                                            onClick={this.handleClick('ingredient')}
                                         ></i>
