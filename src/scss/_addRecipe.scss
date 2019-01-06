@@ -8,6 +8,15 @@
 .addRecipeForm {
   width: 95%;
   margin: 30px auto;
+  ol, ul {
+    margin-left: 20px;
+  }
+  ul {
+    list-style-type: disc;
+    &.errorList {
+      color: $colorBin;
+    }
+  }
 }
 
 .addRecipeHeader {
@@ -69,12 +78,4 @@
   }
 }
 
-ol, ul {
-  margin-left: 20px;
-}
-ul {
-  list-style-type: disc;
-  &.errorList {
-    color: $colorBin;
-  }
-}
+

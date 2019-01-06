@@ -39,18 +39,41 @@ const ErrorList = props => {
 
 const List = props => {
     let list;
-    const listItems = props.items.map((item, i) => (
-        <li key={item}>
-            {item}
-            <i onClick={props.handleEdit(i, props.type)} className="fas fa-edit action"></i>
-            <i onClick={props.handleDelete(i, props.type)} className="fas fa-trash-alt action"></i>
-        </li>
-    ));
+    const listItems = props.items.map((item, i) => {
+        const styleText = {color: '#000'};
+        const styleIcon = {
+            edit: {color: '#FFB03B'},
+            delete: {color: '#BD4932'}
+        };
+        if (props.index === i) {
+            styleText.color = '#FFB03B';
+        } else if (props.index >= 0) {
+            styleText.color = '#A1A194';
+            styleIcon.edit = {color: '#A1A194'};
+            styleIcon.delete = {color: '#A1A194'};
+        }
+
+        return (
+            <li key={item} style={styleText}>
+                {item}
+                <i onClick={props.handleEdit(i, props.type)}
+                   className="fas fa-edit action"
+                   style={styleIcon.edit}
+                ></i>
+                <i onClick={props.handleDelete(i, props.type)}
+                   className="fas fa-trash-alt action"
+                   style={styleIcon.delete}
+                ></i>
+            </li>
+        );
+    });
+
     if (props.type === 'instructions') {
         list = <ol>{listItems}</ol>;
     } else if (props.type === 'ingredients') {
         list = <ul>{listItems}</ul>;
     }
+
     return list;
 };
 
@@ -139,8 +162,8 @@ class AddRecipe extends React.Component {
             if (recipeInst.length < 10 || recipeInst.length > 150) {
                 errors.push('Każdy podpunkt instrukcji musi mieć od 10 do 150 znaków.');
             }
-            // check if input is unique
-            if (instructions.indexOf(recipeInst) > -1) {
+            // check if input is unique (except during edit)
+            if (instructions.indexOf(recipeInst) > -1 && this.state.editInstIndex < 0) {
                 errors.push('Każdy podpunkt instrukcji musi być unikalny.');
             }
 
@@ -167,8 +190,8 @@ class AddRecipe extends React.Component {
             if (recipeIngr.length < 3 || recipeIngr.length > 50) {
                 errors.push('Każdy podpunkt składników musi mieć od 3 do 50 znaków.')
             }
-            // check if input is unique
-            if (ingredients.indexOf(recipeIngr) > -1) {
+            // check if input is unique (except during edit)
+            if (ingredients.indexOf(recipeIngr) > -1 && this.state.editIngrIndex < 0) {
                 errors.push('Każdy podpunkt składników musi być unikalny.');
             }
 
@@ -193,13 +216,15 @@ class AddRecipe extends React.Component {
     // TODO: BLOCK OTHER EDIT/DELETE DURING EDITING - CAUSING ERRORS
     handleEdit = (i, type) => event => {
         console.log(i, type, event.target);
+        // block btn when editing list item
         if (type === 'instructions' && this.state.editInstIndex < 0) {
             const editInst = this.state.instructions[i];
             this.setState({
                 recipeInst: editInst,
                 editInstIndex: i
             });
-        } else if (type === 'ingredients'  && this.state.editIngrIndex < 0) {
+            // block btn when editing list item
+        } else if (type === 'ingredients' && this.state.editIngrIndex < 0) {
             const editIngr = this.state.ingredients[i];
             this.setState({
                 recipeIngr: editIngr,
@@ -211,13 +236,15 @@ class AddRecipe extends React.Component {
     handleDelete = (i, type) => event => {
         console.log(i, type, event.target);
         let newState;
-        if (type === 'instructions') {
+        // block btn when editing list item
+        if (type === 'instructions' && this.state.editInstIndex < 0) {
             newState = [...this.state.instructions];
             newState.splice(i, 1);
             this.setState({
                 instructions: newState
             });
-        } else if (type === 'ingredients') {
+            // block btn when editing list item
+        } else if (type === 'ingredients' && this.state.editIngrIndex < 0) {
             newState = [...this.state.ingredients];
             newState.splice(i, 1);
             this.setState({
@@ -268,6 +295,7 @@ class AddRecipe extends React.Component {
                                           handleDelete={this.handleDelete}
                                           handleEdit={this.handleEdit}
                                           type={'instructions'}
+                                          index={this.state.editInstIndex}
                                     />
                                 </div>
                                 <div>
@@ -286,6 +314,7 @@ class AddRecipe extends React.Component {
                                           handleDelete={this.handleDelete}
                                           handleEdit={this.handleEdit}
                                           type={'ingredients'}
+                                          index={this.state.editIngrIndex}
                                     />
                                 </div>
                             </div>
