@@ -45,10 +45,9 @@ const List = props => {
             edit: {color: '#FFB03B'},
             delete: {color: '#BD4932'}
         };
-        if (props.index === i) {
-            styleText.color = '#FFB03B';
-        } else if (props.index >= 0) {
-            styleText.color = '#A1A194';
+
+        if (props.index >= 0) {
+            props.index === i ? styleText.color = '#FFB03B' : styleText.color = '#A1A194';
             styleIcon.edit = {color: '#A1A194'};
             styleIcon.delete = {color: '#A1A194'};
         }
@@ -162,9 +161,14 @@ class AddRecipe extends React.Component {
             if (recipeInst.length < 10 || recipeInst.length > 150) {
                 errors.push('Każdy podpunkt instrukcji musi mieć od 10 do 150 znaków.');
             }
-            // check if input is unique (except during edit)
-            if (instructions.indexOf(recipeInst) > -1 && this.state.editInstIndex < 0) {
-                errors.push('Każdy podpunkt instrukcji musi być unikalny.');
+            // check if input is unique
+            if (instructions.indexOf(recipeInst) > -1) {
+                // different message during edit
+                if (this.state.editInstIndex >= 0) {
+                    errors.push('Dokończ edycję wybranego punktu. Pamiętaj, że każdy podpunkt musi być unikalny.');
+                } else {
+                    errors.push('Każdy podpunkt instrukcji musi być unikalny.');
+                }
             }
 
             if (errors.length) {
@@ -191,8 +195,13 @@ class AddRecipe extends React.Component {
                 errors.push('Każdy podpunkt składników musi mieć od 3 do 50 znaków.')
             }
             // check if input is unique (except during edit)
-            if (ingredients.indexOf(recipeIngr) > -1 && this.state.editIngrIndex < 0) {
-                errors.push('Każdy podpunkt składników musi być unikalny.');
+            if (ingredients.indexOf(recipeIngr) > -1) {
+                // different message during edit
+                if (this.state.editIngrIndex >= 0) {
+                    errors.push('Dokończ edycję wybranego punktu. Pamiętaj, że każdy podpunkt musi być unikalny.');
+                } else {
+                    errors.push('Każdy podpunkt składników musi być unikalny.');
+                }
             }
 
             if (errors.length) {
