@@ -12,7 +12,7 @@ import firebase, {db} from "./firebase";
 //     </ul>
 // );
 const ErrorList = props => {
-    let result;
+    let result = null;
     if (props.items) {
         result = (
             <ul className={'errorList'}>
@@ -21,8 +21,6 @@ const ErrorList = props => {
                 ))}
             </ul>
         );
-    } else {
-        result = null;
     }
     return result;
 };
@@ -136,6 +134,7 @@ class AddRecipe extends React.Component {
         if (name === 'instruction') {
             const recipeInst = this.state.recipeInst;
             const instructions = this.state.instructions;
+            const index = this.state.editInstIndex;
 
             if (recipeInst.length < 10 || recipeInst.length > 150) {
                 errors.push('Każdy podpunkt instrukcji musi mieć od 10 do 150 znaków.');
@@ -152,7 +151,7 @@ class AddRecipe extends React.Component {
             } else {
                 newState = [...instructions];
                 // newState.push(recipeInst);
-                this.state.editInstIndex >= 0 ? newState.splice(this.state.editInstIndex, 1, recipeInst) : newState.push(recipeInst);
+                index >= 0 ? newState.splice(index, 1, recipeInst) : newState.push(recipeInst);
                 this.setState({
                     recipeInst: '',
                     instructions: newState,
@@ -163,6 +162,7 @@ class AddRecipe extends React.Component {
         } else if (name === 'ingredient') {
             const recipeIngr = this.state.recipeIngr;
             const ingredients = this.state.ingredients;
+            const index = this.state.editIngrIndex;
 
             if (recipeIngr.length < 3 || recipeIngr.length > 50) {
                 errors.push('Każdy podpunkt składników musi mieć od 3 do 50 znaków.')
@@ -179,7 +179,7 @@ class AddRecipe extends React.Component {
             } else {
                 newState = [...ingredients];
                 // newState.push(recipeIngr);
-                this.state.editIngrIndex >= 0 ? newState.splice(this.state.editIngrIndex, 1, recipeIngr) : newState.push(recipeIngr);
+                index >= 0 ? newState.splice(index, 1, recipeIngr) : newState.push(recipeIngr);
                 this.setState({
                     recipeIngr: '',
                     ingredients: newState,
@@ -193,13 +193,13 @@ class AddRecipe extends React.Component {
     // TODO: BLOCK OTHER EDIT/DELETE DURING EDITING - CAUSING ERRORS
     handleEdit = (i, type) => event => {
         console.log(i, type, event.target);
-        if (type === 'instructions') {
+        if (type === 'instructions' && this.state.editInstIndex < 0) {
             const editInst = this.state.instructions[i];
             this.setState({
                 recipeInst: editInst,
                 editInstIndex: i
             });
-        } else if (type === 'ingredients') {
+        } else if (type === 'ingredients'  && this.state.editIngrIndex < 0) {
             const editIngr = this.state.ingredients[i];
             this.setState({
                 recipeIngr: editIngr,
