@@ -1,0 +1,11 @@
+@mixin appContainer {
+  background-color: $colorBg;
+  width: 80%;
+  margin: 30px auto;
+  border: 1px dashed $colorNav;
+}
+
+@mixin appInnerContainer {
+  width: 95%;
+  margin: 30px auto;
+}

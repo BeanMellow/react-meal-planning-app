@@ -1,0 +1,45 @@
+.recipesContainer {
+  @include appContainer;
+  .recipesTable {
+    @include appInnerContainer;
+    .recipesHeader {
+      display: flex;
+      border-bottom: 3px solid $colorTabData;
+      padding-bottom: 5px;
+      h2 {
+        flex-grow: 1;
+        color: $colorBtn;
+        font-weight: 700;
+      }
+      i {
+        color: $colorSuccess;
+      }
+    }
+    table {
+      width: 100%;
+      text-align: left;
+      th {
+        font-size: $fontSizeMedium;
+        color: $colorHead;
+        padding: 15px 0;
+        &:first-of-type {
+          width: 5%;
+        }
+        &:nth-of-type(2) {
+          width: 20%;
+        }
+        &:nth-of-type(3) {
+          width: 60%;
+        }
+        &:last-of-type {
+          width: 15%;
+        }
+      }
+      td {
+        color: $colorNav;
+        padding: 10px 0;
+        border-top: 1px solid $colorTabData;
+      }
+    }
+  }
+}

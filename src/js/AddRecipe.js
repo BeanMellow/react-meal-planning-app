@@ -123,6 +123,7 @@ class AddRecipe extends React.Component {
                 instructions: this.state.instructions,
                 ingredients: this.state.ingredients
             }).then(() => {
+                // TODO: ADD SUCCESS MESSAGE IN HTML
                 console.log('Recipe successfully added to database');
                 this.setState({
                     recipeName: '',

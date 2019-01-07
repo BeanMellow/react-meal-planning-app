@@ -83,3 +83,17 @@
 .activeLink{
     font-weight: bold;
 }
+
+// TODO: edited 07.01
+.action {
+  margin-left: 5px;
+  &:first-of-type {
+    color: $colorWarning;
+  }
+  &:last-of-type {
+    color: $colorBin;
+  }
+}
+i {
+  cursor: pointer;
+}

@@ -1,13 +1,17 @@
+// TODO: change name ie appContainer and move to main? use in all views
 .addRecipeContainer {
-  background-color: $colorBg;
-  width: 80%;
-  margin: 30px auto;
-  border: 1px dashed $colorNav;
+  // CHANGE TO MIXIN
+  //background-color: $colorBg;
+  //width: 80%;
+  //margin: 30px auto;
+  //border: 1px dashed $colorNav;
+  @include appContainer;
 }
 
 .addRecipeForm {
-  width: 95%;
-  margin: 30px auto;
+  //width: 95%;
+  //margin: 30px auto;
+  @include appInnerContainer;
   label {
     color: $colorHead;
     font-size: $fontSizeMedium;
@@ -64,9 +68,10 @@
   display: flex;
   justify-content: space-between;
   margin-top: 30px;
-  i {
-    cursor: pointer;
-  }
+  // moved to _app
+  //i {
+  //  cursor: pointer;
+  //}
   > div {
     width: 48%;
     label {
@@ -92,15 +97,16 @@
     .add {
       color: $colorSuccess;
     }
-    .action {
-      margin-left: 5px;
-      &:first-of-type {
-        color: $colorWarning;
-      }
-      &:last-of-type {
-        color: $colorBin;
-      }
-    }
+    // moved to _app.scss
+    //.action {
+    //  margin-left: 5px;
+    //  &:first-of-type {
+    //    color: $colorWarning;
+    //  }
+    //  &:last-of-type {
+    //    color: $colorBin;
+    //  }
+    //}
     .recipeList {
       height: 350px;
       overflow-y: auto;

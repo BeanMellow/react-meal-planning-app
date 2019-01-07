@@ -1,9 +1,11 @@
 @import '_reset.scss';
 @import '_variables.scss';
+@import '_mixins.scss';
 @import '_landingPage.scss';
 @import '_app.scss';
 @import '_pulpit.scss';
 @import '_addRecipe.scss';
+@import '_recipes.scss';
 
 body {
   font-family: 'Open Sans', sans-serif;
