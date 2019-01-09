@@ -1,5 +1,7 @@
 # React Food App
-## Work in progress
+## Work in progress. Features:
+* React Router
+* Cloud Firestore database integration
 
 ### How to install:
 1. `git clone https://github.com/BeanMellow/react-food-app`
