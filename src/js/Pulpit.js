@@ -49,31 +49,47 @@ class Widgets extends React.Component{
 }
 
 class ScheduleWeek extends React.Component{
-
-
-    render(){
-
+    constructor(props) {
+        super(props);
 
         function getWeekNumber(d) {
             d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
             d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
-            var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-            var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
-            return [d.getUTCFullYear(), weekNo];
+            let yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        }
+        const result = getWeekNumber(new Date());
+
+        this.state = {
+            week: result
         }
 
-        var result = getWeekNumber(new Date());
-        console.log(result);
+    }
 
+    handleClick = side => () => {
+
+        let actualWeek = this.state.week;
+        if (side === 'previous') {
+            actualWeek < 2 ? actualWeek = 52 : actualWeek--;
+        } else if (side === 'next') {
+            actualWeek > 51 ? actualWeek = 1 : actualWeek++;
+        }
+
+        this.setState({
+            week: actualWeek
+        });
+    };
+
+    render(){
         return(
             <div className={"scheduleContainer"}>
                 <div>
-                    <h2>Twój plan na  tydzień:</h2>
+                    <h2>Twój plan na {this.state.week} tydzień:</h2>
                     <div>plan</div>
                 </div>
                 <div>
-                    <h3>  poprzedni </h3>
-                    <h3>następny</h3>
+                    <h3 onClick={this.handleClick('previous')}>poprzedni </h3>
+                    <h3 onClick={this.handleClick('next')}>następny</h3>
                 </div>
             </div>
         )
