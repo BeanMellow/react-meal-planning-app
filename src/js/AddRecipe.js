@@ -117,7 +117,13 @@ class AddRecipe extends React.Component {
                 ingredientValid: ingrError
             });
         } else {
-            db.collection('Recipes').doc(this.state.recipeName).set({
+            /*db.collection('Recipes').doc(this.state.recipeName).set({
+                recipeName: this.state.recipeName,
+                recipeDesc: this.state.recipeDesc,
+                instructions: this.state.instructions,
+                ingredients: this.state.ingredients
+            })*/
+            db.collection('Recipes').add({
                 recipeName: this.state.recipeName,
                 recipeDesc: this.state.recipeDesc,
                 instructions: this.state.instructions,

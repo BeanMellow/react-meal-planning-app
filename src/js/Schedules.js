@@ -36,17 +36,25 @@ const TableHead = () => (
 
 class TableData extends React.Component{
     state = {
-        allRecipes: []
+        allSchedules: []
     };
 
     getDataFromDb = category => {
         const result = [];
 
-        db.collection(category).get().then(recipes => {
-            recipes.forEach(recipe => result.push(recipe.data()));
+        db.collection(category).get().then(schedules => {
+
+            schedules.forEach(schedule => {
+                const schedulesContainer = {
+                    data: schedule.data(),
+                    id: schedule.id
+                };
+                result.push(schedulesContainer)
+            });
+
             console.log(result);
             this.setState({
-                allRecipes: result
+                allSchedules: result
             });
 
         }).catch(error => console.log('Error getting data: ' + error));
@@ -56,12 +64,12 @@ class TableData extends React.Component{
     render() {
         return (
             <tbody>
-            {this.state.allRecipes.map((schedule, i) => (
+            {this.state.allSchedules.map((schedule, i) => (
                 <tr key={i}>
                     <td>{++i}</td>
-                    <td>{schedule.scheduleName}</td>
-                    <td>{schedule.scheduleDesc}</td>
-                    <td>{schedule.scheduleNum}</td>
+                    <td>{schedule.data.scheduleName}</td>
+                    <td>{schedule.data.scheduleDesc}</td>
+                    <td>{schedule.data.scheduleNum}</td>
                     <td>
                         <i className="fas fa-edit fa-lg action"> </i>
                         <i className="fas fa-trash-alt fa-lg action"> </i>

@@ -64,6 +64,7 @@ class ScheduleSelectors extends React.Component{
 
     };
 
+
     render(){
         return (
             <tbody>
@@ -135,6 +136,7 @@ class AddSchedule extends React.Component{
             numValid: [],
         }
     }
+
     handleSubmit = event => {
         event.preventDefault();
         const scheduleName = this.state.scheduleName;
@@ -152,7 +154,6 @@ class AddSchedule extends React.Component{
         if (scheduleNum.length < 1 || scheduleNum < 1 || scheduleDesc > 52) {
             numError = ['Numer planu musi być liczbą pomiędzy 1 a 52.'];
         }
-
         if (nameError || descError || numError) {
             this.setState({
                 nameValid: nameError,
@@ -160,13 +161,13 @@ class AddSchedule extends React.Component{
                 numValid: numError
             });
         } else {
-            db.collection('Schedules').doc(this.state.scheduleName).set({
+            db.collection('Schedules').add({
                 scheduleName: this.state.scheduleName,
                 scheduleDesc: this.state.scheduleDesc,
                 scheduleNum: this.state.scheduleNum,
 
             }).then(() => {
-                console.log(db.collection('Schedules'))
+                console.log(db.collection('Schedules'));
                 this.setState({
                     scheduleName: '',
                     scheduleDesc: '',
@@ -215,7 +216,6 @@ class AddSchedule extends React.Component{
                                 <label htmlFor={'recipeDescription'}>Numer tygodnia</label>
                                 <input onChange={this.handleChange('scheduleNum')}
                                        value ={this.state.scheduleNum}
-
                                 />
                             </div>
                             <ErrorMessage error={this.state.numValid}/>

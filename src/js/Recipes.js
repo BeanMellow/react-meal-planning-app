@@ -42,7 +42,15 @@ class TableData extends React.Component {
         const result = [];
 
         db.collection(category).get().then(recipes => {
-            recipes.forEach(recipe => result.push(recipe.data()));
+
+
+            recipes.forEach(recipe => {
+                const recipesContainer = {
+                    data: recipe.data(),
+                    id: recipe.id
+                };
+                result.push(recipesContainer);
+            });
 
             // TODO: CZY TO W TYM MIEJSCU JEST OK? SORTUJE 5X (PO KAZDEJ KAT)
             // result.sort((a, b) => a.SKU - b.SKU);
@@ -62,8 +70,8 @@ class TableData extends React.Component {
             {this.state.allRecipes.map((recipe, i) => (
                 <tr key={i}>
                     <td>{++i}</td>
-                    <td>{recipe.recipeName}</td>
-                    <td>{recipe.recipeDesc}</td>
+                    <td>{recipe.data.recipeName}</td>
+                    <td>{recipe.data.recipeDesc}</td>
                     <td>
                         <i className="fas fa-edit fa-lg action"></i>
                         <i className="fas fa-trash-alt fa-lg action"></i>
