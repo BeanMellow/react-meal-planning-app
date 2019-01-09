@@ -49,11 +49,26 @@ class Widgets extends React.Component{
 }
 
 class ScheduleWeek extends React.Component{
+
+
     render(){
+
+
+        function getWeekNumber(d) {
+            d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+            d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+            var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+            var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+            return [d.getUTCFullYear(), weekNo];
+        }
+
+        var result = getWeekNumber(new Date());
+        console.log(result);
+
         return(
             <div className={"scheduleContainer"}>
                 <div>
-                    <h2>Twój plan na <span> XX </span> tydzień:</h2>
+                    <h2>Twój plan na  tydzień:</h2>
                     <div>plan</div>
                 </div>
                 <div>
