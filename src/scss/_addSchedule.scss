@@ -1,0 +1,61 @@
+.addScheduleContainer {
+  @include appContainer;
+}
+
+.addScheduleForm{
+  @include addForm;
+  div:nth-of-type(4){
+    width: 28.5%;
+    input{
+      width: 29.25px;
+    }
+  }
+}
+
+.addScheduleHeader{
+  @include addHeader;
+}
+
+.addScheduleInput-horiz {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  input, textarea{
+    width: 75%;
+    border: 1px solid $colorTabData;
+  }
+  textarea{
+    height: 60px;
+  }
+}
+
+.weekScheduleTable{
+  margin-top: 10px;
+  width: 100%;
+  th:nth-of-type(1){
+    visibility: hidden;
+  }
+  th{
+    color: $colorHead;
+    width: 14.28%;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    border-top: 1px solid $colorTabData;
+  }
+  td:first-child{
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    color: $colorHead;
+  }
+  td{
+    border-top: 1px solid $colorTabData;
+    padding:5px;
+    position: relative;
+    select {
+      width: 100%;
+    }
+  }
+
+}

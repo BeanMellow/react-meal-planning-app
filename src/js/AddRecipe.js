@@ -54,11 +54,11 @@ const List = props => {
                 <i onClick={props.handleEdit(i, props.type)}
                    className="fas fa-edit action"
                    style={styleIcon.edit}
-                ></i>
+                > </i>
                 <i onClick={props.handleDelete(i, props.type)}
                    className="fas fa-trash-alt action"
                    style={styleIcon.delete}
-                ></i>
+                > </i>
             </li>
         );
     });
@@ -298,7 +298,7 @@ class AddRecipe extends React.Component {
                                         />
                                         <i className="fas fa-plus-square fa-2x add"
                                            onClick={this.handleClick('instruction')}
-                                        ></i>
+                                        > </i>
                                     </div>
                                     <ErrorMessage error={this.state.instructionValid}/>
                                     <List items={this.state.instructions}
