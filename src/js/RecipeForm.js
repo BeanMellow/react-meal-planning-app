@@ -35,38 +35,43 @@ const ErrorMessage = props => {
 
 const List = props => {
     let list;
-    const listItems = props.items.map((item, i) => {
-        const styleText = {color: '#4a4a49'};
-        const styleIcon = {
-            edit: {color: '#FFB03B'},
-            delete: {color: '#BD4932'}
-        };
 
-        if (props.index >= 0) {
-            props.index === i ? styleText.color = '#FFB03B' : styleText.color = '#A1A194';
-            styleIcon.edit = {color: '#A1A194'};
-            styleIcon.delete = {color: '#A1A194'};
+    if (props.items) {
+        const listItems = props.items.map((item, i) => {
+            const styleText = {color: '#4a4a49'};
+            const styleIcon = {
+                edit: {color: '#FFB03B'},
+                delete: {color: '#BD4932'}
+            };
+
+            if (props.index >= 0) {
+                props.index === i ? styleText.color = '#FFB03B' : styleText.color = '#A1A194';
+                styleIcon.edit = {color: '#A1A194'};
+                styleIcon.delete = {color: '#A1A194'};
+            }
+
+            return (
+                <li key={item} style={styleText}>
+                    {item}
+                    <i onClick={props.handleEdit(i, props.type)}
+                       className="fas fa-edit action"
+                       style={styleIcon.edit}
+                    > </i>
+                    <i onClick={props.handleDelete(i, props.type)}
+                       className="fas fa-trash-alt action"
+                       style={styleIcon.delete}
+                    > </i>
+                </li>
+            );
+        });
+
+        if (props.type === 'instructions') {
+            list = <ol className={'recipeList'}>{listItems}</ol>;
+        } else if (props.type === 'ingredients') {
+            list = <ul className={'recipeList'}>{listItems}</ul>;
         }
-
-        return (
-            <li key={item} style={styleText}>
-                {item}
-                <i onClick={props.handleEdit(i, props.type)}
-                   className="fas fa-edit action"
-                   style={styleIcon.edit}
-                > </i>
-                <i onClick={props.handleDelete(i, props.type)}
-                   className="fas fa-trash-alt action"
-                   style={styleIcon.delete}
-                > </i>
-            </li>
-        );
-    });
-
-    if (props.type === 'instructions') {
-        list = <ol className={'recipeList'}>{listItems}</ol>;
-    } else if (props.type === 'ingredients') {
-        list = <ul className={'recipeList'}>{listItems}</ul>;
+    } else {
+        list = null;
     }
 
     return list;
@@ -116,12 +121,15 @@ class RecipeForm extends React.Component {
             });
         } else {
             this.setState({
+                instructions: [],
+                ingredients: [],
                 nameValid: '',
                 descValid: '',
                 instructionValid: '',
                 ingredientValid: '',
-            });
-            this.props.handleSubmit();
+                editInstIndex: -1,
+                editIngrIndex: -1
+            }, this.props.handleSubmit(this.state.instructions, this.state.ingredients));
         }
     };
 
@@ -202,6 +210,7 @@ class RecipeForm extends React.Component {
             }, this.props.setProperty('recipeInst', editInst));
             // block btn when editing list item
         } else if (type === 'ingredients' && this.state.editIngrIndex < 0) {
+            // TODO: is this object reference? its not right?
             const editIngr = this.state.ingredients[i];
             this.setState({
                 editIngrIndex: i
@@ -238,7 +247,7 @@ class RecipeForm extends React.Component {
             <div className={'addRecipeContainer'}>
                 <form className={'addRecipeForm'} onSubmit={this.validation}>
                     <div className={'addRecipeHeader'}>
-                        <h2>NOWY PRZEPIS</h2>
+                        <h2>{this.props.isEdit ? 'EDYTOWANIE PRZEPISU' : 'NOWY PRZEPIS'}</h2>
                         <button type={'submit'}>Zapisz i zamknij</button>
                     </div>
                     <div className={'addRecipeInput-horiz'}>
@@ -268,7 +277,7 @@ class RecipeForm extends React.Component {
                                         />
                                 <i className="fas fa-plus-square fa-2x add"
                                    onClick={handleClick('instruction')}
-                                > </i>
+                                ></i>
                             </div>
                             <ErrorMessage error={this.state.instructionValid}/>
                             <List items={this.state.instructions}
@@ -302,6 +311,19 @@ class RecipeForm extends React.Component {
                 </form>
             </div>
         )
+    }
+
+    componentDidMount() {
+        // console.log('mounted form');
+        // console.log(this.props.instructions);
+        if (this.props.isEdit) {
+            // console.log(this.props.instructions);
+            // console.log(this.props.ingredients);
+            this.setState({
+                instructions: this.props.instructions,
+                ingredients: this.props.ingredients
+            });
+        }
     }
 }
 

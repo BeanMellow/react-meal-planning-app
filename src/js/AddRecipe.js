@@ -23,14 +23,14 @@ class AddRecipe extends React.Component {
         // editIngrIndex: -1
     };
 
-    handleSubmit = () => {
+    handleSubmit = (instructions, ingredients) => () => {
         // event.preventDefault();
 
         db.collection('Recipes').add({
             recipeName: this.state.recipeName,
             recipeDesc: this.state.recipeDesc,
-            instructions: this.state.instructions,
-            ingredients: this.state.ingredients
+            instructions: instructions,
+            ingredients: ingredients
         }).then(() => {
             // TODO: ADD SUCCESS MESSAGE IN HTML
             console.log('Recipe successfully added to database');
