@@ -8,57 +8,17 @@ import AddRecipe from './AddRecipe';
 import AddSchedule from './AddSchedule';
 
 
-class PulpitRoute extends React.Component{
-    render(){
-        return (
-            <Pulpit/>
-        )
-    }
-}
-
-class RecipesRoute extends React.Component{
-    render(){
-        return (
-            <Recipes/>
-        )
-    }
-}
-
-class SchedulesRoute extends React.Component{
-    render(){
-        return (
-            <Schedules/>
-        )
-    }
-}
-
-class AddRecipeRoute extends React.Component{
-    render(){
-        return (
-            <AddRecipe/>
-        )
-    }
-}
-
-class AddScheduleRoute extends React.Component{
-    render(){
-        return (
-            <AddSchedule/>
-        )
-    }
-}
-
 class App extends React.Component {
     render() {
         return (
             <HashRouter>
                 <Switch>
                     <Route exact path="/" component={LandingPage}/>
-                    <Route path="/Main" component={PulpitRoute}/>
-                    <Route path="/Recipes" component={RecipesRoute}/>
-                    <Route path="/Schedules" component={SchedulesRoute}/>
-                    <Route path="/AddRecipe" component={AddRecipeRoute}/>
-                    <Route path="/AddSchedule" component={AddScheduleRoute}/>
+                    <Route path="/Main" component={Pulpit}/>
+                    <Route path="/Recipes" component={Recipes}/>
+                    <Route path="/Schedules" component={Schedules}/>
+                    <Route path="/AddRecipe" component={AddRecipe}/>
+                    <Route path="/AddSchedule" component={AddSchedule}/>
                 </Switch>
             </HashRouter>
         )

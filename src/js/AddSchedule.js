@@ -2,6 +2,7 @@ import React from "react";
 import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import {db} from "./firebase";
+import Select from 'react-select';
 
 const ErrorMessage = props => {
     let result;
@@ -18,11 +19,17 @@ const ErrorMessage = props => {
 };
 
 class WeekScheduleTable extends React.Component{
+    constructor(props){
+        super(props);
+        this.planOfWeek = props.planOfWeek;
+        console.log(this.planOfWeek)
+    }
+
     render(){
         return (
             <table className={'weekScheduleTable'}>
                 <ScheduleTableHead/>
-                <ScheduleSelectors/>
+                <ScheduleSelectors  planOfWeek = {this.planOfWeek}/>
             </table>
         )
     }
@@ -42,13 +49,47 @@ const ScheduleTableHead = () => (
     </thead>
 );
 
+class PlanOfDay {
+
+    constructor() {
+        this.breakfest = "";
+        this.lunch = "";
+        this.soup = "";
+        this.dinner = "";
+        this. desert = "";
+        this.supper = "";
+    }
+
+}
+
+class PlanOfWeek {
+
+    constructor() {
+        this.monday = new PlanOfDay();
+        this.tuesday = new PlanOfDay();
+        this.wednesday = new PlanOfDay();
+        this.thursday = new PlanOfDay();
+        this.friday = new PlanOfDay();
+        this.saturday = new PlanOfDay();
+        this.sunday = new PlanOfDay();
+    }
+
+}
+
+
+
 class ScheduleSelectors extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        this.planOfWeek = props.planOfWeek;
 
         this.state = {
             week: ["PONIEDZIAŁEK", "WTOREK", "ŚRODA", "CZWARTEK", "PIĄTEK", "SOBOTA", "NIEDZIELA"],
-            allRecipes: []
+            allRecipes: [],
+            selectedOption: null,
+            monday: {
+
+            }
         }
     }
 
@@ -56,7 +97,12 @@ class ScheduleSelectors extends React.Component{
         const result = [];
 
         db.collection(category).get().then(recipes => {
-            recipes.forEach(recipe => result.push(recipe.data()));
+            recipes.forEach(recipe => {
+                const recipeWithId = recipe.data();
+                recipeWithId.id = recipe.id;
+                result.push(recipeWithId);
+            });
+
             this.setState({
                 allRecipes: result
             });
@@ -64,24 +110,62 @@ class ScheduleSelectors extends React.Component{
 
     };
 
+    handleChange = (event) => {
+
+        let index = event.nativeEvent.target.selectedIndex;
+        //console.log(event.target.key);
+        let selectedOption = event.nativeEvent.target[index].text;
+        //console.log(`Option selected:`, selectedOption);
+        /*this.setState({
+            selectedOption: selectedOption,
+            dishes: {
+                breakfest: selectedOption
+            }
+        })*/
+        //
+
+
+        const selectedIndex = event.target.options.selectedIndex;
+        const dish = event.target.options[selectedIndex].getAttribute('dish_type');
+        const dayNumber = event.target.options[selectedIndex].getAttribute('week_day');
+
+        console.log(dish + " " + dayNumber);
+
+        if(dish === '0'){
+            if(dayNumber === '0'){ console.log(this.planOfWeek)
+                this.planOfWeek.monday.breakfest = selectedOption;
+                console.log(this.planOfWeek)
+            }
+
+
+        }
+
+
+        // else if(false){
+        //     this.planOfWeek.monday.lunch = "sadasd";
+        //     console.log("Na poniedziałkowe lunch wybrano: " + selectedOption)
+        // }
+    };
+
 
     render(){
+        console.log(this.state.allRecipes);
         return (
             <tbody>
-            {this.state.week.map((day, i) => (
-                <tr key={i}>
+            {this.state.week.map((day, dayNum) => (
+                <tr key={dayNum}>
                     <td>{day}</td>
                     <td>
-                        <select>
+                        <select onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} value={recipe}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={0} value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
-                        <select>
+                        <select onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} value={recipe}>{recipe.recipeName}</option>
+                                <option key={i} value={{day:day, recipe:recipe, meal:1}}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
@@ -127,6 +211,8 @@ class ScheduleSelectors extends React.Component{
 class AddSchedule extends React.Component{
     constructor(){
         super();
+        this.planOfWeek = new PlanOfWeek();
+
         this.state = {
             scheduleName: '',
             scheduleDesc: '',
@@ -219,7 +305,7 @@ class AddSchedule extends React.Component{
                                 />
                             </div>
                             <ErrorMessage error={this.state.numValid}/>
-                            <WeekScheduleTable/>
+                            <WeekScheduleTable planOfWeek={this.planOfWeek}/>
                         </form>
                     </div>
                 </div>
