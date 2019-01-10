@@ -74,22 +74,22 @@ const List = props => {
 
 class RecipeForm extends React.Component {
     state = {
-        // instructions: [],
-        // ingredients: [],
+        instructions: [],
+        ingredients: [],
         nameValid: '',
         descValid: '',
         instructionValid: '',
         ingredientValid: '',
-        // editInstIndex: -1,
-        // editIngrIndex: -1
+        editInstIndex: -1,
+        editIngrIndex: -1
     };
 
     validation = event => {
         event.preventDefault();
         const recipeName = this.props.state.recipeName;
         const recipeDesc = this.props.state.recipeDesc;
-        const instructions = this.props.state.instructions;
-        const ingredients = this.props.state.ingredients;
+        const instructions = this.state.instructions;
+        const ingredients = this.state.ingredients;
         let nameError = '';
         let descError = '';
         let instError = '';
@@ -126,11 +126,12 @@ class RecipeForm extends React.Component {
     };
 
     handleClick = name => () => {
+        let newState;
         let error = '';
         if (name === 'instruction') {
-            console.log('instruction in RecipeForm');
             const recipeInst = this.props.state.recipeInst;
-            const instructions = this.props.state.instructions;
+            const instructions = this.state.instructions;
+            const index = this.state.editInstIndex;
 
             if (recipeInst.length < 10 || recipeInst.length > 150) {
                 error = 'Każdy podpunkt instrukcji musi mieć od 10 do 150 znaków.';
@@ -149,14 +150,18 @@ class RecipeForm extends React.Component {
                     instructionValid: error
                 });
             } else {
+                newState = [...instructions];
+                index >= 0 ? newState.splice(index, 1, recipeInst) : newState.push(recipeInst);
                 this.setState({
-                    instructionValid: ''
-                }, this.props.handleClick(name));
+                    instructions: newState,
+                    instructionValid: '',
+                    editInstIndex: -1
+                }, this.props.setProperty('recipeInst', ''));
             }
         } else if (name === 'ingredient') {
-            console.log('ingredient in RecipeForm');
             const recipeIngr = this.props.state.recipeIngr;
-            const ingredients = this.props.state.ingredients;
+            const ingredients = this.state.ingredients;
+            const index = this.state.editIngrIndex;
 
             if (recipeIngr.length < 3 || recipeIngr.length > 50) {
                 error = 'Każdy podpunkt składników musi mieć od 3 do 50 znaków.';
@@ -176,18 +181,59 @@ class RecipeForm extends React.Component {
                     ingredientValid: error
                 });
             } else {
+                newState = [...ingredients];
+                index >= 0 ? newState.splice(index, 1, recipeIngr) : newState.push(recipeIngr);
                 this.setState({
-                    ingredientValid: ''
-                }, this.props.handleClick(name));
+                    ingredients: newState,
+                    ingredientValid: '',
+                    editIngrIndex: -1
+                }, this.props.setProperty('recipeIngr', ''));
             }
+        }
+    };
+
+    handleEdit = (i, type) => event => {
+        // console.log(i, type, event.target);
+        // block btn when editing list item
+        if (type === 'instructions' && this.state.editInstIndex < 0) {
+            const editInst = this.state.instructions[i];
+            this.setState({
+                editInstIndex: i
+            }, this.props.setProperty('recipeInst', editInst));
+            // block btn when editing list item
+        } else if (type === 'ingredients' && this.state.editIngrIndex < 0) {
+            const editIngr = this.state.ingredients[i];
+            this.setState({
+                editIngrIndex: i
+            }, this.props.setProperty('recipeIngr', editIngr));
+        }
+    };
+
+    handleDelete = (i, type) => event => {
+        // console.log(i, type, event.target);
+        let newState;
+        // block btn when editing list item
+        if (type === 'instructions' && this.state.editInstIndex < 0) {
+            newState = [...this.state.instructions];
+            newState.splice(i, 1);
+            this.setState({
+                instructions: newState
+            });
+            // block btn when editing list item
+        } else if (type === 'ingredients' && this.state.editIngrIndex < 0) {
+            newState = [...this.state.ingredients];
+            newState.splice(i, 1);
+            this.setState({
+                ingredients: newState
+            });
         }
     };
 
     render() {
         const handleChange = this.props.handleChange;
         const handleClick = this.handleClick;
-        const handleEdit = this.props.handleEdit;
-        const handleDelete = this.props.handleDelete;
+        const handleEdit = this.handleEdit;
+        const handleDelete = this.handleDelete;
         return (
             <div className={'addRecipeContainer'}>
                 <form className={'addRecipeForm'} onSubmit={this.validation}>
@@ -221,15 +267,15 @@ class RecipeForm extends React.Component {
                                                   id={'recipeInstruction'}
                                         />
                                 <i className="fas fa-plus-square fa-2x add"
-                                   onClick={this.handleClick('instruction')}
+                                   onClick={handleClick('instruction')}
                                 > </i>
                             </div>
                             <ErrorMessage error={this.state.instructionValid}/>
-                            <List items={this.props.state.instructions}
+                            <List items={this.state.instructions}
                                   handleDelete={handleDelete}
                                   handleEdit={handleEdit}
                                   type={'instructions'}
-                                  index={this.props.state.editInstIndex}
+                                  index={this.state.editInstIndex}
                             />
                         </div>
                         <div>
@@ -245,11 +291,11 @@ class RecipeForm extends React.Component {
                                 ></i>
                             </div>
                             <ErrorMessage error={this.state.ingredientValid}/>
-                            <List items={this.props.state.ingredients}
+                            <List items={this.state.ingredients}
                                   handleDelete={handleDelete}
                                   handleEdit={handleEdit}
                                   type={'ingredients'}
-                                  index={this.props.state.editIngrIndex}
+                                  index={this.state.editIngrIndex}
                             />
                         </div>
                     </div>
