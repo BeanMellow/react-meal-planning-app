@@ -38,24 +38,45 @@ class TableData extends React.Component {
         allRecipes: []
     };
 
+    handleEdit = recipe => () => {
+        console.log(recipe);
+    };
+
+    handleDelete = id => () => {
+        console.log(id);
+        const newAllRecipes = this.state.allRecipes.filter(recipe => recipe.id !== id);
+        this.setState({
+            allRecipes: newAllRecipes
+        });
+        db.collection('Recipes').doc(id).delete().then(() => {
+            console.log('Document successfully deleted!');
+        }).catch(error => {
+            console.error('Error removing document: ', error);
+        });
+    };
+
     getDataFromDb = category => {
         const result = [];
 
         db.collection(category).get().then(recipes => {
 
-
             recipes.forEach(recipe => {
-                const recipesContainer = {
-                    data: recipe.data(),
-                    id: recipe.id
-                };
-                result.push(recipesContainer);
+                const recipeWithId = recipe.data();
+                recipeWithId.id = recipe.id;
+                result.push(recipeWithId);
             });
 
-            // TODO: CZY TO W TYM MIEJSCU JEST OK? SORTUJE 5X (PO KAZDEJ KAT)
-            // result.sort((a, b) => a.SKU - b.SKU);
-            // this.handleSort(Object.values(this.state.sort));
-            console.log(result);
+            // TODO: ascending sort by recipeName - add to README
+            result.sort((a, b) => {
+                if (a.recipeName < b.recipeName) {
+                    return -1;
+                }
+                if (a.recipeName > b.recipeName) {
+                    return 1;
+                }
+                return 0;
+            });
+
             this.setState({
                 allRecipes: result
             });
@@ -65,16 +86,17 @@ class TableData extends React.Component {
     };
 
     render() {
+        console.log(this.state.allRecipes);
         return (
             <tbody>
             {this.state.allRecipes.map((recipe, i) => (
                 <tr key={i}>
                     <td>{++i}</td>
-                    <td>{recipe.data.recipeName}</td>
-                    <td>{recipe.data.recipeDesc}</td>
+                    <td>{recipe.recipeName}</td>
+                    <td>{recipe.recipeDesc}</td>
                     <td>
-                        <i className="fas fa-edit fa-lg action"></i>
-                        <i className="fas fa-trash-alt fa-lg action"></i>
+                        <i onClick={this.handleEdit(recipe)} className="fas fa-edit fa-lg action"></i>
+                        <i onClick={this.handleDelete(recipe.id)} className="fas fa-trash-alt fa-lg action"></i>
                     </td>
                 </tr>
             ))}
