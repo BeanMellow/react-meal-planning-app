@@ -88,4 +88,19 @@
       cursor: pointer;
     }
   }
+  .pulpitTable{
+    margin: 0 auto;
+    width: 90%;
+    th{
+      border-top: 1px solid $colorTabData;
+      border-bottom: 1px solid $colorTabData;
+      padding: 10px;
+      color: $colorHead;
+    }
+    td{
+      color: $colorNav;
+      padding: 10px;
+      border-bottom: 1px solid $colorTabData;
+    }
+  }
 }

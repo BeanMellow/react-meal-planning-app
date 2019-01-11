@@ -3,6 +3,7 @@ import FirstVisit from "./FirstVisit";
 import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import {NavLink} from "react-router-dom";
+import {db} from "./firebase";
 
 class Widgets extends React.Component{
     render(){
@@ -51,7 +52,6 @@ class Widgets extends React.Component{
 const PulpitTableHead = () => (
     <thead>
     <tr>
-        <th> </th>
         <th>PONIEDZIAŁEK</th>
         <th>WTOREK</th>
         <th>ŚRODA</th>
@@ -64,14 +64,49 @@ const PulpitTableHead = () => (
 );
 
 class PulpitTableBody extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            data: [],
+            thisWeek: this.props.thisWeek
+        }
+    }
+
+    getDataFromDb = category => {
+
+        const scheduleData = [];
+        db.collection(category).get().then(result => {
+            result.forEach(schedule => {
+                const ScheduleData = {
+                    scheduleRecipies: schedule.data().scheduleRec,
+                    scheduleID: schedule.id,
+                    scheduleWeek: schedule.data().scheduleNum
+                };
+                scheduleData.push(ScheduleData)
+            });
+            this.setState({
+                data: scheduleData
+            });
+        }).catch(error => console.log('Error getting data: ' + error));
+
+    };
+
     render(){
+
+        //TODO znalezc plan z takim num jaki jest tydzien, wyswietlic wybrane przepisy
         return (
             <tbody>
-            <tr>
-                <td>to będzie body</td>
-            </tr>
+                <tr>
+                    <td>
+                        {" przepis "}
+                    </td>
+                </tr>
             </tbody>
-        )
+        );
+    }
+
+    componentDidMount() {
+        this.getDataFromDb('Schedules');
     }
 }
 
@@ -90,7 +125,6 @@ class ScheduleWeek extends React.Component{
         this.state = {
             week: result
         }
-
     }
 
     handleClick = side => () => {
@@ -101,7 +135,6 @@ class ScheduleWeek extends React.Component{
         } else if (side === 'next') {
             actualWeek > 51 ? actualWeek = 1 : actualWeek++;
         }
-
         this.setState({
             week: actualWeek
         });
@@ -112,9 +145,9 @@ class ScheduleWeek extends React.Component{
             <div className={"scheduleContainer"}>
                 <div>
                     <h2>Twój plan na {this.state.week} tydzień:</h2>
-                    <table>
+                    <table  className={'pulpitTable'}>
                         <PulpitTableHead/>
-                        <PulpitTableBody/>
+                        <PulpitTableBody thisWeek={this.state.week}/>
                     </table>
                 </div>
                 <div>

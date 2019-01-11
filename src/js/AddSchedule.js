@@ -2,7 +2,6 @@ import React from "react";
 import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import {db} from "./firebase";
-import Select from 'react-select';
 
 const ErrorMessage = props => {
     let result;
@@ -113,6 +112,7 @@ class ScheduleSelectors extends React.Component{
         const dish = event.target.options[selectedIndex].getAttribute('dish_type');
         const dayNumber = event.target.options[selectedIndex].getAttribute('week_day');
 
+        console.log(dish, dayNumber);
         if(dish === '0'){
             if(dayNumber === '0'){
                 this.planOfWeek.monday.breakfest = selectedOption;
@@ -233,28 +233,28 @@ class ScheduleSelectors extends React.Component{
                         </select>
                     </td>
                     <td>
-                        <select>
+                        <select  onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
                                 <option key={i} week_day={dayNum} dish_type={2} value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
-                        <select>
+                        <select  onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
                                 <option key={i} week_day={dayNum} dish_type={3} value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
-                        <select>
+                        <select  onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
                                 <option key={i} week_day={dayNum} dish_type={4} value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
-                        <select>
+                        <select  onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
                                 <option key={i} week_day={dayNum} dish_type={5} value={recipe.id}>{recipe.recipeName}</option>
                             ))}
