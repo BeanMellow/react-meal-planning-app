@@ -47,8 +47,6 @@ class EditRecipe extends React.Component {
     };
 
     handleSubmit = (instructions, ingredients) => {
-        // event.preventDefault();
-        // doc(this.props.recipe.id)
         db.collection('Recipes').doc(this.state.id).set({
             recipeName: this.state.recipeName,
             recipeDesc: this.state.recipeDesc,
@@ -56,21 +54,9 @@ class EditRecipe extends React.Component {
             ingredients: ingredients
         }).then(() => {
             // TODO: ADD SUCCESS MESSAGE IN HTML
-            console.log('Recipe successfully added to database');
-            // TODO: make sure this is correct to avoid obj reference
-            const editedRecipe = JSON.parse(JSON.stringify(this.state));
-            editedRecipe.instructions = instructions;
-            editedRecipe.ingredients = ingredients;
-            // this.props.finishEdit(editedRecipe);
-            // this.setState({
-            //     recipeName: '',
-            //     recipeDesc: '',
-            //     recipeInst: '',
-            //     recipeIngr: '',
-            // });
+            console.log('Recipe successfully updated');
         }).catch(error => console.log('Error writing document: ', error));
     };
-
 
     handleChange = name => event => {
         this.setState({

@@ -155,6 +155,8 @@ class Recipes extends React.Component {
                 allRecipes: result
             });
 
+            console.log('Recipes loaded.')
+
         }).catch(error => console.log('Error getting data: ' + error));
 
     };

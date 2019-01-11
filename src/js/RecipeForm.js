@@ -1,8 +1,4 @@
 import React from "react";
-import UserHeader from "./Header";
-import AppNavigation from "./Navigation";
-import firebase, {db} from "./firebase";
-import {Link} from "react-router-dom";
 import {withRouter} from "react-router-dom";
 
 // each error in different place -> map useless for now
@@ -121,18 +117,36 @@ class RecipeForm extends React.Component {
                 ingredientValid: ingrError
             });
         } else {
-            // TODO: this wont be necessary if submitting will also close RecipeForm
-            this.setState({
-                instructions: [],
-                ingredients: [],
-                nameValid: '',
-                descValid: '',
-                instructionValid: '',
-                ingredientValid: '',
-                editInstIndex: -1,
-                editIngrIndex: -1
-            }, this.props.handleSubmit(this.state.instructions, this.state.ingredients));
+            // // TODO: this wont be necessary if submitting will also close RecipeForm
+            // this.setState({
+            //     instructions: [],
+            //     ingredients: [],
+            //     nameValid: '',
+            //     descValid: '',
+            //     instructionValid: '',
+            //     ingredientValid: '',
+            //     editInstIndex: -1,
+            //     editIngrIndex: -1
+            // },
+            //     this.props.handleSubmit(this.state.instructions, this.state.ingredients),
+            //     this.props.history.push('/Recipes'));
+            // // TODO: end here. is the below version ok or better with callback like above?
+            // this.props.handleSubmit(this.state.instructions, this.state.ingredients);
+            // this.props.history.push('/Recipes');
+
+
+            this.finishValidation(instructions, ingredients, () => {
+                this.props.history.push('/Recipes');
+            });
+            // this.props.handleSubmit(instructions, ingredients, () => {
+            //     this.props.history.push('/Recipes');
+            // });
         }
+    };
+
+    finishValidation = (instructions, ingredients, callback) => {
+        this.props.handleSubmit(instructions, ingredients);
+        callback();
     };
 
     handleClick = name => () => {
@@ -326,7 +340,7 @@ class RecipeForm extends React.Component {
         }
     }
 
-    // TODO: works, but this way theres a short period where empty inputs are displayed - better with loader
+    // componentDidMount() above^ works well
     // componentDidUpdate(prevProps) {
     //     // console.log('new props');
     //     // check if props were updated
@@ -340,4 +354,4 @@ class RecipeForm extends React.Component {
     // }
 }
 
-export default RecipeForm;
+export default withRouter(RecipeForm);
