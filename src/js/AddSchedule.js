@@ -74,8 +74,6 @@ class PlanOfWeek {
 
 }
 
-
-
 class ScheduleSelectors extends React.Component{
     constructor(props){
         super(props);
@@ -287,7 +285,7 @@ class AddSchedule extends React.Component{
     }
 
     handleSubmit = event => {
-        const truePlan = JSON.parse(JSON.stringify(this.planOfWeek));
+        const doneSchedule = JSON.parse(JSON.stringify(this.planOfWeek));
         event.preventDefault();
         const scheduleName = this.state.scheduleName;
         const scheduleDesc = this.state.scheduleDesc;
@@ -315,7 +313,7 @@ class AddSchedule extends React.Component{
                 scheduleName: this.state.scheduleName,
                 scheduleDesc: this.state.scheduleDesc,
                 scheduleNum: this.state.scheduleNum,
-                scheduleRec: truePlan
+                scheduleRec: doneSchedule
             }).then(() => {
                 console.log(db.collection('Schedules'));
                 this.setState({
