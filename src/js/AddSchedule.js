@@ -22,7 +22,6 @@ class WeekScheduleTable extends React.Component{
     constructor(props){
         super(props);
         this.planOfWeek = props.planOfWeek;
-        console.log(this.planOfWeek)
     }
 
     render(){
@@ -86,10 +85,6 @@ class ScheduleSelectors extends React.Component{
         this.state = {
             week: ["PONIEDZIAŁEK", "WTOREK", "ŚRODA", "CZWARTEK", "PIĄTEK", "SOBOTA", "NIEDZIELA"],
             allRecipes: [],
-            selectedOption: null,
-            monday: {
-
-            }
         }
     }
 
@@ -112,44 +107,112 @@ class ScheduleSelectors extends React.Component{
 
     handleChange = (event) => {
 
-        let index = event.nativeEvent.target.selectedIndex;
-        //console.log(event.target.key);
-        let selectedOption = event.nativeEvent.target[index].text;
-        //console.log(`Option selected:`, selectedOption);
-        /*this.setState({
-            selectedOption: selectedOption,
-            dishes: {
-                breakfest: selectedOption
-            }
-        })*/
-        //
-
-
+        const index = event.nativeEvent.target.selectedIndex;
+        const selectedOption = event.nativeEvent.target[index].text;
         const selectedIndex = event.target.options.selectedIndex;
         const dish = event.target.options[selectedIndex].getAttribute('dish_type');
         const dayNumber = event.target.options[selectedIndex].getAttribute('week_day');
 
-        console.log(dish + " " + dayNumber);
-
         if(dish === '0'){
-            if(dayNumber === '0'){ console.log(this.planOfWeek)
+            if(dayNumber === '0'){
                 this.planOfWeek.monday.breakfest = selectedOption;
-                console.log(this.planOfWeek)
+            }else if(dayNumber === "1"){
+                this.planOfWeek.tuesday.breakfest = selectedOption;
+            }else if(dayNumber === "2"){
+                this.planOfWeek.wednesday.breakfest = selectedOption;
+            }else if(dayNumber === "3"){
+                this.planOfWeek.thursday.breakfest = selectedOption;
+            }else if(dayNumber === "4"){
+                this.planOfWeek.friday.breakfest = selectedOption;
+            }else if(dayNumber === "5"){
+                this.planOfWeek.saturday.breakfest = selectedOption;
+            }else if(dayNumber === "6"){
+                this.planOfWeek.sunday.breakfest = selectedOption;
             }
-
-
+        }else if(dish === '1') {
+            if (dayNumber === '0') {
+                this.planOfWeek.monday.lunch = selectedOption;
+            } else if (dayNumber === "1") {
+                this.planOfWeek.tuesday.lunch = selectedOption;
+            } else if (dayNumber === "2") {
+                this.planOfWeek.wednesday.lunch = selectedOption;
+            } else if (dayNumber === "3") {
+                this.planOfWeek.thursday.lunch = selectedOption;
+            } else if (dayNumber === "4") {
+                this.planOfWeek.friday.lunch = selectedOption;
+            } else if (dayNumber === "5") {
+                this.planOfWeek.saturday.lunch = selectedOption;
+            } else if (dayNumber === "6") {
+                this.planOfWeek.sunday.lunch = selectedOption;
+            }
+        }else if(dish === '2') {
+            if (dayNumber === '0') {
+                this.planOfWeek.monday.soup = selectedOption;
+            } else if (dayNumber === "1") {
+                this.planOfWeek.tuesday.soup = selectedOption;
+            } else if (dayNumber === "2") {
+                this.planOfWeek.wednesday.soup = selectedOption;
+            } else if (dayNumber === "3") {
+                this.planOfWeek.thursday.soup = selectedOption;
+            } else if (dayNumber === "4") {
+                this.planOfWeek.friday.soup = selectedOption;
+            } else if (dayNumber === "5") {
+                this.planOfWeek.saturday.soup = selectedOption;
+            } else if (dayNumber === "6") {
+                this.planOfWeek.sunday.soup = selectedOption;
+            }
+        }else if(dish === '3') {
+            if (dayNumber === '0') {
+                this.planOfWeek.monday.dinner = selectedOption;
+            } else if (dayNumber === "1") {
+                this.planOfWeek.tuesday.dinner = selectedOption;
+            } else if (dayNumber === "2") {
+                this.planOfWeek.wednesday.dinner = selectedOption;
+            } else if (dayNumber === "3") {
+                this.planOfWeek.thursday.dinner = selectedOption;
+            } else if (dayNumber === "4") {
+                this.planOfWeek.friday.dinner = selectedOption;
+            } else if (dayNumber === "5") {
+                this.planOfWeek.saturday.dinner = selectedOption;
+            } else if (dayNumber === "6") {
+                this.planOfWeek.sunday.dinner = selectedOption;
+            }
+        }else if(dish === '4') {
+            if (dayNumber === '0') {
+                this.planOfWeek.monday.desert = selectedOption;
+            } else if (dayNumber === "1") {
+                this.planOfWeek.tuesday.desert = selectedOption;
+            } else if (dayNumber === "2") {
+                this.planOfWeek.wednesday.desert = selectedOption;
+            } else if (dayNumber === "3") {
+                this.planOfWeek.thursday.desert = selectedOption;
+            } else if (dayNumber === "4") {
+                this.planOfWeek.friday.desert = selectedOption;
+            } else if (dayNumber === "5") {
+                this.planOfWeek.saturday.desert = selectedOption;
+            } else if (dayNumber === "6") {
+                this.planOfWeek.sunday.desert = selectedOption;
+            }
+        }else if(dish === '5') {
+            if (dayNumber === '0') {
+                this.planOfWeek.monday.supper = selectedOption;
+            } else if (dayNumber === "1") {
+                this.planOfWeek.tuesday.supper = selectedOption;
+            } else if (dayNumber === "2") {
+                this.planOfWeek.wednesday.supper = selectedOption;
+            } else if (dayNumber === "3") {
+                this.planOfWeek.thursday.supper = selectedOption;
+            } else if (dayNumber === "4") {
+                this.planOfWeek.friday.supper = selectedOption;
+            } else if (dayNumber === "5") {
+                this.planOfWeek.saturday.supper = selectedOption;
+            } else if (dayNumber === "6") {
+                this.planOfWeek.sunday.supper = selectedOption;
+            }
         }
-
-
-        // else if(false){
-        //     this.planOfWeek.monday.lunch = "sadasd";
-        //     console.log("Na poniedziałkowe lunch wybrano: " + selectedOption)
-        // }
     };
 
-
     render(){
-        console.log(this.state.allRecipes);
         return (
             <tbody>
             {this.state.week.map((day, dayNum) => (
@@ -165,35 +228,35 @@ class ScheduleSelectors extends React.Component{
                     <td>
                         <select onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} value={{day:day, recipe:recipe, meal:1}}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={1} value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
                         <select>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} value={recipe}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={2} value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
                         <select>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} value={recipe}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={3} value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
                         <select>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} value={recipe}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={4} value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
                         <select>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} value={recipe}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={5} value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
@@ -224,6 +287,7 @@ class AddSchedule extends React.Component{
     }
 
     handleSubmit = event => {
+        const truePlan = JSON.parse(JSON.stringify(this.planOfWeek));
         event.preventDefault();
         const scheduleName = this.state.scheduleName;
         const scheduleDesc = this.state.scheduleDesc;
@@ -251,7 +315,7 @@ class AddSchedule extends React.Component{
                 scheduleName: this.state.scheduleName,
                 scheduleDesc: this.state.scheduleDesc,
                 scheduleNum: this.state.scheduleNum,
-
+                scheduleRec: truePlan
             }).then(() => {
                 console.log(db.collection('Schedules'));
                 this.setState({

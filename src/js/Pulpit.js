@@ -48,6 +48,33 @@ class Widgets extends React.Component{
     }
 }
 
+const PulpitTableHead = () => (
+    <thead>
+    <tr>
+        <th> </th>
+        <th>PONIEDZIAŁEK</th>
+        <th>WTOREK</th>
+        <th>ŚRODA</th>
+        <th>CZWARTEK</th>
+        <th>PIĄTEK</th>
+        <th>SOBOTA</th>
+        <th>NIEDZIELA</th>
+    </tr>
+    </thead>
+);
+
+class PulpitTableBody extends React.Component {
+    render(){
+        return (
+            <tbody>
+            <tr>
+                <td>to będzie body</td>
+            </tr>
+            </tbody>
+        )
+    }
+}
+
 class ScheduleWeek extends React.Component{
     constructor(props) {
         super(props);
@@ -85,7 +112,10 @@ class ScheduleWeek extends React.Component{
             <div className={"scheduleContainer"}>
                 <div>
                     <h2>Twój plan na {this.state.week} tydzień:</h2>
-                    <div>plan</div>
+                    <table>
+                        <PulpitTableHead/>
+                        <PulpitTableBody/>
+                    </table>
                 </div>
                 <div>
                     <h3 onClick={this.handleClick('previous')}>poprzedni </h3>
