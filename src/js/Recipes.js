@@ -3,11 +3,12 @@ import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import firebase, {db} from "./firebase";
 import EditRecipe from "./EditRecipe";
+import {Link} from "react-router-dom";
 
 const Header = () => (
     <div className={'recipesHeader'}>
         <h2>LISTA PRZEPISÓW</h2>
-        <i className="fas fa-plus-square fa-3x"></i>
+        <Link to="/AddRecipe"><i className="fas fa-plus-square fa-3x"></i></Link>
     </div>
 );
 

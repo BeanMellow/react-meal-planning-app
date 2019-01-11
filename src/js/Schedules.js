@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 const Header = () => (
     <div className={'recipesHeader'}>
         <h2>LISTA PLANÓW</h2>
-        <i className="fas fa-plus-square fa-3x"> </i>
+        <Link to="/AddSchedule"> <i className="fas fa-plus-square fa-3x"> </i> </Link>
     </div>
 );
 
@@ -58,7 +58,19 @@ class TableData extends React.Component{
             });
 
         }).catch(error => console.log('Error getting data: ' + error));
+    };
 
+    handleDelete = id => () => {
+        const newAllSchedules = this.state.allSchedules.filter(schedule => schedule.id !== id);
+        console.log(id);
+        this.setState({
+            allSchedules: newAllSchedules
+        });
+        db.collection('Schedules').doc(id).delete().then(() => {
+            console.log('Document successfully deleted!');
+        }).catch(error => {
+            console.error('Error removing document: ', error);
+        });
     };
 
     render() {
@@ -72,8 +84,8 @@ class TableData extends React.Component{
                     <td>{schedule.data.scheduleDesc}</td>
                     <td>{schedule.data.scheduleNum}</td>
                     <td>
-                        <Link to={"/EditSchedule/" + schedule.id}  style={{textDecoration: 'none'}}><i className="fas fa-edit fa-lg action"> </i></Link>
-                        <i className="fas fa-trash-alt fa-lg action"> </i>
+                        <Link to={"/EditSchedule/" + schedule.id}  style={{textDecoration: 'none'}}><i className="fas fa-edit fa-lg action" style={{color: '#FFB030'}}> </i></Link>
+                        <i className="fas fa-trash-alt fa-lg action" onClick={this.handleDelete(schedule.id)}> </i>
                     </td>
                 </tr>
             ))}

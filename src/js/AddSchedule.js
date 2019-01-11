@@ -364,6 +364,9 @@ class AddSchedule extends React.Component{
                                 <label htmlFor={'recipeDescription'}>Numer tygodnia</label>
                                 <input onChange={this.handleChange('scheduleNum')}
                                        value ={this.state.scheduleNum}
+                                       type="number"
+                                       min="1"
+                                       max="52"
                                 />
                             </div>
                             <ErrorMessage error={this.state.numValid}/>
