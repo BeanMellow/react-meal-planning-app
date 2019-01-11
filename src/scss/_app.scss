@@ -84,15 +84,22 @@
     font-weight: bold;
 }
 
-// TODO: edited 07.01
+// BELOW - used in most app views
 .action {
   margin-left: 5px;
-  &:first-of-type {
-    color: $colorWarning;
-  }
-  &:last-of-type {
-    color: $colorBin;
-  }
+  // this is currently set in-line in JS for recipe/ingredient lists
+  //&:first-of-type {
+  //  color: $colorWarning;
+  //}
+  //&:last-of-type {
+  //  color: $colorBin;
+  //}
+}
+.warning {
+  color: $colorWarning;
+}
+.bin {
+  color: $colorBin;
 }
 i {
   cursor: pointer;

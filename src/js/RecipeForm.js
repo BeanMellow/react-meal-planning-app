@@ -2,7 +2,8 @@ import React from "react";
 import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import firebase, {db} from "./firebase";
-// import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 // each error in different place -> map useless for now
 // const ErrorList = props => {
@@ -120,6 +121,7 @@ class RecipeForm extends React.Component {
                 ingredientValid: ingrError
             });
         } else {
+            // TODO: this wont be necessary if submitting will also close RecipeForm
             this.setState({
                 instructions: [],
                 ingredients: [],
@@ -243,6 +245,7 @@ class RecipeForm extends React.Component {
         const handleClick = this.handleClick;
         const handleEdit = this.handleEdit;
         const handleDelete = this.handleDelete;
+
         return (
             <div className={'addRecipeContainer'}>
                 <form className={'addRecipeForm'} onSubmit={this.validation}>
@@ -310,21 +313,31 @@ class RecipeForm extends React.Component {
                     </div>
                 </form>
             </div>
-        )
+        );
     }
 
     componentDidMount() {
-        // console.log('mounted form');
-        // console.log(this.props.instructions);
         if (this.props.isEdit) {
-            // console.log(this.props.instructions);
-            // console.log(this.props.ingredients);
+            const state = this.props.state;
             this.setState({
-                instructions: this.props.instructions,
-                ingredients: this.props.ingredients
+                instructions: state.instructions,
+                ingredients: state.ingredients
             });
         }
     }
+
+    // TODO: works, but this way theres a short period where empty inputs are displayed - better with loader
+    // componentDidUpdate(prevProps) {
+    //     // console.log('new props');
+    //     // check if props were updated
+    //     if (this.props.state !== prevProps.state) {
+    //         const state = this.props.state;
+    //         this.setState({
+    //             instructions: state.instructions,
+    //             ingredients: state.ingredients
+    //         });
+    //     }
+    // }
 }
 
 export default RecipeForm;
