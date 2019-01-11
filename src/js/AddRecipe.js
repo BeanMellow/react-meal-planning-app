@@ -3,9 +3,7 @@ import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import firebase, {db} from "./firebase";
 import RecipeForm from "./RecipeForm";
-
-// import {NavLink} from "react-router-dom";
-
+import {withRouter} from "react-router-dom";
 
 class AddRecipe extends React.Component {
     state = {
@@ -24,6 +22,7 @@ class AddRecipe extends React.Component {
         }).then(() => {
             // TODO: ADD SUCCESS MESSAGE IN HTML
             console.log('Recipe successfully added to database');
+            this.props.history.push('/Recipes');
         }).catch(error => console.log('Error writing document: ', error));
     };
 
@@ -57,4 +56,4 @@ class AddRecipe extends React.Component {
     }
 }
 
-export default AddRecipe;
+export default withRouter(AddRecipe);

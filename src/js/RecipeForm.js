@@ -1,5 +1,4 @@
 import React from "react";
-import {withRouter} from "react-router-dom";
 
 // each error in different place -> map useless for now
 // const ErrorList = props => {
@@ -117,36 +116,8 @@ class RecipeForm extends React.Component {
                 ingredientValid: ingrError
             });
         } else {
-            // // TODO: this wont be necessary if submitting will also close RecipeForm
-            // this.setState({
-            //     instructions: [],
-            //     ingredients: [],
-            //     nameValid: '',
-            //     descValid: '',
-            //     instructionValid: '',
-            //     ingredientValid: '',
-            //     editInstIndex: -1,
-            //     editIngrIndex: -1
-            // },
-            //     this.props.handleSubmit(this.state.instructions, this.state.ingredients),
-            //     this.props.history.push('/Recipes'));
-            // // TODO: end here. is the below version ok or better with callback like above?
-            // this.props.handleSubmit(this.state.instructions, this.state.ingredients);
-            // this.props.history.push('/Recipes');
-
-
-            this.finishValidation(instructions, ingredients, () => {
-                this.props.history.push('/Recipes');
-            });
-            // this.props.handleSubmit(instructions, ingredients, () => {
-            //     this.props.history.push('/Recipes');
-            // });
+            this.props.handleSubmit(instructions, ingredients);
         }
-    };
-
-    finishValidation = (instructions, ingredients, callback) => {
-        this.props.handleSubmit(instructions, ingredients);
-        callback();
     };
 
     handleClick = name => () => {
@@ -354,4 +325,4 @@ class RecipeForm extends React.Component {
     // }
 }
 
-export default withRouter(RecipeForm);
+export default RecipeForm;

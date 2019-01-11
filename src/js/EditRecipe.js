@@ -3,21 +3,9 @@ import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import firebase, {db} from "./firebase";
 import RecipeForm from "./RecipeForm";
-
-// import {NavLink} from "react-router-dom";
-
+import {withRouter} from "react-router-dom";
 
 class EditRecipe extends React.Component {
-    // state = {
-    //     recipeName: this.props.recipe.recipeName,
-    //     recipeDesc: this.props.recipe.recipeDesc,
-    //     recipeInst: this.props.recipe.recipeInst,
-    //     recipeIngr: this.props.recipe.recipeIngr,
-    //     id: this.props.recipe.id,
-    //     // TODO: need current instructions / ingredients array from RecipeForm
-    //     // instructions: this.props.recipe.instructions
-    // };
-
     state = {
         recipeName: '',
         recipeDesc: '',
@@ -41,9 +29,7 @@ class EditRecipe extends React.Component {
                 ingredients: editedRecipe.ingredients,
                 id: recipeId
             });
-
         }).catch(error => console.log('Error getting data: ' + error));
-
     };
 
     handleSubmit = (instructions, ingredients) => {
@@ -55,6 +41,8 @@ class EditRecipe extends React.Component {
         }).then(() => {
             // TODO: ADD SUCCESS MESSAGE IN HTML
             console.log('Recipe successfully updated');
+            // this has to be here and not in RecipeForm - otherwise sometimes Recipes load before editedRecipe is updated
+            this.props.history.push('/Recipes');
         }).catch(error => console.log('Error writing document: ', error));
     };
 
@@ -84,9 +72,8 @@ class EditRecipe extends React.Component {
                                     handleSubmit={this.handleSubmit}
                                     setProperty={this.setProperty}
                                     isEdit={true}
-                            // then if isEdit=true in componentDidMount use props below
-                            //         instructions={this.props.recipe.instructions}
-                            //         ingredients={this.props.recipe.ingredients}
+                            // then if isEdit=true in RecipeForm->componentDidMount:
+                            // load instructions/ingredients arrays
                         />
                     </div>
                 </div>
@@ -96,7 +83,6 @@ class EditRecipe extends React.Component {
             result = <div>LOADING</div>;
         }
 
-
         return result;
     }
 
@@ -105,4 +91,4 @@ class EditRecipe extends React.Component {
     }
 }
 
-export default EditRecipe;
+export default withRouter(EditRecipe);
