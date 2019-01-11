@@ -2,6 +2,7 @@ import React from "react";
 import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import {db} from "./firebase";
+import {Link} from "react-router-dom";
 
 const Header = () => (
     <div className={'recipesHeader'}>
@@ -52,7 +53,6 @@ class TableData extends React.Component{
                 result.push(schedulesContainer)
             });
 
-            console.log(result);
             this.setState({
                 allSchedules: result
             });
@@ -65,13 +65,14 @@ class TableData extends React.Component{
         return (
             <tbody>
             {this.state.allSchedules.map((schedule, i) => (
+
                 <tr key={i}>
                     <td>{++i}</td>
                     <td>{schedule.data.scheduleName}</td>
                     <td>{schedule.data.scheduleDesc}</td>
                     <td>{schedule.data.scheduleNum}</td>
                     <td>
-                        <i className="fas fa-edit fa-lg action"> </i>
+                        <Link to={"/EditSchedule/" + schedule.id}  style={{textDecoration: 'none'}}><i className="fas fa-edit fa-lg action"> </i></Link>
                         <i className="fas fa-trash-alt fa-lg action"> </i>
                     </td>
                 </tr>

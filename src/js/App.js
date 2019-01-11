@@ -6,6 +6,7 @@ import Recipes from './Recipes';
 import Pulpit from './Pulpit';
 import AddRecipe from './AddRecipe';
 import AddSchedule from './AddSchedule';
+import EditSchedule from './EditSchedule';
 
 
 class App extends React.Component {
@@ -19,6 +20,7 @@ class App extends React.Component {
                     <Route path="/Schedules" component={Schedules}/>
                     <Route path="/AddRecipe" component={AddRecipe}/>
                     <Route path="/AddSchedule" component={AddSchedule}/>
+                    <Route path="/EditSchedule/:value" component={EditSchedule}/>
                 </Switch>
             </HashRouter>
         )
