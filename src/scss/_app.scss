@@ -104,3 +104,23 @@
 i {
   cursor: pointer;
 }
+
+.test {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.notification {
+  @include appContainer;
+  cursor: pointer;
+  color: $colorSuccess;
+  border-color: $colorSuccess;
+  > div {
+    @include appInnerContainer;
+    display: flex;
+    justify-content: center;
+    h2 {
+      margin: 0 15px;
+    }
+  }
+}

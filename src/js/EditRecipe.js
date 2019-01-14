@@ -42,7 +42,11 @@ class EditRecipe extends React.Component {
             // TODO: ADD SUCCESS MESSAGE IN HTML
             console.log('Recipe successfully updated');
             // this has to be here and not in RecipeForm - otherwise sometimes Recipes load before editedRecipe is updated
-            this.props.history.push('/Recipes');
+            // this.props.history.push('/Recipes');
+            this.props.history.push({
+                pathname: '/Recipes',
+                state: {notification: ['edit', this.state.recipeName]}
+            });
         }).catch(error => console.log('Error writing document: ', error));
     };
 

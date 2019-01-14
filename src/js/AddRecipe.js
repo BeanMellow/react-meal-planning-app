@@ -22,7 +22,11 @@ class AddRecipe extends React.Component {
         }).then(() => {
             // TODO: ADD SUCCESS MESSAGE IN HTML
             console.log('Recipe successfully added to database');
-            this.props.history.push('/Recipes');
+            // this.props.history.push('/Recipes');
+            this.props.history.push({
+                pathname: '/Recipes',
+                state: {notification: ['add', this.state.recipeName]}
+            });
         }).catch(error => console.log('Error writing document: ', error));
     };
 
