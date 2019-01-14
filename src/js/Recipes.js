@@ -2,13 +2,12 @@ import React from "react";
 import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import firebase, {db} from "./firebase";
-import EditRecipe from "./EditRecipe";
 import {Link} from "react-router-dom";
 
 const Header = () => (
     <div className={'recipesHeader'}>
         <h2>LISTA PRZEPISÓW</h2>
-        <Link to="/AddRecipe"><i className="fas fa-plus-square fa-3x"></i></Link>
+        <Link to={'/AddRecipe'}><i className="fas fa-plus-square fa-3x"></i></Link>
     </div>
 );
 
@@ -46,13 +45,15 @@ class TableData extends React.Component {
             result = (
                 <tbody>
                 {this.props.allRecipes.map((recipe, i) => (
-                    <tr key={i}>
+                    <tr key={recipe.id}>
                         <td>{++i}</td>
                         <td>{recipe.recipeName}</td>
                         <td>{recipe.recipeDesc}</td>
                         <td>
-                            <i onClick={this.props.handleEdit(recipe)} className="fas fa-edit fa-lg action"></i>
-                            <i onClick={this.props.handleDelete(recipe.id)} className="fas fa-trash-alt fa-lg action"></i>
+                            <Link to={"/EditRecipe/" + recipe.id}><i className="fas fa-edit fa-lg action warning"></i></Link>
+                            {/*TODO: add warning dialog to confirm delete*/}
+                            <i onClick={this.props.handleDelete(recipe.id)}
+                               className="fas fa-trash-alt fa-lg action bin"></i>
                         </td>
                     </tr>
                 ))}
@@ -68,50 +69,7 @@ class TableData extends React.Component {
 
 class Recipes extends React.Component {
     state = {
-        allRecipes: [],
-        edit: {
-            isEdit: false,
-            recipe: false
-        }
-    };
-
-    handleEdit = recipe => () => {
-        // console.log(recipe.id);
-        this.setState({
-            edit: {
-                isEdit: true,
-                recipe
-            }
-        });
-    };
-
-    finishEdit = editedRecipe => {
-        //TODO: check if this can be done better
-        let newAllRecipes = [...this.state.allRecipes];
-        const index = newAllRecipes.map(recipe => recipe.id).indexOf(editedRecipe.id);
-        console.log(editedRecipe);
-        // console.log(index);
-        newAllRecipes.splice(index, 1, editedRecipe);
-        //TODO: works fine, but mb tweak in the future - take into account sort state before update?
-        // back to default sort after updating
-        newAllRecipes.sort((a, b) => {
-            if (a.recipeName < b.recipeName) {
-                return -1;
-            }
-            if (a.recipeName > b.recipeName) {
-                return 1;
-            }
-            return 0;
-        });
-
-        this.setState({
-            allRecipes: newAllRecipes,
-            //TODO: works fine, but mb tweak in the future - take into account sort state before update?
-            // back to default sort after updating
-            edit: {
-                isEdit: false
-            }
-        });
+        allRecipes: []
     };
 
     handleDelete = id => () => {
@@ -139,10 +97,12 @@ class Recipes extends React.Component {
 
             // TODO: ascending sort by recipeName - add to README
             result.sort((a, b) => {
-                if (a.recipeName < b.recipeName) {
+                const nameA = a.recipeName.toUpperCase();
+                const nameB = b.recipeName.toUpperCase();
+                if (nameA < nameB) {
                     return -1;
                 }
-                if (a.recipeName > b.recipeName) {
+                if (nameA > nameB) {
                     return 1;
                 }
                 return 0;
@@ -152,35 +112,28 @@ class Recipes extends React.Component {
                 allRecipes: result
             });
 
+            console.log('Recipes loaded.')
+
         }).catch(error => console.log('Error getting data: ' + error));
 
     };
 
     render() {
-        let result;
-        if (this.state.edit.isEdit) {
-            console.log(this.state.edit.recipe);
-            result = <EditRecipe recipe={this.state.edit.recipe} finishEdit={this.finishEdit}/>
-        } else {
-            result = (
-                <div className={'recipesContainer'}>
-                    <div className={'recipesTable'}>
-                        <Header/>
-                        <RecipesTable allRecipes={this.state.allRecipes}
-                                      handleEdit={this.handleEdit}
-                                      handleDelete={this.handleDelete}
-                        />
-                    </div>
-                </div>
-            );
-        }
 
         return (
             <div className="mainAppView">
                 <UserHeader/>
                 <div style={{display: 'flex'}}>
                     <AppNavigation/>
-                    {result}
+                    <div className={'recipesContainer'}>
+                        <div className={'recipesTable'}>
+                            <Header/>
+                            <RecipesTable allRecipes={this.state.allRecipes}
+                                          handleEdit={this.handleEdit}
+                                          handleDelete={this.handleDelete}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         )

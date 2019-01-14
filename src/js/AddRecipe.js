@@ -3,29 +3,17 @@ import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import firebase, {db} from "./firebase";
 import RecipeForm from "./RecipeForm";
-
-// import {NavLink} from "react-router-dom";
-
+import {withRouter} from "react-router-dom";
 
 class AddRecipe extends React.Component {
     state = {
         recipeName: '',
         recipeDesc: '',
         recipeInst: '',
-        recipeIngr: '',
-        // instructions: [],
-        // ingredients: [],
-        // nameValid: '',
-        // descValid: '',
-        // instructionValid: '',
-        // ingredientValid: '',
-        // editInstIndex: -1,
-        // editIngrIndex: -1
+        recipeIngr: ''
     };
 
-    handleSubmit = (instructions, ingredients) => () => {
-        // event.preventDefault();
-
+    handleSubmit = (instructions, ingredients) => {
         db.collection('Recipes').add({
             recipeName: this.state.recipeName,
             recipeDesc: this.state.recipeDesc,
@@ -34,23 +22,9 @@ class AddRecipe extends React.Component {
         }).then(() => {
             // TODO: ADD SUCCESS MESSAGE IN HTML
             console.log('Recipe successfully added to database');
-            this.setState({
-                recipeName: '',
-                recipeDesc: '',
-                recipeInst: '',
-                recipeIngr: '',
-                // instructions: [],
-                // ingredients: [],
-                // nameValid: [],
-                // descValid: [],
-                // instructionValid: [],
-                // ingredientValid: [],
-                // editInstIndex: -1,
-                // editIngrIndex: -1
-            });
+            this.props.history.push('/Recipes');
         }).catch(error => console.log('Error writing document: ', error));
     };
-
 
     handleChange = name => event => {
         this.setState({
@@ -78,8 +52,8 @@ class AddRecipe extends React.Component {
                     />
                 </div>
             </div>
-        )
+        );
     }
 }
 
-export default AddRecipe;
+export default withRouter(AddRecipe);

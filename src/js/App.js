@@ -7,6 +7,7 @@ import Pulpit from './Pulpit';
 import AddRecipe from './AddRecipe';
 import AddSchedule from './AddSchedule';
 import EditSchedule from './EditSchedule';
+import EditRecipe from './EditRecipe';
 
 
 class App extends React.Component {
@@ -19,6 +20,7 @@ class App extends React.Component {
                     <Route path="/Recipes" component={Recipes}/>
                     <Route path="/Schedules" component={Schedules}/>
                     <Route path="/AddRecipe" component={AddRecipe}/>
+                    <Route path="/EditRecipe/:value" component={EditRecipe}/>
                     <Route path="/AddSchedule" component={AddSchedule}/>
                     <Route path="/EditSchedule/:value" component={EditSchedule}/>
                 </Switch>

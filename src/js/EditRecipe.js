@@ -3,46 +3,48 @@ import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import firebase, {db} from "./firebase";
 import RecipeForm from "./RecipeForm";
-
-// import {NavLink} from "react-router-dom";
-
+import {withRouter} from "react-router-dom";
 
 class EditRecipe extends React.Component {
     state = {
-        recipeName: this.props.recipe.recipeName,
-        recipeDesc: this.props.recipe.recipeDesc,
-        recipeInst: this.props.recipe.recipeInst,
-        recipeIngr: this.props.recipe.recipeIngr,
-        id: this.props.recipe.id,
-        // TODO: need current instructions / ingredients array from RecipeForm
-        // instructions: this.props.recipe.instructions
+        recipeName: '',
+        recipeDesc: '',
+        recipeInst: '',
+        recipeIngr: '',
+        instructions: [],
+        ingredients: [],
+        id: ''
+    };
+
+    getDataFromDb = () => {
+        const recipeId = this.props.match.params.value;
+
+        db.collection('Recipes').doc(recipeId).get().then(recipe => {
+            const editedRecipe = recipe.data();
+            console.log(editedRecipe);
+            this.setState({
+                recipeName: editedRecipe.recipeName,
+                recipeDesc: editedRecipe.recipeDesc,
+                instructions: editedRecipe.instructions,
+                ingredients: editedRecipe.ingredients,
+                id: recipeId
+            });
+        }).catch(error => console.log('Error getting data: ' + error));
     };
 
     handleSubmit = (instructions, ingredients) => {
-        // event.preventDefault();
-        db.collection('Recipes').doc(this.props.recipe.id).set({
+        db.collection('Recipes').doc(this.state.id).set({
             recipeName: this.state.recipeName,
             recipeDesc: this.state.recipeDesc,
             instructions: instructions,
             ingredients: ingredients
         }).then(() => {
             // TODO: ADD SUCCESS MESSAGE IN HTML
-            console.log('Recipe successfully added to database');
-            // TODO: make sure this is correct to avoid obj reference
-            const editedRecipe = JSON.parse(JSON.stringify(this.state));
-            editedRecipe.instructions = instructions;
-            editedRecipe.ingredients = ingredients;
-            // console.log(editedRecipe);
-            this.props.finishEdit(editedRecipe);
-            // this.setState({
-            //     recipeName: '',
-            //     recipeDesc: '',
-            //     recipeInst: '',
-            //     recipeIngr: '',
-            // });
+            console.log('Recipe successfully updated');
+            // this has to be here and not in RecipeForm - otherwise sometimes Recipes load before editedRecipe is updated
+            this.props.history.push('/Recipes');
         }).catch(error => console.log('Error writing document: ', error));
     };
-
 
     handleChange = name => event => {
         this.setState({
@@ -56,36 +58,37 @@ class EditRecipe extends React.Component {
         });
     };
 
-    // render() {
-    //     return (
-    //         <div className="mainAppView">
-    //             <UserHeader/>
-    //             <div style={{display: 'flex'}}>
-    //                 <AppNavigation/>
-    //                 <RecipeForm state={this.state}
-    //                             handleChange={this.handleChange}
-    //                             handleSubmit={this.handleSubmit}
-    //                             setProperty={this.setProperty}
-    //                     // isEdit={false}
-    //                 />
-    //             </div>
-    //         </div>
-    //     )
-    // }
-
     render() {
-        return (
-            <RecipeForm state={this.state}
-                        handleChange={this.handleChange}
-                        handleSubmit={this.handleSubmit}
-                        setProperty={this.setProperty}
-                        isEdit={true}
-                        // then if isEdit=true in componentDidMount use props below
-                        instructions={this.props.recipe.instructions}
-                        ingredients={this.props.recipe.ingredients}
-            />
-        )
+        let result;
+
+        if (this.state.instructions.length > 0 && this.state.ingredients.length > 0) {
+            result = (
+                <div className="mainAppView">
+                    <UserHeader/>
+                    <div style={{display: 'flex'}}>
+                        <AppNavigation/>
+                        <RecipeForm state={this.state}
+                                    handleChange={this.handleChange}
+                                    handleSubmit={this.handleSubmit}
+                                    setProperty={this.setProperty}
+                                    isEdit={true}
+                            // then if isEdit=true in RecipeForm->componentDidMount:
+                            // load instructions/ingredients arrays
+                        />
+                    </div>
+                </div>
+            );
+        } else {
+            // TODO: ADD LOADER HERE
+            result = <div>LOADING</div>;
+        }
+
+        return result;
+    }
+
+    componentDidMount() {
+        this.getDataFromDb();
     }
 }
 
-export default EditRecipe;
+export default withRouter(EditRecipe);
