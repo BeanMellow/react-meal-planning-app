@@ -63,46 +63,255 @@ const PulpitTableHead = () => (
     </thead>
 );
 
-class PulpitTableBody extends React.Component {
+class PulpitTable extends React.Component {
     constructor(props){
         super(props);
+
+        const result = this.props.thisWeek;
+
         this.state = {
-            data: [],
-            thisWeek: this.props.thisWeek
+            monday: {},
+            tuesday: {},
+            wednesday: {},
+            thursday: {},
+            friday: {},
+            saturday: {},
+            sunday: {},
+            thisWeek: result,
+            isReady: false
         }
     }
 
-    getDataFromDb = category => {
+    getDataFromDb = () => {
+        const weekNumber = this.state.thisWeek;
 
-        const scheduleData = [];
-        db.collection(category).get().then(result => {
-            result.forEach(schedule => {
-                const ScheduleData = {
-                    scheduleRecipies: schedule.data().scheduleRec,
-                    scheduleID: schedule.id,
-                    scheduleWeek: schedule.data().scheduleNum
-                };
-                scheduleData.push(ScheduleData)
-            });
+        db.collection('Schedules').doc(weekNumber + "week").get().then(schedule => {
+            const monday = schedule.data().scheduleRec.monday;
+            const tuesday = schedule.data().scheduleRec.tuesday;
+            const wednesday = schedule.data().scheduleRec.wednesday;
+            const thursday = schedule.data().scheduleRec.thursday;
+            const friday = schedule.data().scheduleRec.friday;
+            const saturday = schedule.data().scheduleRec.saturday;
+            const sunday = schedule.data().scheduleRec.sunday;
+
             this.setState({
-                data: scheduleData
+                monday: monday,
+                tuesday: tuesday,
+                wednesday: wednesday,
+                thursday: thursday,
+                friday: friday,
+                saturday: saturday,
+                sunday: sunday,
+                isReady: true
             });
         }).catch(error => console.log('Error getting data: ' + error));
 
     };
 
-    render(){
+    refreshData = (date) => {
+        const weekNumber = date;
 
-        //TODO znalezc plan z takim num jaki jest tydzien, wyswietlic wybrane przepisy
-        return (
-            <tbody>
-                <tr>
-                    <td>
-                        {" przepis "}
-                    </td>
-                </tr>
-            </tbody>
-        );
+        db.collection('Schedules').doc(weekNumber + "week").get().then(schedule => {
+
+            if(schedule.data() !== undefined) {
+
+                const monday = schedule.data().scheduleRec.monday;
+                const tuesday = schedule.data().scheduleRec.tuesday;
+                const wednesday = schedule.data().scheduleRec.wednesday;
+                const thursday = schedule.data().scheduleRec.thursday;
+                const friday = schedule.data().scheduleRec.friday;
+                const saturday = schedule.data().scheduleRec.saturday;
+                const sunday = schedule.data().scheduleRec.sunday;
+
+                this.setState({
+                    monday: monday,
+                    tuesday: tuesday,
+                    wednesday: wednesday,
+                    thursday: thursday,
+                    friday: friday,
+                    saturday: saturday,
+                    sunday: sunday,
+                    isReady: true
+                });
+            }else{
+                this.setState({
+                    isReady: undefined
+                })
+            }
+        }).catch(error => console.log('Error getting data: ' + error));
+    };
+
+    render(){
+        if(this.state.isReady === true){
+            return (
+                <table  className={'pulpitTable'}>
+                    <PulpitTableHead/>
+                    <tbody>
+                    <tr>
+                        <td>
+                            {this.state.monday.breakfest}
+                        </td>
+                        <td>
+                            {this.state.tuesday.breakfest}
+                        </td>
+                        <td>
+                            {this.state.wednesday.breakfest}
+                        </td>
+                        <td>
+                            {this.state.thursday.breakfest}
+                        </td>
+                        <td>
+                            {this.state.friday.breakfest}
+                        </td>
+                        <td>
+                            {this.state.saturday.breakfest}
+                        </td>
+                        <td>
+                            {this.state.sunday.breakfest}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.state.monday.lunch}
+                        </td>
+                        <td>
+                            {this.state.tuesday.lunch}
+                        </td>
+                        <td>
+                            {this.state.wednesday.lunch}
+                        </td>
+                        <td>
+                            {this.state.thursday.lunch}
+                        </td>
+                        <td>
+                            {this.state.friday.lunch}
+                        </td>
+                        <td>
+                            {this.state.saturday.lunch}
+                        </td>
+                        <td>
+                            {this.state.sunday.lunch}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.state.monday.soup}
+                        </td>
+                        <td>
+                            {this.state.tuesday.soup}
+                        </td>
+                        <td>
+                            {this.state.wednesday.soup}
+                        </td>
+                        <td>
+                            {this.state.thursday.soup}
+                        </td>
+                        <td>
+                            {this.state.friday.soup}
+                        </td>
+                        <td>
+                            {this.state.saturday.soup}
+                        </td>
+                        <td>
+                            {this.state.sunday.soup}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.state.monday.dinner}
+                        </td>
+                        <td>
+                            {this.state.tuesday.dinner}
+                        </td>
+                        <td>
+                            {this.state.wednesday.dinner}
+                        </td>
+                        <td>
+                            {this.state.thursday.dinner}
+                        </td>
+                        <td>
+                            {this.state.friday.dinner}
+                        </td>
+                        <td>
+                            {this.state.saturday.dinner}
+                        </td>
+                        <td>
+                            {this.state.sunday.dinner}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.state.monday.desert}
+                        </td>
+                        <td>
+                            {this.state.tuesday.desert}
+                        </td>
+                        <td>
+                            {this.state.wednesday.desert}
+                        </td>
+                        <td>
+                            {this.state.thursday.desert}
+                        </td>
+                        <td>
+                            {this.state.friday.desert}
+                        </td>
+                        <td>
+                            {this.state.saturday.desert}
+                        </td>
+                        <td>
+                            {this.state.sunday.desert}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {this.state.monday.supper}
+                        </td>
+                        <td>
+                            {this.state.tuesday.supper}
+                        </td>
+                        <td>
+                            {this.state.wednesday.supper}
+                        </td>
+                        <td>
+                            {this.state.thursday.supper}
+                        </td>
+                        <td>
+                            {this.state.friday.supper}
+                        </td>
+                        <td>
+                            {this.state.saturday.supper}
+                        </td>
+                        <td>
+                            {this.state.sunday.supper}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            );
+        }else if(this.state.isReady === undefined){
+            return (
+                <h3>Nie dodano planu na ten tydzień. Kliknij w "Dodaj plan" aby uzupełnić przepisy</h3>
+            );
+        }else{
+            return (
+                <table  className={'pulpitTable'}>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Trwa ładowanie planu
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            );
+        }
+    }
+
+    componentWillReceiveProps(props) {
+        this.setState({
+            thisWeek: props.thisWeek
+        });
+        this.refreshData(props.thisWeek);
     }
 
     componentDidMount() {
@@ -123,7 +332,8 @@ class ScheduleWeek extends React.Component{
         const result = getWeekNumber(new Date());
 
         this.state = {
-            week: result
+            week: result,
+            false: true
         }
     }
 
@@ -131,24 +341,22 @@ class ScheduleWeek extends React.Component{
 
         let actualWeek = this.state.week;
         if (side === 'previous') {
-            actualWeek < 2 ? actualWeek = 52 : actualWeek--;
+            actualWeek < 2 ? actualWeek = 52 : --actualWeek;
         } else if (side === 'next') {
-            actualWeek > 51 ? actualWeek = 1 : actualWeek++;
+            actualWeek > 51 ? actualWeek = 1 : ++actualWeek;
         }
         this.setState({
-            week: actualWeek
+            week: actualWeek,
+            false: false
         });
     };
 
     render(){
         return(
             <div className={"scheduleContainer"}>
+                <h2>Twój plan na {this.state.week} tydzień:</h2>
                 <div>
-                    <h2>Twój plan na {this.state.week} tydzień:</h2>
-                    <table  className={'pulpitTable'}>
-                        <PulpitTableHead/>
-                        <PulpitTableBody thisWeek={this.state.week}/>
-                    </table>
+                        <PulpitTable thisWeek={this.state.week} false={this.state.false}/>
                 </div>
                 <div>
                     <h3 onClick={this.handleClick('previous')}>poprzedni </h3>

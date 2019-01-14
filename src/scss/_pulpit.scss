@@ -69,16 +69,20 @@
 }
 
 .scheduleContainer{
-  width: 94%;
+  width: 88%;
   height: 60vh;
   border: 1px dashed #CFCFCA;
   background-color: #fff;
-  margin: 0 auto;
+  margin: 30px;
   text-align: center;
   h2{
     font-size: $fontSizeMedium;
     color: $colorBtn;
     padding: 10px;
+  }
+  div:nth-of-type(1){
+    overflow-y: scroll;
+    height: 50vh;
   }
   div:nth-of-type(2){
     display: flex;
@@ -90,7 +94,6 @@
   }
   .pulpitTable{
     margin: 0 auto;
-    width: 90%;
     th{
       border-top: 1px solid $colorTabData;
       border-bottom: 1px solid $colorTabData;

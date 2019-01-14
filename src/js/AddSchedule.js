@@ -309,7 +309,7 @@ class AddSchedule extends React.Component{
                 numValid: numError
             });
         } else {
-            db.collection('Schedules').add({
+            db.collection('Schedules').doc(this.state.scheduleNum+"week").set({
                 scheduleName: this.state.scheduleName,
                 scheduleDesc: this.state.scheduleDesc,
                 scheduleNum: this.state.scheduleNum,
