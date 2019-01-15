@@ -1,6 +1,9 @@
 @mixin appContainer {
   background-color: $colorBg;
-  width: 80%;
+  //width: 80%;
+  width: 95%;
+  // TODO: add fixed width + table overflow
+  //height: 85vh;
   margin: 30px auto;
   border: 1px dashed $colorNav;
 }
@@ -8,6 +11,12 @@
 @mixin appInnerContainer {
   width: 95%;
   margin: 30px auto;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @mixin addForm {

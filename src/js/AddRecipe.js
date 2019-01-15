@@ -48,12 +48,14 @@ class AddRecipe extends React.Component {
                 <UserHeader/>
                 <div style={{display: 'flex'}}>
                     <AppNavigation/>
-                    <RecipeForm state={this.state}
-                                handleChange={this.handleChange}
-                                handleSubmit={this.handleSubmit}
-                                setProperty={this.setProperty}
-                                isEdit={false}
-                    />
+                    <div className={'appMainContainer'}>
+                        <RecipeForm state={this.state}
+                                    handleChange={this.handleChange}
+                                    handleSubmit={this.handleSubmit}
+                                    setProperty={this.setProperty}
+                                    isEdit={false}
+                        />
+                    </div>
                 </div>
             </div>
         );

@@ -67,27 +67,47 @@ class EditRecipe extends React.Component {
 
         if (this.state.instructions.length > 0 && this.state.ingredients.length > 0) {
             result = (
-                <div className="mainAppView">
-                    <UserHeader/>
-                    <div style={{display: 'flex'}}>
-                        <AppNavigation/>
-                        <RecipeForm state={this.state}
-                                    handleChange={this.handleChange}
-                                    handleSubmit={this.handleSubmit}
-                                    setProperty={this.setProperty}
-                                    isEdit={true}
-                            // then if isEdit=true in RecipeForm->componentDidMount:
-                            // load instructions/ingredients arrays
-                        />
+                <RecipeForm state={this.state}
+                            handleChange={this.handleChange}
+                            handleSubmit={this.handleSubmit}
+                            setProperty={this.setProperty}
+                            isEdit={true}
+                    // then if isEdit=true in RecipeForm->componentDidMount:
+                    // load instructions/ingredients arrays
+                />
+            );
+        } else {
+            result = (
+                <div className={'loader flexCenter'}>
+                    <div className="lds-default">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
                 </div>
             );
-        } else {
-            // TODO: ADD LOADER HERE
-            result = <div>LOADING</div>;
         }
 
-        return result;
+        return (
+            <div className="mainAppView">
+                <UserHeader/>
+                <div style={{display: 'flex'}}>
+                    <AppNavigation/>
+                    <div className={'appMainContainer'}>
+                        {result}
+                    </div>
+                </div>
+            </div>
+        );
     }
 
     componentDidMount() {

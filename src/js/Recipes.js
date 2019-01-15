@@ -65,15 +65,44 @@ const Header = () => (
 );
 
 class RecipesTable extends React.Component {
-
     render() {
-        return (
-            <table>
-                <TableHead/>
+        let result;
+        if (this.props.allRecipes.length === 0) {
+            result = (
+                <tbody>
+                <tr>
+                    <td colSpan={'4'}>
+                        <div className="lds-default">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            );
+        } else {
+            result = (
                 <TableData allRecipes={this.props.allRecipes}
                            handleEdit={this.props.handleEdit}
                            handleDelete={this.props.handleDelete}
                 />
+            );
+        }
+
+        return (
+            <table>
+                <TableHead/>
+                {result}
             </table>
         );
     }
@@ -82,7 +111,7 @@ class RecipesTable extends React.Component {
 const TableHead = () => (
     <thead>
     <tr>
-        <th>ID</th>
+        <th>NR</th>
         <th>NAZWA</th>
         <th>OPIS</th>
         <th>AKCJE</th>
@@ -194,7 +223,7 @@ class Recipes extends React.Component {
                 <div style={{display: 'flex'}}>
                     <AppNavigation/>
                     {/*TODO: without this div.test + notifications -> looked good. Fix this*/}
-                    <div className={'test'}>
+                    <div className={'appMainContainer'}>
                         {notification}
                         <div className={'recipesContainer'}>
                             <div className={'recipesTable'}>

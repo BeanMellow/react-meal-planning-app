@@ -17,28 +17,38 @@
     }
     table {
       width: 100%;
-      text-align: left;
-      th {
-        font-size: $fontSizeMedium;
-        color: $colorHead;
-        padding: 15px 0;
-        &:first-of-type {
-          width: 5%;
+      tr {
+        th:first-child, td:first-child {
+          text-align: center;
         }
-        &:nth-of-type(2) {
-          width: 20%;
+        th {
+          font-size: $fontSizeMedium;
+          color: $colorHead;
+          padding: 15px 0;
+          &:first-of-type {
+            width: 5%;
+          }
+          &:nth-of-type(2) {
+            width: 20%;
+          }
+          &:nth-of-type(3) {
+            width: 68%;
+          }
+          &:last-of-type {
+            width: 7%;
+          }
         }
-        &:nth-of-type(3) {
-          width: 60%;
-        }
-        &:last-of-type {
-          width: 15%;
+        td {
+          color: $colorNav;
+          padding: 10px 0;
+          border-top: 1px solid $colorTabData;
         }
       }
-      td {
-        color: $colorNav;
-        padding: 10px 0;
-        border-top: 1px solid $colorTabData;
+      tbody {
+        // TODO: ADD OVERFLOW
+        tr:hover {
+          background-color: $colorTabHover;
+        }
       }
     }
   }

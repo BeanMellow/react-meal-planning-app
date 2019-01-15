@@ -89,8 +89,8 @@ class TableData extends React.Component{
                     <td>{schedule.data.scheduleDesc}</td>
                     <td>{schedule.data.scheduleNum}</td>
                     <td>
-                        <Link to={"/EditSchedule/" + schedule.id}  style={{textDecoration: 'none'}}><i className="fas fa-edit fa-lg action" style={{color: '#FFB030'}}> </i></Link>
-                        <i className="fas fa-trash-alt fa-lg action" onClick={this.handleDelete(schedule.id)}> </i>
+                        <Link to={"/EditSchedule/" + schedule.id}  style={{textDecoration: 'none'}}><i className="fas fa-edit fa-lg action warning"> </i></Link>
+                        <i className="fas fa-trash-alt fa-lg action bin" onClick={this.handleDelete(schedule.id)}> </i>
                     </td>
                 </tr>
             ))}
