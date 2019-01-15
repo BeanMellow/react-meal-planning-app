@@ -36,9 +36,13 @@ const TableHead = () => (
 );
 
 class TableData extends React.Component{
-    state = {
-        allSchedules: []
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            allSchedules: [],
+            isDeleted: false
+        };
+    }
 
     getDataFromDb = category => {
         const result = [];
@@ -64,7 +68,8 @@ class TableData extends React.Component{
         const newAllSchedules = this.state.allSchedules.filter(schedule => schedule.id !== id);
         console.log(id);
         this.setState({
-            allSchedules: newAllSchedules
+            allSchedules: newAllSchedules,
+            isDeleted: true
         });
         db.collection('Schedules').doc(id).delete().then(() => {
             console.log('Document successfully deleted!');
@@ -99,16 +104,45 @@ class TableData extends React.Component{
 }
 
 class Schedules extends React.Component{
+    constructor(props){
+        super(props);
+        const name = this.props.location.state;
+        this.state = {
+            editedName: name
+        }
+    }
+
+    handleDelete = () =>{
+        this.setState({
+            editedName: undefined
+        })
+    };
+
     render(){
+        let notification = null;
+        if (this.state.editedName !== undefined) {
+            notification = (
+                <div className={'editWidget'} onClick={this.handleDelete}>
+                    <i className="fas fa-info-circle fa-2x"> </i>
+                    <h2>Edytowano plan o nazwie: {this.state.editedName}</h2>
+                    <i className="fas fa-times-circle fa-2x"> </i>
+                </div>
+            )
+        }
         return (
             <div className="mainAppView">
                 <UserHeader/>
                 <div style={{display: 'flex'}}>
                     <AppNavigation/>
-                    <div className={'recipesContainer'}>
-                        <div className={'recipesTable'}>
-                            <Header/>
-                            <SchedulesTable/>
+                    <div className={'schedulesView'}>
+                        <div>
+                        {notification}
+                        </div>
+                        <div className={'recipesContainer'}>
+                            <div className={'recipesTable'}>
+                                <Header/>
+                                <SchedulesTable/>
+                            </div>
                         </div>
                     </div>
                 </div>

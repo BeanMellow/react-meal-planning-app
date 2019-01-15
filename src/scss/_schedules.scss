@@ -1,3 +1,8 @@
+.schedulesView{
+  width: 100%;
+}
+
+
 .recipesContainer {
   @include appContainer;
   .recipesTable {
@@ -53,5 +58,20 @@
       }
 
     }
+  }
+}
+
+.editWidget{
+  display: flex;
+  width: 80%;
+  border: 1px dashed $colorSuccess;
+  background-color: #fff;
+  padding: 30px;
+  margin: 10px auto;
+  color: $colorSuccess;
+  justify-content: center;
+  cursor: pointer;
+  i{
+    margin: 0 15px;
   }
 }
