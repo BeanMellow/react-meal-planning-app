@@ -360,7 +360,7 @@ class EditSchedule extends React.Component{
 
     handleEdit = () =>{
         this.handleSubmit();
-    }
+    };
 
     render() {
         if (this.state.isEdited === true) {

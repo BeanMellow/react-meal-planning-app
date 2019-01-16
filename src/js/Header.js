@@ -4,8 +4,8 @@ import {Link} from "react-router-dom";
 class UserHeader extends React.Component {
     render(){
         return (
-            <div className={'header appHeader'}>
-                <div className={'container'}>
+            <div className={'appHeader'}>
+                <div>
                     <Link to="/" style={{textDecoration: 'none'}}><h1 className={'logo'}>
                         Zaplanuj <span>Jedzonko</span>
                     </h1></Link>

@@ -16,8 +16,7 @@
       }
     }
     .tableData{
-      height: 70vh;
-      overflow-y: auto;
+      @include tableData;
     }
     table {
       width: 100%;

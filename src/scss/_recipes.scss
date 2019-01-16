@@ -16,8 +16,7 @@
       }
     }
     .tableData{
-      height: 70vh;
-      overflow-y: auto;
+      @include tableData;
     }
     table {
       width: 100%;
@@ -49,7 +48,6 @@
         }
       }
       tbody {
-        // TODO: ADD OVERFLOW
         tr:hover {
           background-color: $colorTabHover;
         }

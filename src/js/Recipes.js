@@ -220,7 +220,7 @@ class Recipes extends React.Component {
         return (
             <div className="mainAppView">
                 <UserHeader/>
-                <div style={{display: 'flex'}}>
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     <AppNavigation/>
                     <div className={'appMainContainer'}>
                         {notification}

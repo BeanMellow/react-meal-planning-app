@@ -20,7 +20,6 @@ class AddRecipe extends React.Component {
             instructions: instructions,
             ingredients: ingredients
         }).then(() => {
-            // TODO: ADD SUCCESS MESSAGE IN HTML
             console.log('Recipe successfully added to database');
             // this.props.history.push('/Recipes');
             this.props.history.push({
@@ -46,7 +45,7 @@ class AddRecipe extends React.Component {
         return (
             <div className="mainAppView">
                 <UserHeader/>
-                <div style={{display: 'flex'}}>
+                <div style={{display: 'flex', height: '100%'}}>
                     <AppNavigation/>
                     <div className={'appMainContainer'}>
                         <RecipeForm state={this.state}
