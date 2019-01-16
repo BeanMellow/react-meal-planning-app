@@ -21,7 +21,6 @@
     table {
       width: 100%;
       text-align: left;
-
       th {
         font-size: $fontSizeMedium;
         color: $colorHead;
@@ -68,7 +67,7 @@
   border: 1px dashed $colorSuccess;
   background-color: #fff;
   padding: 10px;
-  margin: 20px auto 0 auto;
+  margin: 20px auto 10px auto;
   color: $colorSuccess;
   justify-content: center;
   cursor: pointer;

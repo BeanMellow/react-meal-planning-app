@@ -134,7 +134,7 @@ class PulpitTable extends React.Component {
             saturday: {},
             sunday: {},
             thisWeek: result,
-            isReady: false
+            isReady: true
         }
     }
 
@@ -198,6 +198,7 @@ class PulpitTable extends React.Component {
     };
 
     render(){
+        console.log(this.state.isReady)
         if(this.state.isReady === true){
             return (
                 <div className={'desktopView'}>
@@ -413,11 +414,12 @@ class ScheduleWeek extends React.Component{
         return(
             <div className={"scheduleContainer"}>
                 <h2>Twój plan na {this.state.week} tydzień:</h2>
+
                 <div>
                         <PulpitTable thisWeek={this.state.week} false={this.state.false}/>
                 </div>
                 <div>
-                    <h3 onClick={this.handleClick('previous')}>poprzedni </h3>
+                    <h3 onClick={this.handleClick('previous')}> poprzedni </h3>
                     <h3 onClick={this.handleClick('next')}>następny</h3>
                 </div>
             </div>

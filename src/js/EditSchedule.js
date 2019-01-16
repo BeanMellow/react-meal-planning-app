@@ -299,6 +299,7 @@ class EditSchedule extends React.Component{
 
     getDataFromDb = () => {
         db.collection('Schedules').doc(this.state.scheduleID).get().then(schedule => {
+
             this.setState({
                 scheduleName: schedule.data().scheduleName,
                 scheduleDesc: schedule.data().scheduleDesc,
@@ -332,23 +333,52 @@ class EditSchedule extends React.Component{
                 numValid: numError
             });
         } else {
-            db.collection('Schedules').doc(this.state.scheduleNum+"week").set({
-                scheduleName: this.state.scheduleName,
-                scheduleDesc: this.state.scheduleDesc,
-                scheduleNum: this.state.scheduleNum,
-                scheduleRec: doneSchedule
-            }).then(() => {
-                console.log(db.collection('Schedules'));
-                this.setState({
-                    scheduleName: '',
-                    scheduleDesc: '',
-                    nameValid: [],
-                    descValid: [],
-                    numValid: [],
-                    isEdited: true,
-                    editedName: this.state.scheduleName
+
+            const newId = this.state.scheduleNum+"week";
+            console.log("ID nowego: ", newId, "ID starego: ", this.state.scheduleID)
+            if(newId === this.state.scheduleID){
+                db.collection('Schedules').doc(this.state.scheduleNum+"week").set({
+                    scheduleName: this.state.scheduleName,
+                    scheduleDesc: this.state.scheduleDesc,
+                    scheduleNum: this.state.scheduleNum,
+                    scheduleRec: doneSchedule
+                }).then(() => {
+                    console.log(db.collection('Schedules'));
+                    this.setState({
+                        scheduleName: '',
+                        scheduleDesc: '',
+                        nameValid: [],
+                        descValid: [],
+                        numValid: [],
+                        isEdited: true,
+                        editedName: this.state.scheduleName
+                    });
+                }).catch(error => console.log('Error writing document: ', error));
+            }else{
+                db.collection('Schedules').doc(this.state.scheduleID).delete().then(()=>{
+                    console.log("deleted")
                 });
-            }).catch(error => console.log('Error writing document: ', error));
+                db.collection('Schedules').doc(this.state.scheduleNum+"week").set({
+                    scheduleName: this.state.scheduleName,
+                    scheduleDesc: this.state.scheduleDesc,
+                    scheduleNum: this.state.scheduleNum,
+                    scheduleRec: doneSchedule
+                }).then(() => {
+                    console.log(db.collection('Schedules'));
+                    this.setState({
+                        scheduleName: '',
+                        scheduleDesc: '',
+                        nameValid: [],
+                        descValid: [],
+                        numValid: [],
+                        isEdited: true,
+                        editedName: this.state.scheduleName
+                    });
+                }).catch(error => console.log('Error writing document: ', error));
+            }
+
+
+
         }
     };
 
