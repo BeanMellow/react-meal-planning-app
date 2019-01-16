@@ -6,7 +6,74 @@ import {NavLink} from "react-router-dom";
 import {db} from "./firebase";
 
 class Widgets extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            numberOfRecipes: '',
+            info: true,
+            alert: true,
+            success: true,
+        }
+
+    }
+
+    getDataFromDb = category => {
+        const result = [];
+
+        db.collection(category).get().then(recipes => {
+            recipes.forEach(recipe => {
+                result.push(recipe);
+            });
+           this.setState({
+               numberOfRecipes: result.length
+           })
+        }).catch(error => console.log('Error getting data: ' + error));
+
+    };
+
+    handleDelete = widgetType => () => {
+        this.setState({
+            [widgetType]: false,
+        });
+
+    };
+
     render(){
+        let widgetInfo = null;
+        let widgetAlert = null;
+        let widgetSuccess = null;
+        if(this.state.info === true){
+            widgetInfo = (
+                <div  onClick={this.handleDelete('info')}>
+                    <i className="fas fa-info-circle">
+                        <h3>Masz już {this.state.numberOfRecipes} przepisów, nieźle!</h3>
+                    </i>
+                    <i className="fas fa-times-circle"> </i>
+                </div>
+            )
+        }
+
+        if(this.state.alert === true){
+            widgetAlert = (
+                <div onClick={this.handleDelete('alert')}>
+                    <i className="fas fa-exclamation-circle">
+                        <h3>Pamiętaj, aby dodać plan!</h3>
+                    </i>
+                    <i className="fas fa-times-circle"> </i>
+                </div>
+            )
+        }
+
+        if(this.state.success === true){
+            widgetSuccess = (
+                <div onClick={this.handleDelete('success')} style={{}}>
+                    <i className="fas fa-check-circle">
+                        <h3>Świetnie, że jesteś! Udanego planowania i smaczego! :)</h3>
+                    </i>
+                    <i className="fas fa-times-circle"> </i>
+                </div>
+            )
+        }
         return(
             <div className={"widgetsContainer"}>
                 <div>
@@ -25,27 +92,16 @@ class Widgets extends React.Component{
                     </NavLink>
                 </div>
                 <div className={"widgetsInfo"}>
-                    <div>
-                        <i className="fas fa-info-circle">
-                            <h3>Masz już x przepisów, nieźle!</h3>
-                        </i>
-                        <i className="fas fa-times-circle"> </i>
-                    </div>
-                    <div>
-                        <i className="fas fa-exclamation-circle">
-                            <h3>Pamiętaj, aby dodać plan!</h3>
-                        </i>
-                        <i className="fas fa-times-circle"> </i>
-                    </div>
-                    <div>
-                        <i className="fas fa-check-circle">
-                            <h3>Świetnie, że jesteś! Udanego planowania i smaczego! :)</h3>
-                        </i>
-                        <i className="fas fa-times-circle"> </i>
-                    </div>
+                    <div>{widgetInfo}</div>
+                    <div>{widgetAlert}</div>
+                    <div>{widgetSuccess}</div>
                 </div>
             </div>
         )
+    }
+
+    componentDidMount(){
+        this.getDataFromDb('Recipes')
     }
 }
 

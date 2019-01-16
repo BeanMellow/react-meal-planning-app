@@ -37,6 +37,7 @@
         }
         &:nth-of-type(4) {
           width: 15%;
+          padding-right: 10px;
         }
         &:last-of-type {
           width: 15%;
@@ -49,11 +50,11 @@
       }
       tbody {
         tr {
+          th:nth-child(4){
+            padding-right: 10px;
+          }
           th:nth-child(4), td:nth-child(4) {
             text-align: center;
-            //td:nth-of-type(4){
-            //  padding-left: 20px;
-            //}
           }
         }
       }
@@ -63,11 +64,11 @@
 
 .editWidget {
   display: flex;
-  width: 80%;
+  width: 95%;
   border: 1px dashed $colorSuccess;
   background-color: #fff;
-  padding: 30px;
-  margin: 10px auto;
+  padding: 10px;
+  margin: 20px auto 0 auto;
   color: $colorSuccess;
   justify-content: center;
   cursor: pointer;

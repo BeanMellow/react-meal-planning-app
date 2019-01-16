@@ -13,11 +13,19 @@ const Header = () => (
 
 class SchedulesTable extends React.Component {
 
+    getInfo = () => {
+        this.sendInfoDeleted();
+    }
+
+    sendInfoDeleted = () =>{
+        this.props.scheduleIsDeleted()
+    }
+
     render() {
         return (
             <table>
                 <TableHead/>
-                <TableData/>
+                <TableData scheduleDeleted={this.getInfo}/>
             </table>
         );
     }
@@ -40,15 +48,16 @@ class TableData extends React.Component{
         super(props);
         this.state = {
             allSchedules: [],
-            isDeleted: false
         };
     }
 
+    sendInfoDeleted = () =>{
+        this.props.scheduleDeleted()
+    };
+
     getDataFromDb = category => {
         const result = [];
-
         db.collection(category).get().then(schedules => {
-
             schedules.forEach(schedule => {
                 const schedulesContainer = {
                     data: schedule.data(),
@@ -56,7 +65,6 @@ class TableData extends React.Component{
                 };
                 result.push(schedulesContainer)
             });
-
             this.setState({
                 allSchedules: result
             });
@@ -66,11 +74,10 @@ class TableData extends React.Component{
 
     handleDelete = id => () => {
         const newAllSchedules = this.state.allSchedules.filter(schedule => schedule.id !== id);
-        console.log(id);
         this.setState({
             allSchedules: newAllSchedules,
-            isDeleted: true
         });
+        this.sendInfoDeleted();
         db.collection('Schedules').doc(id).delete().then(() => {
             console.log('Document successfully deleted!');
         }).catch(error => {
@@ -79,6 +86,30 @@ class TableData extends React.Component{
     };
 
     render() {
+        if(this.state.allSchedules.length === 0){
+            return (
+            <tbody>
+            <tr>
+                <td colSpan={'4'}>
+                    <div className="lds-default">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            )
+        }
         return (
             <tbody>
             {this.state.allSchedules.map((schedule, i) => (
@@ -108,27 +139,53 @@ class Schedules extends React.Component{
         super(props);
         const name = this.props.location.state;
         this.state = {
-            editedName: name
+            editedName: name,
+            isDeleted: false
         }
     }
 
     handleDelete = () =>{
         this.setState({
-            editedName: undefined
+            editedName: undefined,
+            isDeleted: false
         })
     };
 
+    changeState = () =>{
+        this.setState({
+            isDeleted: true
+        });
+    };
+
+
     render(){
         let notification = null;
-        if (this.state.editedName !== undefined) {
+        if (this.state.isDeleted === true){
             notification = (
                 <div className={'editWidget'} onClick={this.handleDelete}>
                     <i className="fas fa-info-circle fa-2x"> </i>
-                    <h2>Edytowano plan o nazwie: {this.state.editedName}</h2>
+                    <h2>Usunięto plan</h2>
+                    <i className="fas fa-times-circle fa-2x"> </i>
+                </div>
+            )
+        }else if (this.state.editedName === true){
+            notification = (
+                <div className={'editWidget'} onClick={this.handleDelete}>
+                    <i className="fas fa-info-circle fa-2x"> </i>
+                    <h2>Plan został pomyślnie dodany</h2>
+                    <i className="fas fa-times-circle fa-2x"> </i>
+                </div>
+            )
+        }else if (this.state.editedName !== undefined) {
+            notification = (
+                <div className={'editWidget'} onClick={this.handleDelete}>
+                    <i className="fas fa-info-circle fa-2x"> </i>
+                    <h2>{this.state.editedName} - Plan został pomyślnie edytowany</h2>
                     <i className="fas fa-times-circle fa-2x"> </i>
                 </div>
             )
         }
+
         return (
             <div className="mainAppView">
                 <UserHeader/>
@@ -141,7 +198,7 @@ class Schedules extends React.Component{
                         <div className={'recipesContainer'}>
                             <div className={'recipesTable'}>
                                 <Header/>
-                                <SchedulesTable/>
+                                <SchedulesTable scheduleIsDeleted={this.changeState}/>
                             </div>
                         </div>
                     </div>

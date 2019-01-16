@@ -2,6 +2,7 @@ import React from "react";
 import UserHeader from "./Header";
 import AppNavigation from "./Navigation";
 import {db} from "./firebase";
+import Redirect from "react-router-dom/es/Redirect";
 
 const ErrorMessage = props => {
     let result;
@@ -281,6 +282,7 @@ class AddSchedule extends React.Component{
             nameValid: [],
             descValid: [],
             numValid: [],
+            isAdded: false,
         }
     }
 
@@ -322,6 +324,9 @@ class AddSchedule extends React.Component{
                     nameValid: [],
                     descValid: [],
                     numValid: [],
+                    isAdded: true,
+                    addedName: this.state.scheduleName
+
                 });
             }).catch(error => console.log('Error writing document: ', error));
         }
@@ -334,6 +339,12 @@ class AddSchedule extends React.Component{
     };
 
     render(){
+        if(this.state.isAdded === true){
+            return <Redirect to={{
+                pathname: '/Schedules',
+                state: this.state.isAdded
+            }} />
+        }
         return (
             <div className="mainAppView">
                 <UserHeader/>
@@ -343,7 +354,7 @@ class AddSchedule extends React.Component{
                         <form className={'addScheduleForm'} onSubmit={this.handleSubmit}>
                             <div className={'addScheduleHeader'}>
                                 <h2>NOWY PLAN</h2>
-                                <button type={'submit'}>Zapisz i zamknij</button>
+                                <button type={'submit'} onClick={this.handleEdit}>Zapisz i zamknij</button>
                             </div>
                             <div className={'addScheduleInput-horiz'}>
                                 <label htmlFor={'recipeName'}>Nazwa planu</label>

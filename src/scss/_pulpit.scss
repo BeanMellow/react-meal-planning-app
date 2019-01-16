@@ -28,43 +28,57 @@
 }
 
 .widgetsInfo{
-  div{
-    border: 1px dashed $colorSuccess;
-    background-color: #fff;
-    margin: 0 10px;
-    width: 560px;
-    height: 47px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-    i{
-      font-size: $fontSizeLarge;
-      margin-right: 10px;
+  div:nth-of-type(1){
+    div{
+      margin-bottom: 5px;
+      height: 47px;
+      width: 540px;
+      background-color: #fff;
+      border: 1px dashed $colorInfo;
+      color: $colorInfo;
       display: flex;
-      align-content: center;
-
-      h3{
-        font-weight: bold;
-        font-family: "Open Sans", sans-serif;
-        font-size: $fontSizeMain;
-        padding: 5px;
-      }
+      justify-content: space-between;
+      padding: 10px;
     }
   }
-  div:nth-of-type(1){
-    margin-bottom: 5px;
-    border: 1px dashed $colorInfo;
-    color: $colorInfo;
-  }
   div:nth-of-type(2){
-    margin-bottom: 5px;
-    border: 1px dashed $colorWarning;
-    color: $colorWarning;
-  }
+    div{
+      margin-bottom: 5px;
+      height: 47px;
+      width: 540px;
+      background-color: #fff;
+      border: 1px dashed $colorWarning;
+      color: $colorWarning;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      }
+    }
   div:nth-of-type(3){
-    border: 1px dashed $colorSuccess;
-    color: $colorSuccess;
+    div{
+      margin-bottom: 5px;
+      height: 47px;
+      width: 540px;
+      background-color: #fff;
+      border: 1px dashed $colorSuccess;
+      color: $colorSuccess;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+    }
+  }
+  i{
+    font-size: $fontSizeLarge;
+    margin-right: 10px;
+    display: flex;
+    align-content: center;
+
+    h3{
+      font-weight: bold;
+      font-family: "Open Sans", sans-serif;
+      font-size: $fontSizeMain;
+      padding: 5px;
+    }
   }
 }
 
@@ -73,7 +87,7 @@
   height: 60vh;
   border: 1px dashed #CFCFCA;
   background-color: #fff;
-  margin: 30px;
+  margin: 0 30px;
   text-align: center;
   h2{
     font-size: $fontSizeMedium;
