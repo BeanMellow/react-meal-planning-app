@@ -1,5 +1,6 @@
 # Meal Planning App with landing page
-## My second project in React. Work in progress. Features:
+## Work in progress
+### My second project in React. Features:
 * routing (**React Router**)
 * **Cloud Firestore** database integration
 * forms (add recipes and meal plans):
