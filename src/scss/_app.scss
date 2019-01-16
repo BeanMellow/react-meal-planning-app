@@ -81,7 +81,31 @@
     text-decoration: none;
 }
 .activeLink{
-    font-weight: bold;
+  font-weight: bold;
+  position: relative;
+  &:before {
+    content: '';
+    background-color: $colorBtn;
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  &:after {
+    content: '';
+    border: solid $colorBtn;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 5px;
+
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+
+    position: absolute;
+    top: 30px;
+    right: 15px;
+  }
 }
 
 // BELOW - used in most app views
