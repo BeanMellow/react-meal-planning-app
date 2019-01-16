@@ -18,17 +18,17 @@ const ErrorMessage = props => {
     return result;
 };
 
-class WeekScheduleTable extends React.Component{
-    constructor(props){
+class WeekScheduleTable extends React.Component {
+    constructor(props) {
         super(props);
         this.planOfWeek = props.planOfWeek;
     }
 
-    render(){
+    render() {
         return (
             <table className={'weekScheduleTable'}>
                 <ScheduleTableHead/>
-                <ScheduleSelectors  planOfWeek = {this.planOfWeek}/>
+                <ScheduleSelectors planOfWeek={this.planOfWeek}/>
             </table>
         )
     }
@@ -36,15 +36,15 @@ class WeekScheduleTable extends React.Component{
 
 const ScheduleTableHead = () => (
     <thead>
-        <tr>
-            <th> </th>
-            <th>ŚNIADANIE</th>
-            <th>DRUGIE ŚNIADANIE</th>
-            <th>ZUPA</th>
-            <th>DRUGIE DANIE</th>
-            <th>PODWIECZOREK</th>
-            <th>KOLACJA</th>
-        </tr>
+    <tr>
+        <th></th>
+        <th>ŚNIADANIE</th>
+        <th>DRUGIE ŚNIADANIE</th>
+        <th>ZUPA</th>
+        <th>DRUGIE DANIE</th>
+        <th>PODWIECZOREK</th>
+        <th>KOLACJA</th>
+    </tr>
     </thead>
 );
 
@@ -55,7 +55,7 @@ class PlanOfDay {
         this.lunch = "";
         this.soup = "";
         this.dinner = "";
-        this. desert = "";
+        this.desert = "";
         this.supper = "";
     }
 
@@ -75,8 +75,8 @@ class PlanOfWeek {
 
 }
 
-class ScheduleSelectors extends React.Component{
-    constructor(props){
+class ScheduleSelectors extends React.Component {
+    constructor(props) {
         super(props);
         this.planOfWeek = props.planOfWeek;
 
@@ -112,23 +112,23 @@ class ScheduleSelectors extends React.Component{
         const dayNumber = event.target.options[selectedIndex].getAttribute('week_day');
 
         console.log(dish, dayNumber);
-        if(dish === '0'){
-            if(dayNumber === '0'){
+        if (dish === '0') {
+            if (dayNumber === '0') {
                 this.planOfWeek.monday.breakfest = selectedOption;
-            }else if(dayNumber === "1"){
+            } else if (dayNumber === "1") {
                 this.planOfWeek.tuesday.breakfest = selectedOption;
-            }else if(dayNumber === "2"){
+            } else if (dayNumber === "2") {
                 this.planOfWeek.wednesday.breakfest = selectedOption;
-            }else if(dayNumber === "3"){
+            } else if (dayNumber === "3") {
                 this.planOfWeek.thursday.breakfest = selectedOption;
-            }else if(dayNumber === "4"){
+            } else if (dayNumber === "4") {
                 this.planOfWeek.friday.breakfest = selectedOption;
-            }else if(dayNumber === "5"){
+            } else if (dayNumber === "5") {
                 this.planOfWeek.saturday.breakfest = selectedOption;
-            }else if(dayNumber === "6"){
+            } else if (dayNumber === "6") {
                 this.planOfWeek.sunday.breakfest = selectedOption;
             }
-        }else if(dish === '1') {
+        } else if (dish === '1') {
             if (dayNumber === '0') {
                 this.planOfWeek.monday.lunch = selectedOption;
             } else if (dayNumber === "1") {
@@ -144,7 +144,7 @@ class ScheduleSelectors extends React.Component{
             } else if (dayNumber === "6") {
                 this.planOfWeek.sunday.lunch = selectedOption;
             }
-        }else if(dish === '2') {
+        } else if (dish === '2') {
             if (dayNumber === '0') {
                 this.planOfWeek.monday.soup = selectedOption;
             } else if (dayNumber === "1") {
@@ -160,7 +160,7 @@ class ScheduleSelectors extends React.Component{
             } else if (dayNumber === "6") {
                 this.planOfWeek.sunday.soup = selectedOption;
             }
-        }else if(dish === '3') {
+        } else if (dish === '3') {
             if (dayNumber === '0') {
                 this.planOfWeek.monday.dinner = selectedOption;
             } else if (dayNumber === "1") {
@@ -176,7 +176,7 @@ class ScheduleSelectors extends React.Component{
             } else if (dayNumber === "6") {
                 this.planOfWeek.sunday.dinner = selectedOption;
             }
-        }else if(dish === '4') {
+        } else if (dish === '4') {
             if (dayNumber === '0') {
                 this.planOfWeek.monday.desert = selectedOption;
             } else if (dayNumber === "1") {
@@ -192,7 +192,7 @@ class ScheduleSelectors extends React.Component{
             } else if (dayNumber === "6") {
                 this.planOfWeek.sunday.desert = selectedOption;
             }
-        }else if(dish === '5') {
+        } else if (dish === '5') {
             if (dayNumber === '0') {
                 this.planOfWeek.monday.supper = selectedOption;
             } else if (dayNumber === "1") {
@@ -211,7 +211,7 @@ class ScheduleSelectors extends React.Component{
         }
     };
 
-    render(){
+    render() {
         return (
             <tbody>
             {this.state.week.map((day, dayNum) => (
@@ -220,42 +220,48 @@ class ScheduleSelectors extends React.Component{
                     <td>
                         <select onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} week_day={dayNum} dish_type={0} value={recipe.id}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={0}
+                                        value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
                         <select onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} week_day={dayNum} dish_type={1} value={recipe.id}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={1}
+                                        value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
-                        <select  onChange={this.handleChange}>
+                        <select onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} week_day={dayNum} dish_type={2} value={recipe.id}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={2}
+                                        value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
-                        <select  onChange={this.handleChange}>
+                        <select onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} week_day={dayNum} dish_type={3} value={recipe.id}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={3}
+                                        value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
-                        <select  onChange={this.handleChange}>
+                        <select onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} week_day={dayNum} dish_type={4} value={recipe.id}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={4}
+                                        value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
                     <td>
-                        <select  onChange={this.handleChange}>
+                        <select onChange={this.handleChange}>
                             {this.state.allRecipes.map((recipe, i) => (
-                                <option key={i} week_day={dayNum} dish_type={5} value={recipe.id}>{recipe.recipeName}</option>
+                                <option key={i} week_day={dayNum} dish_type={5}
+                                        value={recipe.id}>{recipe.recipeName}</option>
                             ))}
                         </select>
                     </td>
@@ -270,8 +276,8 @@ class ScheduleSelectors extends React.Component{
     }
 }
 
-class AddSchedule extends React.Component{
-    constructor(){
+class AddSchedule extends React.Component {
+    constructor() {
         super();
         this.planOfWeek = new PlanOfWeek();
 
@@ -311,7 +317,7 @@ class AddSchedule extends React.Component{
                 numValid: numError
             });
         } else {
-            db.collection('Schedules').doc(this.state.scheduleNum+"week").set({
+            db.collection('Schedules').doc(this.state.scheduleNum + "week").set({
                 scheduleName: this.state.scheduleName,
                 scheduleDesc: this.state.scheduleDesc,
                 scheduleNum: this.state.scheduleNum,
@@ -338,12 +344,12 @@ class AddSchedule extends React.Component{
         });
     };
 
-    render(){
-        if(this.state.isAdded === true){
+    render() {
+        if (this.state.isAdded === true) {
             return <Redirect to={{
                 pathname: '/Schedules',
                 state: this.state.isAdded
-            }} />
+            }}/>
         }
         return (
             <div className="mainAppView">
@@ -351,39 +357,42 @@ class AddSchedule extends React.Component{
                 <div style={{display: 'flex'}}>
                     <AppNavigation/>
 
-                    <div className={'addScheduleContainer'}>
-                        <form className={'addScheduleForm'} onSubmit={this.handleSubmit}>
-                            <div className={'addScheduleHeader'}>
-                                <h2>NOWY PLAN</h2>
-                                <button type={'submit'} onClick={this.handleEdit}>Zapisz i zamknij</button>
-                            </div>
-                            <div className={'addScheduleInput-horiz'}>
-                                <label htmlFor={'recipeName'}>Nazwa planu</label>
-                                <input type ='text'
-                                       value ={this.state.scheduleName}
-                                       onChange={this.handleChange('scheduleName')}
-                                />
-                            </div>
-                            <ErrorMessage error={this.state.nameValid}/>
-                            <div className={'addScheduleInput-horiz'}>
-                                <label htmlFor={'recipeDescription'}>Opis planu</label>
-                                <textarea onChange={this.handleChange('scheduleDesc')}
-                                          value ={this.state.scheduleDesc}
-                                />
-                            </div>
-                            <ErrorMessage error={this.state.descValid}/>
-                            <div className={'addScheduleInput-horiz'}>
-                                <label htmlFor={'recipeDescription'}>Numer tygodnia</label>
-                                <input onChange={this.handleChange('scheduleNum')}
-                                       value ={this.state.scheduleNum}
-                                       type="number"
-                                       min="1"
-                                       max="52"
-                                />
-                            </div>
-                            <ErrorMessage error={this.state.numValid}/>
-                            <WeekScheduleTable planOfWeek={this.planOfWeek}/>
-                        </form>
+                    <div className={'appMainContainer'}>
+
+                        <div className={'addScheduleContainer'}>
+                            <form className={'addScheduleForm'} onSubmit={this.handleSubmit}>
+                                <div className={'addScheduleHeader'}>
+                                    <h2>NOWY PLAN</h2>
+                                    <button type={'submit'} onClick={this.handleEdit}>Zapisz i zamknij</button>
+                                </div>
+                                <div className={'addScheduleInput-horiz'}>
+                                    <label htmlFor={'recipeName'}>Nazwa planu</label>
+                                    <input type='text'
+                                           value={this.state.scheduleName}
+                                           onChange={this.handleChange('scheduleName')}
+                                    />
+                                </div>
+                                <ErrorMessage error={this.state.nameValid}/>
+                                <div className={'addScheduleInput-horiz'}>
+                                    <label htmlFor={'recipeDescription'}>Opis planu</label>
+                                    <textarea onChange={this.handleChange('scheduleDesc')}
+                                              value={this.state.scheduleDesc}
+                                    />
+                                </div>
+                                <ErrorMessage error={this.state.descValid}/>
+                                <div className={'addScheduleInput-horiz'}>
+                                    <label htmlFor={'recipeDescription'}>Numer tygodnia</label>
+                                    <input onChange={this.handleChange('scheduleNum')}
+                                           value={this.state.scheduleNum}
+                                           type="number"
+                                           min="1"
+                                           max="52"
+                                    />
+                                </div>
+                                <ErrorMessage error={this.state.numValid}/>
+                                <WeekScheduleTable planOfWeek={this.planOfWeek}/>
+                            </form>
+                        </div>
                     </div>
 
                 </div>
