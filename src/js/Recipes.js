@@ -222,7 +222,6 @@ class Recipes extends React.Component {
                 <UserHeader/>
                 <div style={{display: 'flex'}}>
                     <AppNavigation/>
-                    {/*TODO: without this div.test + notifications -> looked good. Fix this*/}
                     <div className={'appMainContainer'}>
                         {notification}
                         <div className={'recipesContainer'}>
