@@ -15,9 +15,14 @@
         color: $colorSuccess;
       }
     }
+    .tableData{
+      height: 70vh;
+      overflow-y: scroll;
+    }
     table {
       width: 100%;
       text-align: left;
+
       th {
         font-size: $fontSizeMedium;
         color: $colorHead;

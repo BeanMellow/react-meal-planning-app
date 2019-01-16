@@ -196,7 +196,9 @@ class Schedules extends React.Component{
                         <div className={'recipesContainer'}>
                             <div className={'recipesTable'}>
                                 <Header/>
+                                <div className={'tableData'}>
                                 <SchedulesTable scheduleIsDeleted={this.changeState}/>
+                                </div>
                             </div>
                         </div>
                     </div>

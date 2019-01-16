@@ -228,10 +228,12 @@ class Recipes extends React.Component {
                         <div className={'recipesContainer'}>
                             <div className={'recipesTable'}>
                                 <Header/>
-                                <RecipesTable allRecipes={this.state.allRecipes}
-                                              handleEdit={this.handleEdit}
-                                              handleDelete={this.handleDelete}
-                                />
+                                <div className={'tableData'}>
+                                    <RecipesTable allRecipes={this.state.allRecipes}
+                                                  handleEdit={this.handleEdit}
+                                                  handleDelete={this.handleDelete}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
