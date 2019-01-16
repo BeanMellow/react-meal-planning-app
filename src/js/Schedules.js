@@ -34,7 +34,7 @@ class SchedulesTable extends React.Component {
 const TableHead = () => (
     <thead>
     <tr>
-        <th>ID</th>
+        <th>NR</th>
         <th>NAZWA</th>
         <th>OPIS</th>
         <th>TYDZIEŃ  </th>
@@ -65,6 +65,8 @@ class TableData extends React.Component{
                 };
                 result.push(schedulesContainer)
             });
+            console.log(result);
+            result.sort((a, b) => a.data.scheduleNum - b.data.scheduleNum);
             this.setState({
                 allSchedules: result
             });
