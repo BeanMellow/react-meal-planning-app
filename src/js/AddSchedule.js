@@ -350,6 +350,7 @@ class AddSchedule extends React.Component{
                 <UserHeader/>
                 <div style={{display: 'flex'}}>
                     <AppNavigation/>
+
                     <div className={'addScheduleContainer'}>
                         <form className={'addScheduleForm'} onSubmit={this.handleSubmit}>
                             <div className={'addScheduleHeader'}>
@@ -384,6 +385,7 @@ class AddSchedule extends React.Component{
                             <WeekScheduleTable planOfWeek={this.planOfWeek}/>
                         </form>
                     </div>
+
                 </div>
             </div>
         )

@@ -1,5 +1,6 @@
 .addScheduleContainer {
   @include appContainer;
+  width: 80%;
 }
 
 .addScheduleForm{
@@ -31,7 +32,6 @@
 
 .weekScheduleTable{
   margin-top: 10px;
-  width: 100%;
   th:nth-of-type(1){
     visibility: hidden;
   }
@@ -51,10 +51,10 @@
   }
   td{
     border-top: 1px solid $colorTabData;
-    padding:5px;
+    padding:2px;
     position: relative;
     select {
-      width: 100%;
+      width: 120px;
     }
   }
 }

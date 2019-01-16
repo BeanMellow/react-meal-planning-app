@@ -25,7 +25,11 @@
     color: #fff;
     li {
       padding: 0 30px;
+      cursor: pointer;
       &:first-of-type {
+        color: $colorBtn;
+      }
+      &:hover{
         color: $colorBtn;
       }
     }
