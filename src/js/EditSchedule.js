@@ -374,9 +374,9 @@ class EditSchedule extends React.Component{
                     <UserHeader/>
                     <div style={{display: 'flex'}}>
                         <AppNavigation/>
-                        <div>
-                            <div className={'addScheduleContainer'}>
+                        <div className={'appMainContainer'}>
 
+                            <div className={'addScheduleContainer'}>
                                 <form className={'addScheduleForm'} onSubmit={this.handleSubmit}>
                                     <div className={'addScheduleHeader'}>
                                         <h2>EDYTOWANIE PLANU</h2>

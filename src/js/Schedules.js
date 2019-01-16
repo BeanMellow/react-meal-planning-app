@@ -191,10 +191,8 @@ class Schedules extends React.Component{
                 <UserHeader/>
                 <div style={{display: 'flex'}}>
                     <AppNavigation/>
-                    <div className={'schedulesView'}>
-                        <div>
+                    <div className={'appMainContainer'}>
                         {notification}
-                        </div>
                         <div className={'recipesContainer'}>
                             <div className={'recipesTable'}>
                                 <Header/>

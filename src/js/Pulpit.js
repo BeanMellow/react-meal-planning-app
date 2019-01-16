@@ -200,6 +200,7 @@ class PulpitTable extends React.Component {
     render(){
         if(this.state.isReady === true){
             return (
+                <div className={'desktopView'}>
                 <table  className={'pulpitTable'}>
                     <PulpitTableHead/>
                     <tbody>
@@ -343,6 +344,7 @@ class PulpitTable extends React.Component {
                     </tr>
                     </tbody>
                 </table>
+                </div>
             );
         }else if(this.state.isReady === undefined){
             return (

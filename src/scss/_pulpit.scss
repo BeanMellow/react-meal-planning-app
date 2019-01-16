@@ -29,10 +29,11 @@
 
 .widgetsInfo{
   div:nth-of-type(1){
+    cursor: pointer;
     div{
       margin-bottom: 5px;
       height: 47px;
-      width: 540px;
+      width: 560px;
       background-color: #fff;
       border: 1px dashed $colorInfo;
       color: $colorInfo;
@@ -42,10 +43,11 @@
     }
   }
   div:nth-of-type(2){
+    cursor: pointer;
     div{
       margin-bottom: 5px;
       height: 47px;
-      width: 540px;
+      width: 560px;
       background-color: #fff;
       border: 1px dashed $colorWarning;
       color: $colorWarning;
@@ -55,10 +57,11 @@
       }
     }
   div:nth-of-type(3){
+    cursor: pointer;
     div{
       margin-bottom: 5px;
       height: 47px;
-      width: 540px;
+      width: 560px;
       background-color: #fff;
       border: 1px dashed $colorSuccess;
       color: $colorSuccess;
@@ -81,9 +84,14 @@
     }
   }
 }
-
+.desktopView{
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
 .scheduleContainer{
-  width: 88%;
+  width: 95%;
   height: 60vh;
   border: 1px dashed #CFCFCA;
   background-color: #fff;
@@ -116,7 +124,7 @@
     }
     td{
       color: $colorNav;
-      padding: 10px;
+      padding: 10px 1px;
       border-bottom: 1px solid $colorTabData;
     }
   }
