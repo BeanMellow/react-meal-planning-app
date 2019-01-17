@@ -12,7 +12,7 @@
 
 ### How to install:
 1. `git clone https://github.com/BeanMellow/react-food-app`
-2. `cd react-food-app`
+2. `cd react-meal-planning-app`
 3. `npm i`
 
 Then `npm start` for development mode, and `npm run build` for production.
