@@ -11,7 +11,7 @@
   * edit and delete functions
 
 ### How to install:
-1. `git clone https://github.com/BeanMellow/react-food-app`
+1. `https://github.com/BeanMellow/react-meal-planning-app.git`
 2. `cd react-meal-planning-app`
 3. `npm i`
 
