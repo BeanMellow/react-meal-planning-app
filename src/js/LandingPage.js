@@ -152,7 +152,7 @@ const AboutAuthor = () => (
 
 class Footer extends React.Component {
     state = {
-        input: ''
+        email: ''
     };
 
     handleChange = event => {
