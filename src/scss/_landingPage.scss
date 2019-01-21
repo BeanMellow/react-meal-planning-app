@@ -10,6 +10,9 @@
     color: #fff;
     background-color: $colorBtn;
     border-width: 0;
+    &:hover {
+      background-color: $colorBtnHover;
+    }
   }
 }
 
@@ -99,6 +102,10 @@
       background-color: $colorBtn;
       padding: 10px 20px;
       cursor: pointer;
+      text-decoration: none;
+      &:hover {
+        background-color: $colorBtnHover;
+      }
     }
   }
 }

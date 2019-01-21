@@ -21,7 +21,7 @@
     padding-left: 10px;
   }
   span{
-    color: $colorBtn
+    color: $colorBtn;
   }
 }
 
@@ -44,14 +44,16 @@
 .firstVisitContainer{
   width: 100%;
   div {
-    width: 95%;
+    //width: 95%;
+    width: 60%;
+    min-width: 600px;
     height: auto;
     margin: 30px auto 0 auto;
+    padding: 20px 0;
     background-color: $colorBg;
     border: 1px dashed $colorNav;
     text-align: center;
     color: $colorNav;
-    padding: 30px 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,17 +64,20 @@
     h3{
       font-size: $fontSizeMedium;
       padding: 10px;
+      width: 550px;
     }
     input{
+      margin: 10px 0;
       width: 200px;
+      font-size: $fontSizeMedium;
     }
     button{
       width: 200px;
       border: 1px solid $colorBtn;
       background-color: $colorBtn;
       color: #fff;
-      font-weight: bold;
-      padding: 7px;
+      font-weight: 700;
+      padding: 10px 0;
       margin: 10px;
     }
   }
