@@ -1,14 +1,18 @@
 # Meal Planning App with landing page
-## Work in progress
-### My second project in React. Features:
+## My second project in React (work in progress).
+## Preview:
+https://beanmellow.github.io/react-meal-planning-app/
+### Features:
+* landing page with **slider**
 * routing (**React Router**)
-* **Cloud Firestore** database integration
-* forms (add recipes and meal plans):
-  * validation
-  * data saved in Firestore
-* tables (recipes and plans):
-  * data loaded from Firestore
-  * edit and delete functions
+* username saved to **local storage**
+* **Cloud Firestore database** integration
+* **forms** (add recipes and meal plans):
+  * **validation**
+  * data **saved in Firestore**
+* **tables** (recipes and plans):
+  * data **loaded from Firestore**
+  * **edit and delete functions**
 
 ### How to install:
 1. `git clone https://github.com/BeanMellow/react-meal-planning-app.git`
