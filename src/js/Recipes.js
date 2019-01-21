@@ -22,13 +22,13 @@ class Notification extends React.Component {
             let type;
             switch (this.props.info[0]) {
                 case 'add':
-                    type = 'dodany';
+                    type = 'added';
                     break;
                 case 'edit':
-                    type = 'edytowany';
+                    type = 'edited';
                     break;
                 case 'delete':
-                    type = 'usunięty';
+                    type = 'deleted';
                     break;
             }
 
@@ -36,7 +36,7 @@ class Notification extends React.Component {
                 <div onClick={this.hide} className={'notification'}>
                     <div>
                         <i className="fas fa-info-circle fa-2x"></i>
-                        <h2>{this.props.info[1] + ' - Przepis został pomyślnie ' + type}</h2>
+                        <h2>{this.props.info[1] + ' - recipe successfully ' + type}</h2>
                         <i className="fas fa-times-circle fa-2x"></i>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ class Notification extends React.Component {
 
 const Header = () => (
     <div className={'recipesHeader'}>
-        <h2>LISTA PRZEPISÓW</h2>
+        <h2>LIST OF RECIPES</h2>
         <Link to={'/AddRecipe'}><i className="fas fa-plus-square fa-3x"></i></Link>
     </div>
 );
@@ -111,10 +111,10 @@ class RecipesTable extends React.Component {
 const TableHead = () => (
     <thead>
     <tr>
-        <th>NR</th>
-        <th>NAZWA</th>
-        <th>OPIS</th>
-        <th>AKCJE</th>
+        <th>No.</th>
+        <th>NAME</th>
+        <th>DESCRIPTION</th>
+        <th>ACTIONS</th>
     </tr>
     </thead>
 );

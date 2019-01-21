@@ -46,7 +46,7 @@ class Widgets extends React.Component{
             widgetInfo = (
                 <div  onClick={this.handleDelete('info')}>
                     <i className="fas fa-info-circle">
-                        <h3>Masz już {this.state.numberOfRecipes} przepisów, nieźle!</h3>
+                        <h3>You've got {this.state.numberOfRecipes} recipes, nice!</h3>
                     </i>
                     <i className="fas fa-times-circle"> </i>
                 </div>
@@ -57,7 +57,7 @@ class Widgets extends React.Component{
             widgetAlert = (
                 <div onClick={this.handleDelete('alert')}>
                     <i className="fas fa-exclamation-circle">
-                        <h3>Pamiętaj, aby dodać plan!</h3>
+                        <h3>Remember to keep plans up to date!</h3>
                     </i>
                     <i className="fas fa-times-circle"> </i>
                 </div>
@@ -68,7 +68,7 @@ class Widgets extends React.Component{
             widgetSuccess = (
                 <div onClick={this.handleDelete('success')} style={{}}>
                     <i className="fas fa-check-circle">
-                        <h3>Świetnie, że jesteś! Udanego planowania i smaczego! :)</h3>
+                        <h3>Great to see you here! Enjoy planning and delicious meals! :)</h3>
                     </i>
                     <i className="fas fa-times-circle"> </i>
                 </div>
@@ -80,14 +80,14 @@ class Widgets extends React.Component{
                     <NavLink to="/AddRecipe" style={{textDecoration: 'none', width: '45%'}}>
                         <div className={"widgetAdd"}>
                             <i className="far fa-plus-square fa-4x"> </i>
-                            <h3>dodaj przepis</h3>
+                            <h3>add recipe</h3>
                         </div>
                     </NavLink>
 
                     <NavLink to="/AddSchedule" style={{textDecoration: 'none', width: '45%'}}>
                         <div className={"widgetAdd"}>
                             <i className="far fa-plus-square fa-4x"> </i>
-                            <h3>dodaj plan</h3>
+                            <h3>add plan</h3>
                         </div>
                     </NavLink>
                 </div>
@@ -108,13 +108,13 @@ class Widgets extends React.Component{
 const PulpitTableHead = () => (
     <thead>
     <tr>
-        <th>PONIEDZIAŁEK</th>
-        <th>WTOREK</th>
-        <th>ŚRODA</th>
-        <th>CZWARTEK</th>
-        <th>PIĄTEK</th>
-        <th>SOBOTA</th>
-        <th>NIEDZIELA</th>
+        <th>MONDAY</th>
+        <th>TUESDAY</th>
+        <th>WEDNESDAY</th>
+        <th>THURSDAY</th>
+        <th>FRIDAY</th>
+        <th>SATURDAY</th>
+        <th>SUNDAY</th>
     </tr>
     </thead>
 );
@@ -413,14 +413,14 @@ class ScheduleWeek extends React.Component{
     render(){
         return(
             <div className={"scheduleContainer"}>
-                <h2>Twój plan na {this.state.week} tydzień:</h2>
+                <h2>Your plan for current week ({this.state.week} / 52):</h2>
 
                 <div>
                         <PulpitTable thisWeek={this.state.week} false={this.state.false}/>
                 </div>
                 <div>
-                    <h3 onClick={this.handleClick('previous')}> poprzedni </h3>
-                    <h3 onClick={this.handleClick('next')}>następny</h3>
+                    <h3 onClick={this.handleClick('previous')}>Previous</h3>
+                    <h3 onClick={this.handleClick('next')}>Next</h3>
                 </div>
             </div>
         )

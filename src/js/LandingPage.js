@@ -10,14 +10,14 @@ const Header = () => (
     <div className={'header'}>
         <div className={'container'}>
             <h1 className={'logo'}>
-                Zaplanuj <span>Jedzonko</span>
+                Meal <span>Planner</span>
             </h1>
             <nav>
                 <ul>
-                    <li>ZAPLANUJ POSIŁKI</li>
-                    <li>DLACZEGO WARTO?</li>
-                    <li>O MNIE</li>
-                    <li>KONTAKT</li>
+                    <li>PLAN MEALS</li>
+                    <li>BENEFITS</li>
+                    <li>ABOUT</li>
+                    <li>CONTACT</li>
                 </ul>
             </nav>
         </div>
@@ -88,10 +88,11 @@ const CallToAction = () => (
     <div className={'callToAction'}>
         <div className={'container'}>
             <div>
-                <h2>Zaplanuj każdy posiłek</h2>
-                <p>Planowanie posiłków nigdy nie było takie proste, kliknij przycisk i przekonaj się!</p>
+                <h2>Plan your diet with us!</h2>
+                <p>Develop healthy eating habits - easier than ever.</p>
+                <p>Click button and see for yourself.</p>
             </div>
-            <Link to="/Main" style={linkStyle}><span className={'btn'}>ZACZYNAM</span></Link>
+            <Link to="/Main" style={linkStyle}><span className={'btn'}>GET STARTED</span></Link>
         </div>
     </div>
 );
@@ -195,7 +196,7 @@ class Footer extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className='copyright'>Copyright <span>ZaplanujJedzonko.pl</span></div>
+                <div className='copyright'>Copyright @2019 <span>MealPlanner.com</span></div>
             </footer>
         );
     }

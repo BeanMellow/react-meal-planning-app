@@ -43,13 +43,13 @@ class WeekScheduleTable extends React.Component{
 const ScheduleTableHead = () => (
     <thead>
     <tr>
-        <th> </th>
-        <th>ŚNIADANIE</th>
-        <th>DRUGIE ŚNIADANIE</th>
-        <th>ZUPA</th>
-        <th>DRUGIE DANIE</th>
-        <th>PODWIECZOREK</th>
-        <th>KOLACJA</th>
+        <th></th>
+        <th>BREAKFAST</th>
+        <th>SECOND BREAKFAST</th>
+        <th>BRUNCH</th>
+        <th>LUNCH</th>
+        <th>DINNER</th>
+        <th>SUPPER</th>
     </tr>
     </thead>
 );
@@ -61,7 +61,7 @@ class PlanOfDay {
         this.lunch = "";
         this.soup = "";
         this.dinner = "";
-        this. desert = "";
+        this.desert = "";
         this.supper = "";
     }
 
@@ -88,7 +88,7 @@ class ScheduleSelectors extends React.Component{
         const scheduleId = props.scheduleNumber;
 
         this.state = {
-            week: ["PONIEDZIAŁEK", "WTOREK", "ŚRODA", "CZWARTEK", "PIĄTEK", "SOBOTA", "NIEDZIELA"],
+            week: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"],
             allRecipes: [],
             id: scheduleId
         }
@@ -409,11 +409,11 @@ class EditSchedule extends React.Component{
                             <div className={'addScheduleContainer'}>
                                 <form className={'addScheduleForm'} onSubmit={this.handleSubmit}>
                                     <div className={'addScheduleHeader'}>
-                                        <h2>EDYTOWANIE PLANU</h2>
-                                        <button type={'submit'} onClick={this.handleEdit}>Zapisz i zamknij</button>
+                                        <h2>EDIT PLAN</h2>
+                                        <button type={'submit'} onClick={this.handleEdit}>Save & exit</button>
                                     </div>
                                     <div className={'addScheduleInput-horiz'}>
-                                        <label htmlFor={'recipeName'}>Nazwa planu</label>
+                                        <label htmlFor={'recipeName'}>Plan name</label>
                                         <input type='text'
                                                value={this.state.scheduleName}
                                                onChange={this.handleChange('scheduleName')}
@@ -421,14 +421,14 @@ class EditSchedule extends React.Component{
                                     </div>
                                     <ErrorMessage error={this.state.nameValid}/>
                                     <div className={'addScheduleInput-horiz'}>
-                                        <label htmlFor={'recipeDescription'}>Opis planu</label>
+                                        <label htmlFor={'recipeDescription'}>Plan description</label>
                                         <textarea onChange={this.handleChange('scheduleDesc')}
                                                   value={this.state.scheduleDesc}
                                         />
                                     </div>
                                     <ErrorMessage error={this.state.descValid}/>
                                     <div className={'addScheduleInput-horiz'}>
-                                        <label htmlFor={'recipeDescription'}>Numer tygodnia</label>
+                                        <label htmlFor={'recipeDescription'}>Week number</label>
                                         <input onChange={this.handleChange('scheduleNum')}
                                                value={this.state.scheduleNum}
                                                type="number"

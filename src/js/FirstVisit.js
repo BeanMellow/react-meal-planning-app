@@ -27,7 +27,7 @@ class RegistrationPage extends React.Component{
 
                 <h3>Podaj nam swoje imię, a my zorganizujemy dla Ciebie naszą aplikację :)</h3>
             </div>
-        )
+        );
     }
 }
 
@@ -37,7 +37,7 @@ class InitialHeader extends React.Component {
             <div className={'appHeader'}>
                 <div>
                     <Link to="/" style={{textDecoration: 'none'}}><h1 className={'logo'}>
-                        Zaplanuj <span>Jedzonko</span>
+                        Meal <span>Planner</span>
                     </h1></Link>
                 </div>
                 <div className={'user'}>

@@ -96,16 +96,20 @@ class RecipeForm extends React.Component {
         let instError = '';
         let ingrError = '';
         if (recipeName.length < 3 || recipeName.length > 50) {
-            nameError = 'Nazwa przepisu musi mieć od 3 do 50 znaków.';
+            // nameError = 'Nazwa przepisu musi mieć od 3 do 50 znaków.';
+            nameError = 'Recipe name must have between 3 and 50 characters.';
         }
         if (recipeDesc.length < 10 || recipeDesc.length > 150) {
-            descError = ['Opis przepisu musi mieć od 10 do 150 znaków.'];
+            // descError = ['Opis przepisu musi mieć od 10 do 150 znaków.'];
+            descError = ['Recipe description must have between 10 and 150 characters.'];
         }
         if (instructions.length < 1) {
-            instError = 'Nie można zapisać przepisu bez instrukcji.'
+            // instError = 'Nie można zapisać przepisu bez instrukcji.';
+            instError = 'Can\'t save recipe without instructions.';
         }
         if (ingredients.length < 1) {
-            ingrError = 'Nie można zapisać przepisu bez składników.'
+            // ingrError = 'Nie można zapisać przepisu bez składników.';
+            ingrError = 'Can\'t save recipe without ingredients.';
         }
 
         if (nameError || descError || instError || ingrError) {
@@ -129,14 +133,17 @@ class RecipeForm extends React.Component {
             const index = this.state.editInstIndex;
 
             if (recipeInst.length < 10 || recipeInst.length > 150) {
-                error = 'Każdy podpunkt instrukcji musi mieć od 10 do 150 znaków.';
+                // error = 'Każdy podpunkt instrukcji musi mieć od 10 do 150 znaków.';
+                error = 'Every step must have between 10 and 150 characters.';
                 // check if input is unique
             } else if (instructions.indexOf(recipeInst) > -1) {
                 // different message during edit
                 if (this.state.editInstIndex >= 0) {
-                    error = 'Dokończ edycję wybranego punktu. Pamiętaj, że każdy podpunkt musi być unikalny.';
+                    // error = 'Dokończ edycję wybranego punktu. Pamiętaj, że każdy podpunkt musi być unikalny.';
+                    error = 'Finish editing current step. Remember, that all of them must be unique.';
                 } else {
-                    error = 'Każdy podpunkt instrukcji musi być unikalny.';
+                    // error = 'Każdy podpunkt instrukcji musi być unikalny.';
+                    error = 'Every step must be unique.';
                 }
             }
 
@@ -159,15 +166,18 @@ class RecipeForm extends React.Component {
             const index = this.state.editIngrIndex;
 
             if (recipeIngr.length < 3 || recipeIngr.length > 50) {
-                error = 'Każdy podpunkt składników musi mieć od 3 do 50 znaków.';
+                // error = 'Każdy podpunkt składników musi mieć od 3 do 50 znaków.';
+                error = 'Every ingredient must have between 3 and 50 characters.';
             }
             // check if input is unique (except during edit)
             if (ingredients.indexOf(recipeIngr) > -1) {
                 // different message during edit
                 if (this.state.editIngrIndex >= 0) {
-                    error = 'Dokończ edycję wybranego punktu. Pamiętaj, że każdy podpunkt musi być unikalny.';
+                    // error = 'Dokończ edycję wybranego punktu. Pamiętaj, że każdy podpunkt musi być unikalny.';
+                    error = 'Finish editing current ingredient. Remember, that all of them must be unique.';
                 } else {
-                    error = 'Każdy podpunkt składników musi być unikalny.';
+                    // error = 'Każdy podpunkt składników musi być unikalny.';
+                    error = 'Every ingredient must be unique.';
                 }
             }
 
@@ -235,7 +245,7 @@ class RecipeForm extends React.Component {
             <div className={'addRecipeContainer'}>
                 <form className={'addRecipeForm'} onSubmit={this.validation}>
                     <div className={'addRecipeHeader'}>
-                        <h2>{this.props.isEdit ? 'EDIT RECIPE' : 'ADD RECIPE'}</h2>
+                        <h2>{this.props.isEdit ? 'EDIT RECIPE' : 'NEW RECIPE'}</h2>
                         <button type={'submit'}>Save & close</button>
                     </div>
                     <div className={'addRecipeInput-horiz'}>

@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 const Header = () => (
     <div className={'recipesHeader'}>
-        <h2>LISTA PLANÓW</h2>
+        <h2>LIST OF PLANS</h2>
         <Link to="/AddSchedule"> <i className="fas fa-plus-square fa-3x"> </i> </Link>
     </div>
 );
@@ -15,11 +15,11 @@ class SchedulesTable extends React.Component {
 
     getInfo = () => {
         this.sendInfoDeleted();
-    }
+    };
 
     sendInfoDeleted = () =>{
         this.props.scheduleIsDeleted()
-    }
+    };
 
     render() {
         return (
@@ -34,11 +34,11 @@ class SchedulesTable extends React.Component {
 const TableHead = () => (
     <thead>
     <tr>
-        <th>NR</th>
-        <th>NAZWA</th>
-        <th>OPIS</th>
-        <th>TYDZIEŃ  </th>
-        <th> AKCJE</th>
+        <th>No.</th>
+        <th>NAME</th>
+        <th>DESCRIPTION</th>
+        <th>WEEK</th>
+        <th>ACTIONS</th>
     </tr>
     </thead>
 );
@@ -166,7 +166,7 @@ class Schedules extends React.Component{
             notification = (
                 <div className={'editWidget'} onClick={this.handleDelete}>
                     <i className="fas fa-info-circle fa-2x"> </i>
-                    <h2>Usunięto plan</h2>
+                    <h2>Plan successfully deleted</h2>
                     <i className="fas fa-times-circle fa-2x"> </i>
                 </div>
             )
@@ -174,7 +174,7 @@ class Schedules extends React.Component{
             notification = (
                 <div className={'editWidget'} onClick={this.handleDelete}>
                     <i className="fas fa-info-circle fa-2x"> </i>
-                    <h2>Plan został pomyślnie dodany</h2>
+                    <h2>Plan successfully added</h2>
                     <i className="fas fa-times-circle fa-2x"> </i>
                 </div>
             )
@@ -182,7 +182,7 @@ class Schedules extends React.Component{
             notification = (
                 <div className={'editWidget'} onClick={this.handleDelete}>
                     <i className="fas fa-info-circle fa-2x"> </i>
-                    <h2>{this.state.editedName} - Plan został pomyślnie edytowany</h2>
+                    <h2>{this.state.editedName} - changes successfully saved</h2>
                     <i className="fas fa-times-circle fa-2x"> </i>
                 </div>
             )

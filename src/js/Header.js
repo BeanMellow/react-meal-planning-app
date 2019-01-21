@@ -7,7 +7,7 @@ class UserHeader extends React.Component {
             <div className={'appHeader'}>
                 <div>
                     <Link to="/" style={{textDecoration: 'none'}}><h1 className={'logo'}>
-                        Zaplanuj <span>Jedzonko</span>
+                        Meal <span>Planner</span>
                     </h1></Link>
                 </div>
                 <div className={'user'}>

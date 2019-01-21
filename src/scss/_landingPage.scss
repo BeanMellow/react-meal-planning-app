@@ -24,6 +24,7 @@
   background-color: $colorHead;
   > .container {
     display: flex;
+    align-items: center;
   }
   nav > ul {
     display: flex;

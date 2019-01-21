@@ -38,12 +38,12 @@ const ScheduleTableHead = () => (
     <thead>
     <tr>
         <th></th>
-        <th>ŚNIADANIE</th>
-        <th>DRUGIE ŚNIADANIE</th>
-        <th>ZUPA</th>
-        <th>DRUGIE DANIE</th>
-        <th>PODWIECZOREK</th>
-        <th>KOLACJA</th>
+        <th>BREAKFAST</th>
+        <th>SECOND BREAKFAST</th>
+        <th>BRUNCH</th>
+        <th>LUNCH</th>
+        <th>DINNER</th>
+        <th>SUPPER</th>
     </tr>
     </thead>
 );
@@ -81,7 +81,7 @@ class ScheduleSelectors extends React.Component {
         this.planOfWeek = props.planOfWeek;
 
         this.state = {
-            week: ["PONIEDZIAŁEK", "WTOREK", "ŚRODA", "CZWARTEK", "PIĄTEK", "SOBOTA", "NIEDZIELA"],
+            week: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"],
             allRecipes: [],
         }
     }
@@ -302,13 +302,16 @@ class AddSchedule extends React.Component {
         let descError = '';
         let numError = '';
         if (scheduleName.length < 3 || scheduleName.length > 50) {
-            nameError = 'Nazwa planu musi mieć od 3 do 50 znaków.';
+            // nameError = 'Nazwa planu musi mieć od 3 do 50 znaków.';
+            nameError = 'Plan name must have between 3 and 50 characters.';
         }
         if (scheduleDesc.length < 10 || scheduleDesc.length > 300) {
-            descError = ['Opis planu musi mieć od 10 do 300 znaków.'];
+            // descError = ['Opis planu musi mieć od 10 do 300 znaków.'];
+            descError = ['Recipe description must have between 10 and 300 characters.'];
         }
         if (scheduleNum.length < 1 || scheduleNum < 1 || scheduleDesc > 52) {
-            numError = ['Numer planu musi być liczbą pomiędzy 1 a 52.'];
+            // numError = ['Numer planu musi być liczbą pomiędzy 1 a 52.'];
+            numError = ['Week number must be between 1 and 52.'];
         }
         if (nameError || descError || numError) {
             this.setState({
@@ -362,11 +365,11 @@ class AddSchedule extends React.Component {
                         <div className={'addScheduleContainer'}>
                             <form className={'addScheduleForm'} onSubmit={this.handleSubmit}>
                                 <div className={'addScheduleHeader'}>
-                                    <h2>NOWY PLAN</h2>
-                                    <button type={'submit'} onClick={this.handleEdit}>Zapisz i zamknij</button>
+                                    <h2>NEW PLAN</h2>
+                                    <button type={'submit'} onClick={this.handleEdit}>Save & close</button>
                                 </div>
                                 <div className={'addScheduleInput-horiz'}>
-                                    <label htmlFor={'recipeName'}>Nazwa planu</label>
+                                    <label htmlFor={'recipeName'}>Plan name</label>
                                     <input type='text'
                                            value={this.state.scheduleName}
                                            onChange={this.handleChange('scheduleName')}
@@ -374,14 +377,14 @@ class AddSchedule extends React.Component {
                                 </div>
                                 <ErrorMessage error={this.state.nameValid}/>
                                 <div className={'addScheduleInput-horiz'}>
-                                    <label htmlFor={'recipeDescription'}>Opis planu</label>
+                                    <label htmlFor={'recipeDescription'}>Plan description</label>
                                     <textarea onChange={this.handleChange('scheduleDesc')}
                                               value={this.state.scheduleDesc}
                                     />
                                 </div>
                                 <ErrorMessage error={this.state.descValid}/>
                                 <div className={'addScheduleInput-horiz'}>
-                                    <label htmlFor={'recipeDescription'}>Numer tygodnia</label>
+                                    <label htmlFor={'recipeDescription'}>Week number</label>
                                     <input onChange={this.handleChange('scheduleNum')}
                                            value={this.state.scheduleNum}
                                            type="number"

@@ -1,7 +1,7 @@
 .mainAppView{
   background-image: url("../images/background.png");
   width: 100%;
-  min-width: 700px;
+  min-width: 800px;
   height: 100%;
   //min-height: 500px;
   font-family: "Open Sans", sans-serif;
@@ -75,7 +75,8 @@
 
 .navigationContainer{
   width: 10%;
-  min-width: 140px;
+  //min-width: 140px;
+  min-width: 170px;
   height: 93vh;
   //min-height: 560px;
   background-color: #5B605F;
