@@ -2,7 +2,7 @@ import React from "react";
 import {Link, NavLink} from "react-router-dom";
 
 
-class RegistrationPage extends React.Component{
+class RegistrationPage extends React.Component {
 
     handleClick = () => {
         const name = this.input.value;
@@ -13,26 +13,24 @@ class RegistrationPage extends React.Component{
         }
     };
 
-    render(){
+    render() {
 
         return (
-            <div className="firstVisitContainer">
-                <h2>Witaj,</h2>
-                <h3>Wygląda na to, że jesteś tutaj pierwszy raz!</h3>
-
-                    <input type={"text"} placeholder={"tutaj wpisz jak masz na imię"} ref={(input) => {
-                        this.input = input
-                    }}/> <br/>
-                    <button type={"submit"} onClick={this.handleClick}> Gotowe!</button>
-
-                <h3>Podaj nam swoje imię, a my zorganizujemy dla Ciebie naszą aplikację :)</h3>
+            <div>
+                <h2>Welcome,</h2>
+                <h3>Looks like you're here for the first time.</h3>
+                <h3>Enter your name below and start enjoying our app!</h3>
+                <input type={"text"} placeholder={"Name"} ref={input => {
+                    this.input = input
+                }}/>
+                <button type={"submit"} onClick={this.handleClick}>Confirm</button>
             </div>
         );
     }
 }
 
 class InitialHeader extends React.Component {
-    render(){
+    render() {
         return (
             <div className={'appHeader'}>
                 <div>
@@ -45,8 +43,7 @@ class InitialHeader extends React.Component {
                     <i className="fas fa-user-circle fa-2x"> </i>
                 </div>
             </div>
-
-        )
+        );
     }
 }
 
@@ -55,23 +52,25 @@ class InitialAppNavigation extends React.Component {
     render() {
         return (
             <div className="navigationContainer">
-                    <NavLink to="/Main" className={"navStyle"} activeClassName={"activeLink"}>Pulpit</NavLink>
+                <NavLink to="/Main" className={"navStyle"} activeClassName={"activeLink"}>Dashboard</NavLink>
             </div>
         );
     }
 }
 
-class FirstVisit extends React.Component{
-    render(){
+class FirstVisit extends React.Component {
+    render() {
         return (
             <div className="mainAppView">
                 <InitialHeader/>
                 <div style={{display: 'flex'}}>
                     <InitialAppNavigation/>
-                    <RegistrationPage onNameSubmitted={this.props.nameIsChanged}/>
+                    <div className="firstVisitContainer">
+                        <RegistrationPage onNameSubmitted={this.props.nameIsChanged}/>
+                    </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
