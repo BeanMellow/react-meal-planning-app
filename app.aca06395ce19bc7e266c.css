@@ -1,0 +1,949 @@
+/*
+	HTML5 Reset :: style.css
+	----------------------------------------------------------
+	We have learned much from/been inspired by/taken code where offered from:
+
+	Eric Meyer					:: http://meyerweb.com
+	HTML5 Doctor				:: http://html5doctor.com
+	and the HTML5 Boilerplate	:: http://html5boilerplate.com
+
+-------------------------------------------------------------------------------*/
+/* Let's default this puppy out
+-------------------------------------------------------------------------------*/
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font-weight: normal;
+  vertical-align: baseline;
+  background: transparent; }
+
+main, article, aside, figure, footer, header, nav, section, details, summary {
+  display: block; }
+
+/* Handle box-sizing while better addressing child elements:
+   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+html {
+  box-sizing: border-box; }
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit; }
+
+/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */
+/* Responsive images and other embedded objects */
+/* if you don't have full control over `img` tags (if you have to overcome attributes), consider adding height: auto */
+img,
+object,
+embed {
+  max-width: 100%; }
+
+/*
+   Note: keeping IMG here will cause problems if you're using foreground images as sprites.
+	In fact, it *will* cause problems with Google Maps' controls at small size.
+	If this is the case for you, try uncommenting the following:
+
+#map img {
+		max-width: none;
+}
+*/
+/* force a vertical scrollbar to prevent a jumpy page */
+html {
+  overflow-y: scroll; }
+
+/* we use a lot of ULs that aren't bulleted.
+	you'll have to restore the bullets within content,
+	which is fine because they're probably customized anyway */
+ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none; }
+
+a {
+  margin: 0;
+  padding: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+del {
+  text-decoration: line-through; }
+
+abbr[title], dfn[title] {
+  border-bottom: 1px dotted #000;
+  cursor: help; }
+
+/* tables still need cellspacing="0" in the markup */
+table {
+  border-collapse: separate;
+  border-spacing: 0; }
+
+th {
+  font-weight: bold;
+  vertical-align: bottom; }
+
+td {
+  font-weight: normal;
+  vertical-align: top; }
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0; }
+
+input, select {
+  vertical-align: middle; }
+
+pre {
+  white-space: pre;
+  /* CSS2 */
+  white-space: pre-wrap;
+  /* CSS 2.1 */
+  white-space: pre-line;
+  /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word;
+  /* IE */ }
+
+input[type="radio"] {
+  vertical-align: text-bottom; }
+
+input[type="checkbox"] {
+  vertical-align: bottom; }
+
+.ie7 input[type="checkbox"] {
+  vertical-align: baseline; }
+
+.ie6 input {
+  vertical-align: text-bottom; }
+
+select, input, textarea {
+  font: 99% sans-serif; }
+
+table {
+  font-size: inherit;
+  font: 100%; }
+
+small {
+  font-size: 85%; }
+
+strong {
+  font-weight: bold; }
+
+td, td img {
+  vertical-align: top; }
+
+/* Make sure sup and sub don't mess with your line-heights http://gist.github.com/413930 */
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+/* standardize any monospaced elements */
+pre, code, kbd, samp {
+  font-family: monospace, sans-serif; }
+
+/* hand cursor on clickable elements */
+.clickable,
+label,
+input[type=button],
+input[type=submit],
+input[type=file],
+button {
+  cursor: pointer; }
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button, input, select, textarea {
+  margin: 0; }
+
+/* make buttons play nice in IE */
+button,
+input[type=button] {
+  width: auto;
+  overflow: visible; }
+
+/* scale images in IE7 more attractively */
+.ie7 img {
+  -ms-interpolation-mode: bicubic; }
+
+/* prevent BG image flicker upon hover
+   (commented out as usage is rare, and the filter syntax messes with some pre-processors)
+.ie6 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));}
+*/
+/* let's clear some floats */
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both; }
+
+.main {
+  background-color: #FFFFFA; }
+  .main .btn {
+    color: #fff;
+    background-color: #FF6600;
+    border-width: 0; }
+
+.container {
+  margin: 0 auto;
+  width: 1024px; }
+
+.header {
+  height: 70px;
+  line-height: 70px;
+  background-color: #4a4a49; }
+  .header > .container {
+    display: flex; }
+  .header nav > ul {
+    display: flex;
+    color: #fff; }
+    .header nav > ul li {
+      padding: 0 30px;
+      cursor: pointer; }
+      .header nav > ul li:first-of-type {
+        color: #FF6600; }
+      .header nav > ul li:hover {
+        color: #FF6600; }
+
+.logo {
+  font-family: 'Charmonman', cursive;
+  color: #fff;
+  flex-grow: 1; }
+  .logo span {
+    color: #E58A20;
+    font-weight: 700; }
+
+.slider > .container {
+  height: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .slider > .container i {
+    padding: 14px;
+    cursor: pointer; }
+  .slider > .container > div {
+    display: flex;
+    flex-direction: column;
+    text-align: center; }
+
+.callToAction {
+  background-color: #4a4a49;
+  color: #fff; }
+  .callToAction > .container {
+    height: 150px;
+    width: 900px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center; }
+    .callToAction > .container > div {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start; }
+      .callToAction > .container > div h2 {
+        margin-bottom: 20px; }
+      .callToAction > .container > div p {
+        width: 400px; }
+    .callToAction > .container .btn {
+      color: #fff;
+      background-color: #FF6600;
+      padding: 10px 20px;
+      cursor: pointer; }
+
+.aboutApp {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  margin-bottom: 30px; }
+  .aboutApp div {
+    text-align: center;
+    width: 25%;
+    color: #5B605F; }
+    .aboutApp div i {
+      color: #A1A194; }
+
+.newsletter {
+  background-color: #5B605F;
+  color: #fff; }
+  .newsletter > .container {
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center; }
+    .newsletter > .container input {
+      height: 36px;
+      width: 200px;
+      padding-left: 5px; }
+    .newsletter > .container button {
+      padding: 10px 40px; }
+
+.aboutAuthor {
+  display: flex;
+  justify-content: center; }
+  .aboutAuthor .pic {
+    background-color: #4a4a49;
+    width: 200px;
+    height: 200px;
+    margin: 50px; }
+  .aboutAuthor div:last-of-type {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin: 50px; }
+    .aboutAuthor div:last-of-type h2 {
+      margin-bottom: 20px; }
+
+footer {
+  background-color: #5B605F;
+  color: #fff; }
+  footer > .container > div {
+    display: flex;
+    justify-content: space-between; }
+    footer > .container > div > div {
+      height: 180px;
+      width: 30%;
+      display: flex;
+      flex-direction: column; }
+      footer > .container > div > div h2 {
+        margin: 25px 0 15px 0; }
+      footer > .container > div > div ul {
+        list-style-type: disc; }
+        footer > .container > div > div ul li {
+          margin-left: 15px; }
+      footer > .container > div > div input {
+        width: 150px;
+        height: 26px; }
+      footer > .container > div > div button {
+        padding: 5px 20px; }
+      footer > .container > div > div .socialMedia {
+        margin: 15px 0 0 10px; }
+        footer > .container > div > div .socialMedia i {
+          width: 18%; }
+  footer .copyright {
+    height: 50px;
+    line-height: 50px;
+    background-color: #4a4a49;
+    text-align: center; }
+    footer .copyright span {
+      color: #FF6600; }
+
+.mainAppView {
+  background-image: url(images/background.baa58c3c16b76d6e733e5f658ec2a3f8.png);
+  width: 100%;
+  min-width: 700px;
+  height: 100%;
+  font-family: "Open Sans", sans-serif; }
+
+.appHeader {
+  width: 100%;
+  height: 7vh;
+  min-height: 50px;
+  background-color: #4a4a49;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px; }
+  .appHeader h1 {
+    font-size: 21px;
+    padding-left: 10px; }
+  .appHeader span {
+    color: #FF6600; }
+
+.user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  padding-right: 20px; }
+  .user h2 {
+    font-weight: bold; }
+
+.fa-user-circle {
+  color: #FF6600;
+  padding: 10px; }
+
+.firstVisitContainer {
+  width: 85%;
+  height: 90vh;
+  background-color: #fff;
+  margin: 30px;
+  border: 1px dashed #5B605F;
+  text-align: center;
+  color: #5B605F;
+  padding: 30px 200px; }
+  .firstVisitContainer h2 {
+    font-size: 28px;
+    padding: 10px; }
+  .firstVisitContainer h3 {
+    font-size: 21px;
+    padding: 10px; }
+  .firstVisitContainer input {
+    width: 250px;
+    border: 1px solid #CFCFCE; }
+  .firstVisitContainer button {
+    width: 100px;
+    border: 1px solid #FF6600;
+    background-color: #FF6600;
+    color: #fff;
+    font-weight: bold;
+    padding: 7px;
+    margin: 10px; }
+
+.navigationContainer {
+  width: 10%;
+  min-width: 140px;
+  height: 93vh;
+  background-color: #5B605F;
+  display: flex;
+  flex-direction: column; }
+
+.navStyle {
+  color: #fff;
+  font-size: 21px;
+  padding: 20px;
+  text-decoration: none; }
+
+.activeLink {
+  font-weight: bold;
+  position: relative; }
+  .activeLink:before {
+    content: '';
+    background-color: #FF6600;
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0; }
+  .activeLink:after {
+    content: '';
+    border: solid #FF6600;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    position: absolute;
+    top: 30px;
+    right: 15px; }
+
+.action {
+  margin-left: 5px; }
+
+.warning {
+  color: #FFB03B; }
+
+.bin {
+  color: #BD4932; }
+
+i {
+  cursor: pointer; }
+
+.appMainContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
+
+.notification {
+  background-color: #FFFFFA;
+  width: 95%;
+  margin: 30px auto 10px auto;
+  cursor: pointer;
+  color: #468966;
+  border: 1px dashed #468966; }
+  .notification > div {
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0; }
+    .notification > div h2 {
+      margin: 0 15px; }
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70vh; }
+
+.lds-default {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px; }
+
+.lds-default div {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #FF6600;
+  border-radius: 50%;
+  animation: lds-default 1.2s linear infinite; }
+
+.lds-default div:nth-child(1) {
+  animation-delay: 0s;
+  top: 29px;
+  left: 53px; }
+
+.lds-default div:nth-child(2) {
+  animation-delay: -0.1s;
+  top: 18px;
+  left: 50px; }
+
+.lds-default div:nth-child(3) {
+  animation-delay: -0.2s;
+  top: 9px;
+  left: 41px; }
+
+.lds-default div:nth-child(4) {
+  animation-delay: -0.3s;
+  top: 6px;
+  left: 29px; }
+
+.lds-default div:nth-child(5) {
+  animation-delay: -0.4s;
+  top: 9px;
+  left: 18px; }
+
+.lds-default div:nth-child(6) {
+  animation-delay: -0.5s;
+  top: 18px;
+  left: 9px; }
+
+.lds-default div:nth-child(7) {
+  animation-delay: -0.6s;
+  top: 29px;
+  left: 6px; }
+
+.lds-default div:nth-child(8) {
+  animation-delay: -0.7s;
+  top: 41px;
+  left: 9px; }
+
+.lds-default div:nth-child(9) {
+  animation-delay: -0.8s;
+  top: 50px;
+  left: 18px; }
+
+.lds-default div:nth-child(10) {
+  animation-delay: -0.9s;
+  top: 53px;
+  left: 29px; }
+
+.lds-default div:nth-child(11) {
+  animation-delay: -1s;
+  top: 50px;
+  left: 41px; }
+
+.lds-default div:nth-child(12) {
+  animation-delay: -1.1s;
+  top: 41px;
+  left: 50px; }
+
+@keyframes lds-default {
+  0%, 20%, 80%, 100% {
+    transform: scale(1); }
+  50% {
+    transform: scale(1.5); } }
+
+.widgetsContainer {
+  width: 85%;
+  margin: 20px;
+  display: flex; }
+  .widgetsContainer div:nth-of-type(1) {
+    display: flex; }
+
+.widgetAdd {
+  border: 1px dashed #468966;
+  background-color: #fff;
+  color: #468966;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  margin: 0 10px;
+  cursor: pointer; }
+  .widgetAdd i {
+    color: #468966; }
+  .widgetAdd h3 {
+    font-weight: bold; }
+
+.widgetsInfo div:nth-of-type(1) {
+  cursor: pointer; }
+  .widgetsInfo div:nth-of-type(1) div {
+    margin-bottom: 5px;
+    height: 47px;
+    width: 560px;
+    background-color: #fff;
+    border: 1px dashed #3498DB;
+    color: #3498DB;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px; }
+
+.widgetsInfo div:nth-of-type(2) {
+  cursor: pointer; }
+  .widgetsInfo div:nth-of-type(2) div {
+    margin-bottom: 5px;
+    height: 47px;
+    width: 560px;
+    background-color: #fff;
+    border: 1px dashed #FFB03B;
+    color: #FFB03B;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px; }
+
+.widgetsInfo div:nth-of-type(3) {
+  cursor: pointer; }
+  .widgetsInfo div:nth-of-type(3) div {
+    margin-bottom: 5px;
+    height: 47px;
+    width: 560px;
+    background-color: #fff;
+    border: 1px dashed #468966;
+    color: #468966;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px; }
+
+.widgetsInfo i {
+  font-size: 28px;
+  margin-right: 10px;
+  display: flex;
+  align-content: center; }
+  .widgetsInfo i h3 {
+    font-weight: bold;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    padding: 5px; }
+
+.desktopView {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto; }
+
+.scheduleContainer {
+  width: 95%;
+  height: 60vh;
+  border: 1px dashed #CFCFCA;
+  background-color: #fff;
+  margin: 0 30px;
+  text-align: center; }
+  .scheduleContainer h2 {
+    font-size: 21px;
+    color: #FF6600;
+    padding: 10px; }
+  .scheduleContainer div:nth-of-type(1) {
+    overflow-y: scroll;
+    height: 50vh; }
+  .scheduleContainer div:nth-of-type(2) {
+    display: flex;
+    justify-content: space-between; }
+    .scheduleContainer div:nth-of-type(2) h3 {
+      color: #FF6600;
+      cursor: pointer;
+      margin-bottom: 10px; }
+  .scheduleContainer .pulpitTable {
+    margin: 0 auto; }
+    .scheduleContainer .pulpitTable th {
+      border-top: 1px solid #A1A194;
+      border-bottom: 1px solid #A1A194;
+      padding: 10px;
+      color: #4a4a49; }
+    .scheduleContainer .pulpitTable td {
+      color: #5B605F;
+      padding: 10px 1px;
+      border-bottom: 1px solid #A1A194; }
+
+.addRecipeContainer {
+  background-color: #FFFFFA;
+  width: 95%;
+  height: 95%;
+  margin: auto;
+  border: 1px dashed #5B605F; }
+
+.addRecipeForm {
+  width: 95%;
+  margin: 30px auto 0 auto; }
+  .addRecipeForm label {
+    color: #4a4a49;
+    font-size: 21px; }
+  .addRecipeForm textarea {
+    height: 70px;
+    resize: none; }
+  .addRecipeForm ol, .addRecipeForm ul {
+    margin-left: 25px; }
+    .addRecipeForm ol li, .addRecipeForm ul li {
+      width: 100%; }
+  .addRecipeForm ul {
+    list-style-type: disc; }
+    .addRecipeForm ul.errorList {
+      color: #BD4932; }
+
+.addRecipeHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid #A1A194;
+  color: #FF6600; }
+  .addRecipeHeader h2 {
+    font-weight: 700; }
+  .addRecipeHeader button {
+    color: #fff;
+    background-color: #FF6600;
+    padding: 10px 40px;
+    cursor: pointer;
+    border-width: 0;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 14px; }
+
+.addRecipeInput-horiz {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; }
+  .addRecipeInput-horiz input, .addRecipeInput-horiz textarea {
+    width: 88%; }
+
+.addRecipeInput-vert {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px; }
+  .addRecipeInput-vert > div {
+    width: 48%; }
+    .addRecipeInput-vert > div label {
+      display: block;
+      width: 95%;
+      border-bottom: 2px solid #A1A194; }
+    .addRecipeInput-vert > div div {
+      display: flex;
+      height: 100px; }
+      .addRecipeInput-vert > div div i {
+        margin-top: 10px; }
+    .addRecipeInput-vert > div input, .addRecipeInput-vert > div textarea {
+      width: 85%;
+      margin: 10px; }
+    .addRecipeInput-vert > div input {
+      height: 35px; }
+    .addRecipeInput-vert > div .add {
+      color: #468966; }
+    .addRecipeInput-vert > div .recipeList {
+      height: 350px;
+      overflow-y: auto; }
+
+.recipesContainer {
+  background-color: #FFFFFA;
+  width: 95%;
+  height: 95%;
+  margin: auto;
+  border: 1px dashed #5B605F; }
+  .recipesContainer .recipesTable {
+    width: 95%;
+    margin: 30px auto 0 auto; }
+    .recipesContainer .recipesTable .recipesHeader {
+      display: flex;
+      border-bottom: 3px solid #A1A194;
+      padding-bottom: 5px; }
+      .recipesContainer .recipesTable .recipesHeader h2 {
+        flex-grow: 1;
+        color: #FF6600;
+        font-weight: 700; }
+      .recipesContainer .recipesTable .recipesHeader i {
+        color: #468966; }
+    .recipesContainer .recipesTable .tableData {
+      height: 70vh;
+      overflow-y: auto; }
+    .recipesContainer .recipesTable table {
+      width: 100%; }
+      .recipesContainer .recipesTable table tr th:first-child, .recipesContainer .recipesTable table tr td:first-child {
+        text-align: center; }
+      .recipesContainer .recipesTable table tr th {
+        font-size: 21px;
+        color: #4a4a49;
+        padding: 15px 0; }
+        .recipesContainer .recipesTable table tr th:first-of-type {
+          width: 5%; }
+        .recipesContainer .recipesTable table tr th:nth-of-type(2) {
+          width: 20%; }
+        .recipesContainer .recipesTable table tr th:nth-of-type(3) {
+          width: 68%; }
+        .recipesContainer .recipesTable table tr th:last-of-type {
+          width: 7%; }
+      .recipesContainer .recipesTable table tr td {
+        color: #5B605F;
+        padding: 10px 0;
+        border-top: 1px solid #A1A194; }
+      .recipesContainer .recipesTable table tbody tr:hover {
+        background-color: #fff5e5; }
+
+.addScheduleContainer {
+  background-color: #FFFFFA;
+  width: 95%;
+  height: 95%;
+  margin: auto;
+  border: 1px dashed #5B605F; }
+
+.addScheduleForm {
+  width: 95%;
+  margin: 30px auto 0 auto; }
+  .addScheduleForm label {
+    color: #4a4a49;
+    font-size: 21px; }
+  .addScheduleForm textarea {
+    height: 70px;
+    resize: none; }
+  .addScheduleForm ol, .addScheduleForm ul {
+    margin-left: 25px; }
+    .addScheduleForm ol li, .addScheduleForm ul li {
+      width: 100%; }
+  .addScheduleForm ul {
+    list-style-type: disc; }
+    .addScheduleForm ul.errorList {
+      color: #BD4932; }
+  .addScheduleForm div:nth-of-type(4) {
+    width: 28.5%; }
+    .addScheduleForm div:nth-of-type(4) input {
+      width: 29.25px; }
+
+.addScheduleHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 3px solid #A1A194;
+  color: #FF6600; }
+  .addScheduleHeader h2 {
+    font-weight: 700; }
+  .addScheduleHeader button {
+    color: #fff;
+    background-color: #FF6600;
+    padding: 10px 40px;
+    cursor: pointer;
+    border-width: 0;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 14px; }
+
+.addScheduleInput-horiz {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; }
+  .addScheduleInput-horiz input, .addScheduleInput-horiz textarea {
+    width: 75%;
+    border: 1px solid #A1A194; }
+  .addScheduleInput-horiz textarea {
+    height: 60px; }
+
+.weekScheduleTable {
+  margin-top: 10px; }
+  .weekScheduleTable th:nth-of-type(1) {
+    visibility: hidden; }
+  .weekScheduleTable th {
+    color: #4a4a49;
+    width: 14.28%;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    border-top: 1px solid #A1A194; }
+  .weekScheduleTable td:first-child {
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    color: #4a4a49; }
+  .weekScheduleTable td {
+    border-top: 1px solid #A1A194;
+    padding: 2px;
+    position: relative; }
+    .weekScheduleTable td select {
+      width: 120px; }
+
+.recipesContainer {
+  background-color: #FFFFFA;
+  width: 95%;
+  height: 95%;
+  margin: auto;
+  border: 1px dashed #5B605F; }
+  .recipesContainer .recipesTable {
+    width: 95%;
+    margin: 30px auto 0 auto; }
+    .recipesContainer .recipesTable .recipesHeader {
+      display: flex;
+      border-bottom: 3px solid #A1A194;
+      padding-bottom: 5px; }
+      .recipesContainer .recipesTable .recipesHeader h2 {
+        flex-grow: 1;
+        color: #FF6600;
+        font-weight: 700; }
+      .recipesContainer .recipesTable .recipesHeader i {
+        color: #468966; }
+    .recipesContainer .recipesTable .tableData {
+      height: 70vh;
+      overflow-y: auto; }
+    .recipesContainer .recipesTable table {
+      width: 100%;
+      text-align: left; }
+      .recipesContainer .recipesTable table th {
+        font-size: 21px;
+        color: #4a4a49;
+        padding: 15px 0; }
+        .recipesContainer .recipesTable table th:first-of-type {
+          width: 5%; }
+        .recipesContainer .recipesTable table th:nth-of-type(2) {
+          width: 15%; }
+        .recipesContainer .recipesTable table th:nth-of-type(3) {
+          width: 50%; }
+        .recipesContainer .recipesTable table th:nth-of-type(4) {
+          width: 15%;
+          padding-right: 10px; }
+        .recipesContainer .recipesTable table th:last-of-type {
+          width: 15%; }
+      .recipesContainer .recipesTable table td {
+        color: #5B605F;
+        padding: 10px 0;
+        border-top: 1px solid #A1A194; }
+      .recipesContainer .recipesTable table tbody tr th:nth-child(4) {
+        padding-right: 10px; }
+      .recipesContainer .recipesTable table tbody tr th:nth-child(4), .recipesContainer .recipesTable table tbody tr td:nth-child(4) {
+        text-align: center; }
+
+.editWidget {
+  display: flex;
+  width: 95%;
+  border: 1px dashed #468966;
+  background-color: #fff;
+  padding: 10px;
+  margin: 20px auto 10px auto;
+  color: #468966;
+  justify-content: center;
+  cursor: pointer; }
+  .editWidget i {
+    margin: 0 15px; }
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px; }
+  body h1 {
+    font-size: 28px; }
+  body h2 {
+    font-size: 21px; }
+
