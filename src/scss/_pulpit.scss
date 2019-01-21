@@ -1,82 +1,89 @@
-.widgetsContainer{
-  width: 85%;
-  margin: 20px;
+.dashboardContainer {
+  width: 95%;
+  height: 95%;
+  margin: auto;
   display: flex;
-  div:nth-of-type(1){
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.widgetsContainer {
+  width: 100%;
+  min-height: 150px;
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+  > div {
     display: flex;
+    &:first-of-type {
+      justify-content: space-between;
+      min-width: 250px;
+      width: 25%;
+    }
   }
 }
 
-.widgetAdd{
+.widgetAdd {
   border: 1px dashed $colorSuccess;
-  background-color: #fff;
+  background-color: $colorBg;
   color: $colorSuccess;
-  width: 150px;
-  height: 150px;
+  min-width: 120px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  margin: 0 10px;
   cursor: pointer;
-  i{
+  &:hover {
+    background-color: darken($colorBg, 2%);
+  }
+  i {
     color: $colorSuccess;
   }
-  h3{
+  h3 {
     font-weight: bold;
   }
 }
 
-.widgetsInfo{
-  div:nth-of-type(1){
-    cursor: pointer;
-    div{
-      margin-bottom: 5px;
-      height: 47px;
-      width: 560px;
-      background-color: #fff;
+.widgetsInfo {
+  //width: 80%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-left: 30px;
+  div {
+    height: 30%;
+    width: 100%;
+    background-color: $colorBg;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    cursor:  pointer;
+    &:nth-of-type(1) {
       border: 1px dashed $colorInfo;
       color: $colorInfo;
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
     }
-  }
-  div:nth-of-type(2){
-    cursor: pointer;
-    div{
-      margin-bottom: 5px;
-      height: 47px;
-      width: 560px;
-      background-color: #fff;
+    &:nth-of-type(2) {
       border: 1px dashed $colorWarning;
       color: $colorWarning;
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-      }
     }
-  div:nth-of-type(3){
-    cursor: pointer;
-    div{
-      margin-bottom: 5px;
-      height: 47px;
-      width: 560px;
-      background-color: #fff;
+    &:nth-of-type(3) {
       border: 1px dashed $colorSuccess;
       color: $colorSuccess;
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
+    }
+    &:hover {
+      background-color: darken($colorBg, 2%);
     }
   }
-  i{
+  i {
     font-size: $fontSizeLarge;
     margin-right: 10px;
     display: flex;
     align-content: center;
 
-    h3{
+    h3 {
       font-weight: bold;
       font-family: "Open Sans", sans-serif;
       font-size: $fontSizeMain;
@@ -84,46 +91,49 @@
     }
   }
 }
-.desktopView{
+
+.desktopView {
   width: 95%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
 }
-.scheduleContainer{
-  width: 95%;
-  height: 60vh;
-  border: 1px dashed #CFCFCA;
-  background-color: #fff;
-  margin: 0 30px;
+
+.scheduleContainer {
+  width: 100%;
+  height: 77%;
+  //height: 60vh;
+  border: 1px dashed $colorNav;
+  background-color: $colorBg;
+  //margin: 0 30px;
   text-align: center;
-  h2{
+  h2 {
     font-size: $fontSizeMedium;
     color: $colorBtn;
     padding: 10px;
   }
-  div:nth-of-type(1){
+  div:nth-of-type(1) {
     overflow-y: scroll;
     height: 50vh;
   }
-  div:nth-of-type(2){
+  div:nth-of-type(2) {
     display: flex;
     justify-content: space-between;
-    h3{
+    h3 {
       color: $colorBtn;
       cursor: pointer;
       margin-bottom: 10px;
     }
   }
-  .pulpitTable{
+  .pulpitTable {
     margin: 0 auto;
-    th{
+    th {
       border-top: 1px solid $colorTabData;
       border-bottom: 1px solid $colorTabData;
       padding: 10px;
       color: $colorHead;
     }
-    td{
+    td {
       color: $colorNav;
       padding: 10px 1px;
       border-bottom: 1px solid $colorTabData;

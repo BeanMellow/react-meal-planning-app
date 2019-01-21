@@ -77,14 +77,14 @@ class Widgets extends React.Component{
         return(
             <div className={"widgetsContainer"}>
                 <div>
-                    <NavLink to="/AddRecipe" style={{textDecoration: 'none'}}>
+                    <NavLink to="/AddRecipe" style={{textDecoration: 'none', width: '45%'}}>
                         <div className={"widgetAdd"}>
                             <i className="far fa-plus-square fa-4x"> </i>
                             <h3>dodaj przepis</h3>
                         </div>
                     </NavLink>
 
-                    <NavLink to="/AddSchedule" style={{textDecoration: 'none'}}>
+                    <NavLink to="/AddSchedule" style={{textDecoration: 'none', width: '45%'}}>
                         <div className={"widgetAdd"}>
                             <i className="far fa-plus-square fa-4x"> </i>
                             <h3>dodaj plan</h3>
@@ -92,9 +92,9 @@ class Widgets extends React.Component{
                     </NavLink>
                 </div>
                 <div className={"widgetsInfo"}>
-                    <div>{widgetInfo}</div>
-                    <div>{widgetAlert}</div>
-                    <div>{widgetSuccess}</div>
+                    {widgetInfo}
+                    {widgetAlert}
+                    {widgetSuccess}
                 </div>
             </div>
         )
@@ -198,7 +198,7 @@ class PulpitTable extends React.Component {
     };
 
     render(){
-        console.log(this.state.isReady)
+        console.log(this.state.isReady);
         if(this.state.isReady === true){
             return (
                 <div className={'desktopView'}>
@@ -450,9 +450,11 @@ class Pulpit extends React.Component{
                     <UserHeader/>
                     <div style={{display: 'flex'}}>
                         <AppNavigation/>
-                        <div>
-                            <Widgets/>
-                            <ScheduleWeek/>
+                        <div className={'appMainContainer'}>
+                            <div className={'dashboardContainer'}>
+                                <Widgets/>
+                                <ScheduleWeek/>
+                            </div>
                         </div>
                     </div>
 

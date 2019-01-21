@@ -235,11 +235,11 @@ class RecipeForm extends React.Component {
             <div className={'addRecipeContainer'}>
                 <form className={'addRecipeForm'} onSubmit={this.validation}>
                     <div className={'addRecipeHeader'}>
-                        <h2>{this.props.isEdit ? 'EDYTOWANIE PRZEPISU' : 'NOWY PRZEPIS'}</h2>
-                        <button type={'submit'}>Zapisz i zamknij</button>
+                        <h2>{this.props.isEdit ? 'EDIT RECIPE' : 'ADD RECIPE'}</h2>
+                        <button type={'submit'}>Save & close</button>
                     </div>
                     <div className={'addRecipeInput-horiz'}>
-                        <label htmlFor={'recipeName'}>Nazwa przepisu</label>
+                        <label htmlFor={'recipeName'}>Recipe name</label>
                         <input value={this.props.state.recipeName}
                                onChange={handleChange('recipeName')}
                                type='text'
@@ -248,7 +248,7 @@ class RecipeForm extends React.Component {
                     </div>
                     <ErrorMessage error={this.state.nameValid}/>
                     <div className={'addRecipeInput-horiz'}>
-                        <label htmlFor={'recipeDescription'}>Opis przepisu</label>
+                        <label htmlFor={'recipeDescription'}>Recipe description</label>
                         <textarea value={this.props.state.recipeDesc}
                                   onChange={handleChange('recipeDesc')}
                                   id={'recipeDescription'}
@@ -257,7 +257,7 @@ class RecipeForm extends React.Component {
                     <ErrorMessage error={this.state.descValid}/>
                     <div className={'addRecipeInput-vert'}>
                         <div>
-                            <label htmlFor={'recipeInstruction'}>INSTRUKCJE</label>
+                            <label htmlFor={'recipeInstruction'}>INSTRUCTIONS</label>
                             <div>
                                         <textarea value={this.props.state.recipeInst}
                                                   onChange={handleChange('recipeInst')}
@@ -276,7 +276,7 @@ class RecipeForm extends React.Component {
                             />
                         </div>
                         <div>
-                            <label htmlFor={'recipeIngredient'}>SKŁADNIKI</label>
+                            <label htmlFor={'recipeIngredient'}>INGREDIENTS</label>
                             <div>
                                 <input value={this.props.state.recipeIngr}
                                        onChange={handleChange('recipeIngr')}
