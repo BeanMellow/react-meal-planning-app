@@ -1,6 +1,5 @@
 # Meal Planning App with landing page
-## My second project in React (work in progress).
-## Preview:
+## My second project in React (work in progress). Preview:
 https://beanmellow.github.io/react-meal-planning-app/
 ### Features:
 * landing page with **slider**
