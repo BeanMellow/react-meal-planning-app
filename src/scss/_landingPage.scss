@@ -3,6 +3,7 @@
   //font-family: 'Open Sans', sans-serif;
   //font-size: $fontSizeMain;
   background-color: $colorBg;
+  min-width: 1024px;
   //h2 {
   //  font-size: $fontSizeMedium;
   //}
@@ -113,14 +114,17 @@
 .aboutApp {
   display: flex;
   justify-content: space-around;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   div {
     text-align: center;
     width: 25%;
     color: $colorNav;
     i {
       color: $colorTabData;
+    }
+    h2 {
+      margin: 20px 0;
     }
   }
 }
