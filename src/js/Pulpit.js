@@ -417,12 +417,23 @@ class ScheduleWeek extends React.Component {
         let suffix;
         switch (this.state.week) {
             case 1:
+            case 21:
+            case 31:
+            case 41:
+            case 51:
                 suffix = 'st';
                 break;
             case 2:
+            case 22:
+            case 32:
+            case 42:
+            case 52:
                 suffix = 'nd';
                 break;
             case 3:
+            case 23:
+            case 33:
+            case 43:
                 suffix = 'rd';
                 break;
             default:
