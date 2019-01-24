@@ -195,7 +195,14 @@ input[type=button] {
   clear: both; }
 
 .main {
-  background-color: #FFFFFA; }
+  background-color: #FFFFFA;
+  min-width: 1024px; }
+  .main .btn {
+    color: #fff;
+    background-color: #FF6600;
+    border-width: 0; }
+    .main .btn:hover {
+      background-color: #e65c00; }
 
 .container {
   margin: 0 auto;
@@ -206,7 +213,8 @@ input[type=button] {
   line-height: 70px;
   background-color: #4a4a49; }
   .header > .container {
-    display: flex; }
+    display: flex;
+    align-items: center; }
   .header nav > ul {
     display: flex;
     color: #fff; }
@@ -262,19 +270,24 @@ input[type=button] {
       color: #fff;
       background-color: #FF6600;
       padding: 10px 20px;
-      cursor: pointer; }
+      cursor: pointer;
+      text-decoration: none; }
+      .callToAction > .container .btn:hover {
+        background-color: #e65c00; }
 
 .aboutApp {
   display: flex;
   justify-content: space-around;
-  margin-top: 30px;
-  margin-bottom: 30px; }
+  margin-top: 50px;
+  margin-bottom: 50px; }
   .aboutApp div {
     text-align: center;
     width: 25%;
     color: #5B605F; }
     .aboutApp div i {
       color: #A1A194; }
+    .aboutApp div h2 {
+      margin: 20px 0; }
 
 .newsletter {
   background-color: #5B605F;
@@ -288,12 +301,8 @@ input[type=button] {
       height: 36px;
       width: 200px;
       padding-left: 5px; }
-    .newsletter > .container .btn {
-      color: #fff;
-      background-color: #FF6600;
-      padding: 10px 40px;
-      cursor: pointer;
-      border-width: 0; }
+    .newsletter > .container button {
+      padding: 10px 40px; }
 
 .aboutAuthor {
   display: flex;
@@ -314,24 +323,29 @@ input[type=button] {
 footer {
   background-color: #5B605F;
   color: #fff; }
-  footer > .container div {
-    margin: 20px 0;
+  footer > .container > div {
     display: flex;
     justify-content: space-between; }
-    footer > .container div div {
+    footer > .container > div > div {
+      height: 180px;
       width: 30%;
       display: flex;
       flex-direction: column; }
-      footer > .container div div ul {
+      footer > .container > div > div h2 {
+        margin: 25px 0 15px 0; }
+      footer > .container > div > div ul {
         list-style-type: disc; }
-        footer > .container div div ul li {
+        footer > .container > div > div ul li {
           margin-left: 15px; }
-      footer > .container div div input {
-        width: 150px; }
-      footer > .container div div .socialMedia {
-        flex-direction: unset; }
-        footer > .container div div .socialMedia i {
-          margin-right: 30px; }
+      footer > .container > div > div input {
+        width: 150px;
+        height: 26px; }
+      footer > .container > div > div button {
+        padding: 5px 20px; }
+      footer > .container > div > div .socialMedia {
+        margin: 15px 0 0 10px; }
+        footer > .container > div > div .socialMedia i {
+          width: 18%; }
   footer .copyright {
     height: 50px;
     line-height: 50px;
@@ -343,7 +357,7 @@ footer {
 .mainAppView {
   background-image: url(images/background.baa58c3c16b76d6e733e5f658ec2a3f8.png);
   width: 100%;
-  min-width: 700px;
+  min-width: 800px;
   height: 100%;
   font-family: "Open Sans", sans-serif; }
 
@@ -376,35 +390,43 @@ footer {
   padding: 10px; }
 
 .firstVisitContainer {
-  width: 85%;
-  height: 90vh;
-  background-color: #fff;
-  margin: 30px;
-  border: 1px dashed #5B605F;
-  text-align: center;
-  color: #5B605F;
-  padding: 30px 200px; }
-  .firstVisitContainer h2 {
-    font-size: 28px;
-    padding: 10px; }
-  .firstVisitContainer h3 {
-    font-size: 21px;
-    padding: 10px; }
-  .firstVisitContainer input {
-    width: 250px;
-    border: 1px solid #CFCFCE; }
-  .firstVisitContainer button {
-    width: 100px;
-    border: 1px solid #FF6600;
-    background-color: #FF6600;
-    color: #fff;
-    font-weight: bold;
-    padding: 7px;
-    margin: 10px; }
+  width: 100%; }
+  .firstVisitContainer div {
+    width: 60%;
+    min-width: 600px;
+    height: auto;
+    margin: 30px auto 0 auto;
+    padding: 20px 0;
+    background-color: #FFFFFA;
+    border: 1px dashed #5B605F;
+    text-align: center;
+    color: #5B605F;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .firstVisitContainer div h2 {
+      font-size: 28px;
+      padding: 10px; }
+    .firstVisitContainer div h3 {
+      font-size: 21px;
+      padding: 10px;
+      width: 550px; }
+    .firstVisitContainer div input {
+      margin: 10px 0;
+      width: 200px;
+      font-size: 21px; }
+    .firstVisitContainer div button {
+      width: 200px;
+      border: 1px solid #FF6600;
+      background-color: #FF6600;
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 0;
+      margin: 10px; }
 
 .navigationContainer {
   width: 10%;
-  min-width: 140px;
+  min-width: 170px;
   height: 93vh;
   background-color: #5B605F;
   display: flex;
@@ -560,79 +582,81 @@ i {
   50% {
     transform: scale(1.5); } }
 
+.dashboardContainer {
+  width: 95%;
+  height: 95%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
 .widgetsContainer {
-  width: 85%;
-  margin: 20px;
-  display: flex; }
-  .widgetsContainer div:nth-of-type(1) {
+  width: 100%;
+  min-height: 150px;
+  height: 20%;
+  display: flex;
+  justify-content: space-between; }
+  .widgetsContainer > div {
     display: flex; }
+    .widgetsContainer > div:first-of-type {
+      justify-content: space-between;
+      min-width: 250px;
+      width: 25%; }
 
 .widgetAdd {
   border: 1px dashed #468966;
-  background-color: #fff;
+  background-color: #FFFFFA;
   color: #468966;
-  width: 150px;
-  height: 150px;
+  min-width: 120px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
-  margin: 0 10px;
   cursor: pointer; }
+  .widgetAdd:hover {
+    background-color: ivory; }
   .widgetAdd i {
     color: #468966; }
   .widgetAdd h3 {
     font-weight: bold; }
 
-.widgetsInfo div:nth-of-type(1) {
-  cursor: pointer; }
-  .widgetsInfo div:nth-of-type(1) div {
-    margin-bottom: 5px;
-    height: 47px;
-    width: 560px;
-    background-color: #fff;
-    border: 1px dashed #3498DB;
-    color: #3498DB;
+.widgetsInfo {
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 1;
+  margin-left: 30px; }
+  .widgetsInfo div {
+    height: 30%;
+    width: 100%;
+    background-color: #FFFFFA;
     display: flex;
     justify-content: space-between;
-    padding: 10px; }
-
-.widgetsInfo div:nth-of-type(2) {
-  cursor: pointer; }
-  .widgetsInfo div:nth-of-type(2) div {
-    margin-bottom: 5px;
-    height: 47px;
-    width: 560px;
-    background-color: #fff;
-    border: 1px dashed #FFB03B;
-    color: #FFB03B;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer; }
+    .widgetsInfo div:nth-of-type(1) {
+      border: 1px dashed #3498DB;
+      color: #3498DB; }
+    .widgetsInfo div:nth-of-type(2) {
+      border: 1px dashed #FFB03B;
+      color: #FFB03B; }
+    .widgetsInfo div:nth-of-type(3) {
+      border: 1px dashed #468966;
+      color: #468966; }
+    .widgetsInfo div:hover {
+      background-color: ivory; }
+  .widgetsInfo i {
+    font-size: 28px;
+    margin-right: 10px;
     display: flex;
-    justify-content: space-between;
-    padding: 10px; }
-
-.widgetsInfo div:nth-of-type(3) {
-  cursor: pointer; }
-  .widgetsInfo div:nth-of-type(3) div {
-    margin-bottom: 5px;
-    height: 47px;
-    width: 560px;
-    background-color: #fff;
-    border: 1px dashed #468966;
-    color: #468966;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px; }
-
-.widgetsInfo i {
-  font-size: 28px;
-  margin-right: 10px;
-  display: flex;
-  align-content: center; }
-  .widgetsInfo i h3 {
-    font-weight: bold;
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    padding: 5px; }
+    align-content: center; }
+    .widgetsInfo i h3 {
+      font-weight: bold;
+      font-family: "Open Sans", sans-serif;
+      font-size: 14px;
+      padding: 5px; }
 
 .desktopView {
   width: 95%;
@@ -641,11 +665,10 @@ i {
   margin: 0 auto; }
 
 .scheduleContainer {
-  width: 95%;
-  height: 60vh;
-  border: 1px dashed #CFCFCA;
-  background-color: #fff;
-  margin: 0 30px;
+  width: 100%;
+  height: 77%;
+  border: 1px dashed #5B605F;
+  background-color: #FFFFFA;
   text-align: center; }
   .scheduleContainer h2 {
     font-size: 21px;
